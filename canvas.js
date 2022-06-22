@@ -1,6 +1,7 @@
-const particleColor = 170;
-const numParticles = 20;
+const particleColor = 175;
+const numParticles = 25;
 let nextID = 0;
+
 // Resize canvas
 let canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
@@ -110,7 +111,7 @@ function animate() {
             // Brightness of line segment is proportional to the distance between particles
             let dist = Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
             if (dist <= 22500) {
-                color = dist / 22500 * 75 + 180;
+                color = dist / 22500 * (255 - particleColor) + particleColor;
                 drawLine(p1.x, p1.y, p2.x, p2.y, `rgb(${color}, ${color}, ${color})`);
                 p1.connected.add(p2.id);
                 p2.connected.add(p1.id);
@@ -132,8 +133,8 @@ function animate() {
             }
 
             // Particles are attracted by each other by simulated gravity
-            let dx = (p1.x - p2.x) / Math.pow(dist + 5, 1.5);
-            let dy = (p1.y - p2.y) / Math.pow(dist + 5, 1.5);
+            let dx = 50 / numParticles * (p1.x - p2.x) / Math.pow(dist + 5, 1.5);
+            let dy = 50 / numParticles * (p1.y - p2.y) / Math.pow(dist + 5, 1.5);
             p1.dx -= dx;
             p1.dy -= dy;
             p2.dx += dx;
@@ -143,7 +144,7 @@ function animate() {
 
     // Create new particles if not enough particles are present
     if (keys.length < numParticles) {
-        if (Math.random() < 0.1 / keys.length) {
+        if (Math.random() < 0.005 * (numParticles - keys.length)) {
             particles[nextID] = new Particle(
                 Math.random() * (window.innerWidth - 2) + 1,
                 Math.random() * (window.innerHeight - 2) + 1,

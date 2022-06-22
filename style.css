@@ -1,3 +1,5 @@
+/* Body and backgrounds */
+
 body {
     margin: 0px;
 }
@@ -8,5 +10,80 @@ canvas {
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 10;
+    z-index: 1;
+}
+
+
+/* Text fonts */
+
+.plainfont {
+    text-decoration: none;
+}
+
+.blackfont {
+    color: black;
+}
+
+.midfont {
+    font-size: 18px;
+}
+
+
+/* Navigation bar */
+
+.navbar {
+    height: 75px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    overflow: visible;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 75px;
+    margin: auto 30px;
+}
+
+.navbar::before {
+    /* Overwrites bootstrap */
+    content: none;
+}
+
+.navbar::after {
+    /* Overwrites bootstrap */
+    content: none;
+}
+
+.navbar div a {
+    display: block;
+    padding-right: 30px;
+    text-align: center;
+    z-index: 100;
+}
+
+.navbar a img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
+    margin-right: 10px;
+}
+
+.navbar a:hover {
+    text-decoration: none;
+    color: black;
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.2)
+}
+
+.navbar a:visited,
+a:link,
+a:active {
+    text-decoration: none;
+    color: black;
 }
