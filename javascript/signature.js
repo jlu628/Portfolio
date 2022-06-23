@@ -1,7 +1,7 @@
 const canvasWidth = 750;
 const canvasHeight = 250;
 const speed = 20;
-const penColor = 'black';
+const penColor = '#425362';
 
 let signatureCanvas = document.getElementById("signature-canvas");
 signatureCanvas.width = canvasWidth;

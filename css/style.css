@@ -2,6 +2,7 @@
 
 body {
     margin: 0px;
+    font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
 }
 
 #particle-canvas {
@@ -24,10 +25,6 @@ html {
     text-decoration: none;
 }
 
-.titlefont {
-    font-family: 'Times New Roman', Times, serif;
-}
-
 .blackfont {
     color: black;
 }
@@ -37,11 +34,11 @@ html {
 }
 
 .semiblackfont {
-    color: rgba(0, 0, 0, 0.5)
+    color: rgba(0, 0, 0, 0.6)
 }
 
 .grayfont {
-    color: rgba(0, 0, 0, 0.5);
+    color: #888;
 }
 
 .hugefont {
@@ -53,12 +50,20 @@ html {
     font-size: 24px;
 }
 
+.bigfont {
+    font-size: 22px;
+}
+
 .midfont {
     font-size: 18px;
 }
 
 .smallfont {
     font-size: 14px;
+}
+
+.centertext {
+    text-align: center;
 }
 
 
@@ -68,14 +73,11 @@ html {
     width: 100%;
     position: fixed;
     border-radius: 0;
-    z-index: 1000;
+    z-index: 100;
     background-color: transparent;
-    -webkit-transition: top 0.3s;
-    -ms-transition: top 0.3s;
-    transition: top 0.3s;
-    -webkit-transition: background-color 0.3s linear;
-    -ms-transition: background-color 0.3s linear;
-    transition: background-color 0.3s linear;
+    -webkit-transition: top 0.3s, background-color 0.3s linear;
+    -ms-transition: top 0.3s, background-color 0.3s linear;
+    transition: top 0.3s, background-color 0.3s linear;
 }
 
 .navbar {
@@ -109,8 +111,6 @@ html {
 .navbar div a {
     display: block;
     padding-right: 30px;
-    text-align: center;
-    z-index: 100;
 }
 
 .navbar a img {
@@ -173,16 +173,70 @@ html {
 
 #intro-descriptor {
     opacity: 0;
-    transition: opacity 2s;
+    transition: opacity 4s;
+}
+
+
+/* Contact links tab */
+
+.contact-tab {
+    position: fixed;
+    left: -120px;
+    width: 180px;
+    height: 60px;
+    z-index: 100;
+    transition: left 0.5s, border-radius 0.5s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-tab-text {
+    width: 120px;
+}
+
+.contact-tab:hover {
+    left: 0px;
+    border-radius: 0 15px 15px 0;
+}
+
+.contact-tab1 {
+    top: 125px;
+    background-color: #2767bc;
+    border-radius: 0 15px 0 0;
+}
+
+.contact-tab2 {
+    top: 185px;
+    background-color: #25292e;
+    border-radius: 0 0 0 0;
+}
+
+.contact-tab3 {
+    top: 245px;
+    background-image: url('../assets/mail-background.png');
+    border-radius: 0 0 0 0;
+}
+
+.contact-tab4 {
+    top: 305px;
+    background-image: url('../assets/instagram-background.png');
+    border-radius: 0 0 15px 0;
 }
 
 
 /* Image carousel */
 
+#carouselTitle {
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+
 .carousel {
     margin-top: 50px;
     margin-bottom: 50px;
-    z-index: 100;
+    z-index: 10;
 }
 
 .carousel .carousel-inner .item img {
@@ -206,7 +260,6 @@ html {
 
 .carousel-descriptor {
     height: 25px;
-    text-align: center;
 }
 
 

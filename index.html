@@ -24,7 +24,7 @@
 
     <!-- Navigation bar -->
     <div class="navbar-container">
-        <div class="navbar blackfont midfont plainfont">
+        <div class="navbar blackfont midfont plainfont centertext">
             <div>
                 <a href="#"><img src="assets/logo.png"></a>
                 <a href="#">Myself</a>
@@ -39,17 +39,62 @@
     <!-- <div style="height: 75px;"></div> -->
 
     <!-- Intro section -->
-    <div class="intro-container largefont titlefont">
+    <div class="intro-container">
         <canvas id="signature-canvas"></canvas>
-        <text id="intro-descriptor" class="titlefont semiblackfont">
+        <text id="intro-descriptor" class="largefont semiblackfont">
             Computer Science and Math student at Georgia Tech
         </text>
-        <a><button class="whitefont largefont" onclick="document.getElementById('homeCarousel').scrollIntoView()">↓</button></a>
+        <a><button class="whitefont largefont" onclick="document.getElementById('carouselTitle').scrollIntoView()">↓</button></a>
         <script type="text/javascript" src="assets/ENStroke.js"></script>
         <script src="javascript/signature.js"></script>
     </div>
 
+    <!-- Contact links section -->
+    <a href="https://www.linkedin.com/in/jlu628/" target="_blank">
+        <div class="contact-tab contact-tab1">
+            <div class="contact-tab-text largefont whitefont centertext">
+                LinkedIn
+            </div>
+            <img src="assets/linkedin.png">
+        </div>
+    </a>
+    <a href="https://github.com/jlu628/" target="_blank">
+        <div class="contact-tab contact-tab2">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                Github
+            </div>
+            <img src="assets/github.png">
+        </div>
+    </a>
+    <a href="https://github.com/jlu628/" target="_blank">
+        <div class="contact-tab contact-tab3">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                Email
+            </div>
+            <img src="assets/mail.png">
+        </div>
+    </a>
+    <a href="mailto:6jerrylu@gmail.com" target="_blank">
+        <div class="contact-tab contact-tab3">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                Email
+            </div>
+            <img src="assets/mail.png">
+        </div>
+    </a>
+    <a href="https://www.instagram.com/jerrylu.exe/" target="_blank">
+        <div class="contact-tab contact-tab4">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                Instagram
+            </div>
+            <img src="assets/instagram.png">
+        </div>
+    </a>
+
     <!-- Home page image carousel -->
+    <div id="carouselTitle" class="largefont blackfont centertext">
+        Here to drop a quick hi, and share some recent updates in my life.
+    </div>
     <div id="homeCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -64,7 +109,7 @@
                 <a href="#">
                     <img src="images/first.png">
                 </a>
-                <div class="carousel-descriptor smallfont grayfont">
+                <div class="carousel-descriptor smallfont grayfont centertext">
                     One day trip to Atlanta Aquirium
                 </div>
             </div>
@@ -73,7 +118,7 @@
                 <a href="#">
                     <img src="images/second.png">
                 </a>
-                <div class="carousel-descriptor smallfont grayfont">
+                <div class="carousel-descriptor smallfont grayfont centertext">
                     Cat Diary: Diandian with his friend Paopao
                 </div>
             </div>
@@ -82,7 +127,7 @@
                 <a href="#">
                     <img src="images/third.png">
                 </a>
-                <div class="carousel-descriptor smallfont grayfont">
+                <div class="carousel-descriptor smallfont grayfont centertext">
                     End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer game!
                 </div>
             </div>
