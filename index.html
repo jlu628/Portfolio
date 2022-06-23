@@ -9,34 +9,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="assets/logo.ico" />
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="javascript/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
     <!-- Canvas animated background -->
-    <canvas></canvas>
-    <script src="canvas.js"></script>
+    <canvas id="particle-canvas"></canvas>
+    <script src="javascript/particle.js"></script>
 
     <!-- Navigation bar -->
-    <div class="navbar">
-        <div>
-            <a class="blackfont midfont plainfont" href="#"><img src="assets/logo.png"></a>
-            <a class="blackfont midfont plainfont" href="#">Myself</a>
-            <a class="blackfont midfont plainfont" href="#">Experiences</a>
-            <a class="blackfont midfont plainfont" href="#">Project</a>
-            <a class="blackfont midfont plainfont" href="#">Travel</a>
-            <a class="blackfont midfont plainfont" href="#">Moments</a>
-            <a class="blackfont midfont plainfont" href="#">Social</a>
+    <div class="navbar-container">
+        <div class="navbar blackfont midfont plainfont">
+            <div>
+                <a href="#"><img src="assets/logo.png"></a>
+                <a href="#">Myself</a>
+                <a href="#">Experiences</a>
+                <a href="#">Project</a>
+                <a href="#">Travel</a>
+                <a href="#">Moments</a>
+                <a href="#">Social</a>
+            </div>
         </div>
+    </div>
+    <!-- <div style="height: 75px;"></div> -->
+
+    <!-- Intro section -->
+    <div class="intro-container largefont titlefont">
+        <canvas id="signature-canvas"></canvas>
+        <text id="intro-descriptor" class="titlefont semiblackfont">
+            Computer Science and Math student at Georgia Tech
+        </text>
+        <a><button class="whitefont largefont" onclick="document.getElementById('homeCarousel').scrollIntoView()">↓</button></a>
+        <script type="text/javascript" src="assets/ENStroke.js"></script>
+        <script src="javascript/signature.js"></script>
     </div>
 
     <!-- Home page image carousel -->
+    <div id="homeCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#homeCarousel" data-slide-to="1"></li>
+            <li data-target="#homeCarousel" data-slide-to="2"></li>
+        </ol>
 
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="#">
+                    <img src="images/first.png">
+                </a>
+                <div class="carousel-descriptor smallfont grayfont">
+                    One day trip to Atlanta Aquirium
+                </div>
+            </div>
+
+            <div class="item">
+                <a href="#">
+                    <img src="images/second.png">
+                </a>
+                <div class="carousel-descriptor smallfont grayfont">
+                    Cat Diary: Diandian with his friend Paopao
+                </div>
+            </div>
+
+            <div class="item">
+                <a href="#">
+                    <img src="images/third.png">
+                </a>
+                <div class="carousel-descriptor smallfont grayfont">
+                    End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer game!
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#homeCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-container"></div>
 </body>
 
 </html>
