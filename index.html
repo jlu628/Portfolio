@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="javascript/script.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="javascript/navbarScroll.js"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -27,8 +28,7 @@
         <div class="navbar blackfont midfont plainfont centertext">
             <div>
                 <a href="#"><img src="assets/logo.png"></a>
-                <a href="#">Myself</a>
-                <a href="#">Experiences</a>
+                <a href="experience.html">Experiences</a>
                 <a href="#">Project</a>
                 <a href="#">Travel</a>
                 <a href="#">Moments</a>
@@ -38,21 +38,23 @@
     </div>
     <!-- <div style="height: 75px;"></div> -->
 
-    <!-- Intro section -->
-    <div class="intro-container">
+    <!-- header section -->
+    <div class="header-container">
         <canvas id="signature-canvas"></canvas>
-        <text id="intro-descriptor" class="largefont semiblackfont">
-            Computer Science and Math student at Georgia Tech
+        <text id="header-descriptor" class="largefont semiblackfont">
+            <span>To learn, </span>
+            <span>to apply, </span>
+            <span> to solve, </span>
+            <span>to create...</span>
         </text>
-        <a><button class="whitefont largefont" onclick="document.getElementById('carouselTitle').scrollIntoView()">↓</button></a>
-        <script type="text/javascript" src="assets/ENStroke.js"></script>
+        <a><button class="whitefont bigfont" onclick="document.getElementById('intro-locator').scrollIntoView()">↓</button></a>
         <script src="javascript/signature.js"></script>
     </div>
 
     <!-- Contact links section -->
     <a href="https://www.linkedin.com/in/jlu628/" target="_blank">
         <div class="contact-tab contact-tab1">
-            <div class="contact-tab-text largefont whitefont centertext">
+            <div class="contact-tab-text bigfont whitefont centertext">
                 LinkedIn
             </div>
             <img src="assets/linkedin.png">
@@ -91,9 +93,43 @@
         </div>
     </a>
 
+    <!-- Intro section -->
+    <div id="intro-locator"></div>
+    <div class="intro-container" data-aos="fade-up">
+        <div><img src="assets/placeholder.png"></div>
+        <div class="midfont blackfont">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
+            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
+        </div>
+    </div>
+    <div class="intro-container" data-aos="fade-up">
+        <div><img src="assets/placeholder.png"></div>
+        <div class="midfont blackfont">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
+            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
+        </div>
+    </div>
+    <div class="intro-container" data-aos="fade-up">
+        <div><img src="assets/placeholder.png"></div>
+        <div class="midfont blackfont">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
+            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
+        </div>
+    </div>
+    </div>
+    <div class="intro-container" data-aos="fade-up">
+        <div><img src="assets/placeholder.png"></div>
+        <div class="midfont blackfont">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
+            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
+        </div>
+    </div>
+    </div>
+
+
     <!-- Home page image carousel -->
-    <div id="carouselTitle" class="largefont blackfont centertext">
-        Here to drop a quick hi, and share some recent updates in my life.
+    <div id="carouselTitle" class="titlefont largefont blackfont centertext">
+        Recent blogs
     </div>
     <div id="homeCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -101,37 +137,49 @@
             <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#homeCarousel" data-slide-to="1"></li>
             <li data-target="#homeCarousel" data-slide-to="2"></li>
+            <li data-target="#homeCarousel" data-slide-to="3"></li>
+
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <a href="#">
-                    <img src="images/first.png">
+                <!-- <a href="#">
+                    <img src="blogs/images/intramural20211130.png">
                 </a>
                 <div class="carousel-descriptor smallfont grayfont centertext">
-                    One day trip to Atlanta Aquirium
-                </div>
+                    End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!
+                </div> -->
             </div>
 
             <div class="item">
-                <a href="#">
-                    <img src="images/second.png">
+                <!-- <a href="#">
+                    <img src="blogs/images/lakehouse20211009.png">
                 </a>
                 <div class="carousel-descriptor smallfont grayfont centertext">
-                    Cat Diary: Diandian with his friend Paopao
-                </div>
+                    Fall break at Lake Hartwell
+                </div> -->
             </div>
 
             <div class="item">
-                <a href="#">
-                    <img src="images/third.png">
+                <!-- <a href="#">
+                    <img src="blogs/images/california20210807.png">
                 </a>
                 <div class="carousel-descriptor smallfont grayfont centertext">
-                    End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer game!
-                </div>
+                    End of summer trip in California with friends
+                </div> -->
+            </div>
+
+            <div class="item">
+                <!-- <a href="#">
+                    <img src="blogs/images/gatlinburg20211227.png">
+                </a>
+                <div class="carousel-descriptor smallfont grayfont centertext">
+                    Christmas at the Great Smoky Mountains
+                </div> -->
             </div>
         </div>
+        <script src="javascript/loadHome.js"></script>
 
         <!-- Left and right controls -->
         <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
@@ -145,7 +193,17 @@
     </div>
 
     <!-- footer -->
-    <div class="footer-container"></div>
+    <div class="footer-container centertext whitefont grayfont">
+        Copyright &#169; 2022 Jiayu (Jerry) Lu
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 250,
+            duration: 1000
+        });
+    </script>
 </body>
 
 </html>

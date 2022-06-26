@@ -1,0 +1,25 @@
+{
+    "20220107": {
+        "thumbnail": "blogs/images/20211130/intramural.png",
+        "summary": "End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!",
+        "content": "blogs/contents/intralmural20211130.json",
+        "event": "intralmural"
+    },
+    "20211009": {
+        "thumbnail": "blogs/images/20211009/lakehouse.png",
+        "summary": "Fall break at Lake Hartwell",
+        "content": "blogs/contents/lakehouse20211009.json",
+        "event": "lakehouse"
+    },
+    "20210822": {
+        "thumbnail": "blogs/images/20210807/california.png",
+        "summary": "End of summer trip in California with friends",
+        "contents": "blogs/contents/california20210807.json",
+        "event": "california"
+    },
+    "20201227": {
+        "thumbnail": "blogs/images/20201227/gatlinburg.png",
+        "summary": "Christmas at the Great Smoky Mountains",
+        "event": "gatlinburg"
+    }
+}

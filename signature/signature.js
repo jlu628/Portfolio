@@ -48,13 +48,13 @@ function animate() {
     if (!finished) {
         requestAnimationFrame(animate);
     } else {
-        let data = "text/json;charset=utf-8," + "strokeData = " + encodeURIComponent(JSON.stringify({
+        let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
             "width": canvasWidth,
             "height": canvasHeight,
             "radius": penRadius,
             "strokes": strokes
         }));
-        document.querySelector('body').innerHTML += '<a href="data:' + data + '" download="data.js">download Strokes</a>';
+        document.querySelector('body').innerHTML += '<a href="data:' + data + '" download="data.json">download Strokes</a>';
     }
 }
 animate();

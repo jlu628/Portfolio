@@ -9,16 +9,12 @@ signatureCanvas.height = canvasHeight;
 let c = signatureCanvas.getContext('2d');
 let i = 0;
 
-let width = strokeData.width;
-let height = strokeData.height;
-let ratio = canvasWidth / width;
-let penRadius = strokeData.radius * ratio;
-let strokes = strokeData.strokes;
+let strokeRatio, penRadius, strokes;
 
 function animate() {
     for (let j = 0; j < speed; j++) {
-        let x = strokes[i][0] * ratio;
-        let y = strokes[i][1] * ratio;
+        let x = strokes[i][0] * strokeRatio;
+        let y = strokes[i][1] * strokeRatio;
         i++;
         c.beginPath();
         c.arc(x, y, penRadius, 0, Math.PI * 2, false);
@@ -36,4 +32,13 @@ function animate() {
     }
 }
 
-animate();
+fetch("./data.json")
+    .then(response => response.json())
+    .then(strokeData => {
+        let originalWidth = strokeData.width;
+        strokeRatio = canvasWidth / originalWidth;
+        penRadius = strokeData.radius * strokeRatio;
+        strokes = strokeData.strokes;
+
+        animate();
+    });

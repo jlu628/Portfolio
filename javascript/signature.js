@@ -10,22 +10,18 @@ let signatureCtx = signatureCanvas.getContext('2d');
 let strokeIdx = 0;
 let startWritting = 10;
 
+let strokeRatio, penRadius, strokes;
+
 window.addEventListener('resize', () => {
     // signatureCanvas.width = window.innerWidth;
     // signatureCanvas.height = window.innerHeight;
 });
-
-let originalWidth = strokeData.width;
-let strokeRatio = canvasWidth / originalWidth;
-let penRadius = strokeData.radius * strokeRatio;
-let strokes = strokeData.strokes;
 
 function animateSignature() {
     if (startWritting > 0) {
         startWritting--;
         requestAnimationFrame(animateSignature)
     } else {
-
         for (let speedCounter = 0; speedCounter < speed; speedCounter++) {
             let strokeX = strokes[strokeIdx][0] * strokeRatio;
             let strokeY = strokes[strokeIdx][1] * strokeRatio;
@@ -44,10 +40,28 @@ function animateSignature() {
         if (strokeIdx < strokes.length) {
             requestAnimationFrame(animateSignature);
         } else {
-            let introDescription = document.getElementById("intro-descriptor");;
-            introDescription.style.opacity = 1;
+            let headerDescriptors = document.querySelectorAll("#header-descriptor > span");
+            let headerDescriptorIdx = 0;
+            headerDescriptors[headerDescriptorIdx].style.opacity = 1;
+            headerDescriptorIdx++;
+            let headerDescriptorIntervalID = setInterval(() => {
+                headerDescriptors[headerDescriptorIdx].style.opacity = 1;
+                if (++headerDescriptorIdx === 4) {
+                    window.clearInterval(headerDescriptorIntervalID);
+                }
+            }, 800);
         }
     }
 
 }
-animateSignature();
+
+fetch("../assets/ENStroke.json")
+    .then(response => response.json())
+    .then(strokeData => {
+        let originalWidth = strokeData.width;
+        strokeRatio = canvasWidth / originalWidth;
+        penRadius = strokeData.radius * strokeRatio;
+        strokes = strokeData.strokes;
+
+        animateSignature();
+    });

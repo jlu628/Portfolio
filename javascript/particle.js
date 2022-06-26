@@ -1,6 +1,7 @@
 const particleColor = 150;
 const maxParticleColor = 240;
 const numParticles = 25;
+const gravatationalCoefficient = 0.25
 let nextID = 0;
 
 // Resize canvas
@@ -62,8 +63,8 @@ const drawLine = (x1, y1, x2, y2, color) => {
 let particles = {};
 for (var i = 0; i < numParticles; i++) {
     particles[nextID] = new Particle(
-        Math.random() * (window.innerWidth - 2) + 1,
-        Math.random() * (window.innerHeight - 2) + 1,
+        Math.random() * (window.innerWidth - 10) + 1,
+        Math.random() * (window.innerHeight - 10) + 1,
         Math.random() - 0.5,
         Math.random() - 0.5,
         nextID
@@ -134,8 +135,8 @@ function animateParticles() {
             }
 
             // Particles are attracted by each other by simulated gravity
-            let dx = 50 / numParticles * (p1.x - p2.x) / Math.pow(dist + 5, 1.5);
-            let dy = 50 / numParticles * (p1.y - p2.y) / Math.pow(dist + 5, 1.5);
+            let dx = gravatationalCoefficient * (p1.x - p2.x) / Math.pow(dist + 5, 1.5);
+            let dy = gravatationalCoefficient * (p1.y - p2.y) / Math.pow(dist + 5, 1.5);
             p1.dx -= dx;
             p1.dy -= dy;
             p2.dx += dx;
