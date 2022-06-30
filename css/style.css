@@ -18,6 +18,16 @@ html {
     scroll-behavior: smooth;
 }
 
+:root {
+    --gray: #b8b8b8;
+    --gray-semi-transparent: rgba(230, 230, 230, 0.5);
+    --platinum: #dce3e6;
+    --blue: #97a5b2;
+    --blue-light: #59aae2;
+    --wheat: #d9d2c7;
+    --shadow: rgba(0, 0, 0, 0.2)
+}
+
 
 /* Text fonts */
 
@@ -25,8 +35,17 @@ html {
     text-decoration: none;
 }
 
+.monospacefont {
+    font-family: 'Courier New', monospace;
+}
+
+.underlinefont {
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+
 .titlefont {
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
 
@@ -43,12 +62,12 @@ html {
 }
 
 .grayfont {
-    color: #888;
+    color: #666;
 }
 
 .hugefont {
-    font-size: 60px;
-    font-weight: 900;
+    font-size: 36px;
+    font-weight: 700;
 }
 
 .largefont {
@@ -79,7 +98,7 @@ html {
     position: fixed;
     border-radius: 0;
     z-index: 100;
-    background-color: transparent;
+    background-color: white;
     -webkit-transition: top 0.3s, background-color 0.3s linear;
     -ms-transition: top 0.3s, background-color 0.3s linear;
     transition: top 0.3s, background-color 0.3s linear;
@@ -87,7 +106,7 @@ html {
 
 .navbar {
     height: 75px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px 0px var(--shadow);
     /* overflow: visible; */
     display: flex;
     flex-direction: row;
@@ -95,6 +114,10 @@ html {
     justify-content: space-between;
     border-radius: 0px;
     margin: 0;
+}
+
+.transparent {
+    background-color: transparent;
 }
 
 .navbar div {
@@ -129,7 +152,7 @@ html {
 .navbar a:hover {
     text-decoration: none;
     color: black;
-    text-shadow: 0px 3px rgba(0, 0, 0, 0.2)
+    text-shadow: 0px 3px var(--shadow)
 }
 
 .navbar div a:visited,
@@ -137,6 +160,11 @@ html {
 .navbar div a:active {
     text-decoration: none;
     color: black;
+}
+
+.navbar-placeholder {
+    height: 75px;
+    margin-bottom: 30px;
 }
 
 
@@ -180,6 +208,8 @@ html {
 #header-descriptor span {
     opacity: 0;
     transition: opacity 4s;
+    -webkit-transition: opacity 4s;
+    -ms-transition: opacity 4s;
 }
 
 
@@ -191,11 +221,13 @@ html {
     width: 180px;
     height: 60px;
     z-index: 100;
-    transition: left 0.5s, border-radius 0.5s;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    transition: left 0.5s, border-radius 0.5s;
+    -webkit-transition: left 0.5s, border-radius 0.5s;
+    -ms-transition: left 0.5s, border-radius 0.5s;
 }
 
 .contact-tab-text {
@@ -239,7 +271,6 @@ html {
     height: 250px;
     width: 1000px;
     display: grid;
-    z-index: 10;
 }
 
 .intro-container div {
@@ -248,7 +279,8 @@ html {
     justify-content: center;
     align-items: center;
     border-radius: 50px;
-    background-color: rgb(240, 240, 240);
+    background-color: var(--gray-semi-transparent);
+    z-index: 10;
 }
 
 .intro-container img {
@@ -307,6 +339,7 @@ html {
 .carousel-indicators {
     width: 15%;
     margin-left: -7.5%;
+    z-index: 100;
 }
 
 .carousel-descriptor {

@@ -1,4 +1,5 @@
 let prevScroll = 0;
+
 window.addEventListener('scroll', () => {
     const navbar = document.getElementsByClassName('navbar-container')[0];
     let navHeight = window.getComputedStyle(navbar).height;
@@ -11,11 +12,12 @@ window.addEventListener('scroll', () => {
             navbar.style.top = `-${navHeight}px`;
         }
     }
-
-    if (currScroll > navHeight) {
-        navbar.style.backgroundColor = 'white';
-    } else {
-        navbar.style.backgroundColor = 'transparent';
+    if (navbar.classList.contains('transparent')) {
+        if (currScroll > navHeight) {
+            navbar.style.backgroundColor = 'white';
+        } else {
+            navbar.style.backgroundColor = 'transparent';
+        }
     }
     prevScroll = currScroll;
 })

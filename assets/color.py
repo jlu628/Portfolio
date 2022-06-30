@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 
-fn = 'instagram.png'
+fn = 'document.png'
 color = [255, 255, 255]
 with Image.open(fn) as im:
     im = np.array(im)

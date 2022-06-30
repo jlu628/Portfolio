@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Jerry Lu</title>
+    <meta name="description" content="Jerry (Jiayu) Lu's Portfolio Website">
+    <meta name="keywords" content="Jerry Jiayu Lu Portfolio Georgia Tech Computer Science Undergraduate Student Personal Website">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="assets/logo.ico" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="javascript/navbarScroll.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+</head>
+
+<body>
+    <!-- Canvas animated background -->
+    <canvas id="particle-canvas"></canvas>
+    <script src="javascript/particle.js"></script>
+
+    <!-- Navigation bar -->
+    <div class="navbar-container">
+        <div class="navbar blackfont midfont plainfont centertext">
+            <div>
+                <a href="index.html"><img src="assets/logo.png"></a>
+                <a href="#">Portfolio</a>
+                <a href="#">Projects</a>
+                <a href="#">Travel</a>
+                <a href="#">Moments</a>
+                <a href="#">Social</a>
+            </div>
+        </div>
+    </div>
+    <div class="navbar-placeholder"></div>
+
+    <!-- Contact links section -->
+    <a href="https://www.linkedin.com/in/jlu628/" target="_blank">
+        <div class="contact-tab contact-tab1">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                LinkedIn
+            </div>
+            <img src="assets/linkedin.png">
+        </div>
+    </a>
+    <a href="https://github.com/jlu628/" target="_blank">
+        <div class="contact-tab contact-tab2">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                Github
+            </div>
+            <img src="assets/github.png">
+        </div>
+    </a>
+    <a href="mailto:6jerrylu@gmail.com" target="_blank">
+        <div class="contact-tab contact-tab3">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                Email
+            </div>
+            <img src="assets/mail.png">
+        </div>
+    </a>
+    <a href="https://www.instagram.com/jerrylu.exe/" target="_blank">
+        <div class="contact-tab contact-tab4">
+            <div class="contact-tab-text bigfont whitefont centertext">
+                Instagram
+            </div>
+            <img src="assets/instagram.png">
+        </div>
+    </a>
+
+    <!-- Two columns layout -->
+    <div class="container">
+        <div class="row">
+            <div class="primary col-md-7 col-sm-12 col-xs-12">
+                <!-- Education -->
+                <div class="card">
+                    <div class="card-title whitefont hugefont titlefont">
+                        Education
+                    </div>
+                    <div class="education-row blackfont bigfont">
+                        College
+                        <text class="grayfont underlinefont">
+                            Georgia Institute of Technology
+                        </text>
+                    </div>
+                    <div class="education-row blackfont bigfont">
+                        Dates
+                        <text class="grayfont underlinefont">
+                            June 2019 ~ May 2023 (Expected)
+                        </text>
+                    </div>
+                    <div class="education-row blackfont bigfont">
+                        GPA
+                        <text class="grayfont underlinefont">
+                            4.0/4.0, High honor roll
+                        </text>
+                    </div>
+                    <div class="education-row blackfont bigfont">
+                        Degree
+                        <text class="grayfont underlinefont">
+                            Bachelor of Science
+                        </text>
+                    </div>
+                    <div class="education-row blackfont bigfont">
+                        Majors & Concentration
+                        <text class="grayfont underlinefont">
+                            Computer Science with concentration in Machine Learning and Information Internetworks<br/>
+                            Mathematics with concentration in Probability and Statistics
+                        </text>
+                    </div>
+                </div>
+                <!-- Resume download -->
+                <div id="resume-download-container">
+                    <a href="assets/Resume.pdf " download>
+                        <button id="resume-download" class="whitefont midfont">
+                            <i class="fa fa-download " aria-hidden="true "></i>
+                            &nbsp&nbspDOWNLOAD MY RESUME
+                            <img src="assets/document.png ">
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+            <div class="secondary col-md-5 col-sm-12 col-xs-12">
+                <!-- Skills -->
+                <div class="card">
+                    <div class="card-title-reverse whitefont hugefont titlefont">
+                        Skills
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/python.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>Python</text>
+                                <text>5 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="python-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/java.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>Java</text>
+                                <text>4 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="java-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/c++.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>C/C++</text>
+                                <text>1~2 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="c-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/html.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>HTML+CSS</text>
+                                <text>4 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="html-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/node.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>NodeJS</text>
+                                <text>2 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="node-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/react.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>ReactJS</text>
+                                <text>1~2 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="react-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/mysql.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>MySQL</text>
+                                <text>1~2 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="mysql-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/solidity.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>Solidity Smart Contract</text>
+                                <text>1~2 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="solidity-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-row-left "><img src="assets/aws.png"></div>
+                        <div class="skill-row-right">
+                            <div class="grayfont semiblackfont">
+                                <text>AWS</text>
+                                <text>1~2 years</text>
+                            </div>
+                            <div>
+                                <div class="skill-bar">
+                                    <div class="skill-bar-inner" id="aws-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="javascript/loadSkills.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- footer -->
+    <div class="footer-container centertext whitefont grayfont ">
+        Copyright &#169; 2022 Jiayu (Jerry) Lu
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js "></script>
+    <script>
+        AOS.init({
+            offset: 250,
+            duration: 1000
+        });
+    </script>
+</body>
+
+</html>
