@@ -1,6 +1,6 @@
 const items = document.querySelectorAll("#homeCarousel > .carousel-inner > .item");
 
-fetch("../blogsmeta.json")
+fetch("../blogs/meta.json")
     .then(response => response.json())
     .then(blogsMeta => {
         const blogDates = Object.keys(blogsMeta).map(k => parseInt(k));

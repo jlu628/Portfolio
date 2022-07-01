@@ -18,9 +18,29 @@ html {
     scroll-behavior: smooth;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
+a.disabled {
+    color: currentColor;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+a.disabled:hover {
+    color: currentColor;
+}
+
+
+/* Define colors */
+
 :root {
     --gray: #b8b8b8;
+    --gray-dark: #666;
+    --gray-light: #bbb;
     --gray-semi-transparent: rgba(230, 230, 230, 0.5);
+    --black-semi-transparent: rgba(0, 0, 0, 0.6);
     --platinum: #dce3e6;
     --blue: #97a5b2;
     --blue-light: #59aae2;
@@ -58,11 +78,11 @@ html {
 }
 
 .semiblackfont {
-    color: rgba(0, 0, 0, 0.6)
+    color: var(--black-semi-transparent);
 }
 
 .grayfont {
-    color: #666;
+    color: var(--gray-dark);
 }
 
 .hugefont {
@@ -84,6 +104,10 @@ html {
 
 .smallfont {
     font-size: 14px;
+}
+
+.tinyfont {
+    font-size: 11px;
 }
 
 .centertext {
@@ -147,6 +171,16 @@ html {
     height: 30px;
     margin-left: 25px;
     margin-right: 10px;
+    transition: width 0.3s, height 0.3s, margin-left 0.3s, margin-right 0.3s;
+    -webkit-transition: width 0.3s, height 0.3s, margin-left 0.3s, margin-right 0.3s;
+    -ms-transition: width 0.3s, height 0.3s, margin-left 0.3s, margin-right 0.3s;
+}
+
+.navbar a img:hover {
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+    margin-right: 0px;
 }
 
 .navbar a:hover {
@@ -164,7 +198,6 @@ html {
 
 .navbar-placeholder {
     height: 75px;
-    margin-bottom: 30px;
 }
 
 
@@ -198,11 +231,11 @@ html {
     height: 50px;
     border-radius: 100%;
     border: none;
-    background-color: #666;
+    background-color: var(--gray-dark);
 }
 
 .header-container button:hover {
-    background-color: #bbb;
+    background-color: var(--gray-light);
 }
 
 #header-descriptor span {

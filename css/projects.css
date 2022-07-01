@@ -1,0 +1,29 @@
+.summary-icon-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+}
+
+.summary-icon-container img {
+    height: 40px;
+    width: 40px;
+    margin: auto 5px;
+    -webkit-transition: width 0.5s, height 0.5s, margin 0.5s;
+    -ms-transition: width 0.5s, height 0.5s, margin 0.5s;
+    transition: width 0.5s, height 0.5s, margin 0.5s;
+}
+
+.summary-icon-container img:hover {
+    width: 70px;
+    height: 70px;
+    margin: auto -10px;
+}
+
+.summary-container button {
+    background-color: var(--gray-dark);
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+}

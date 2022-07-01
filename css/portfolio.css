@@ -1,7 +1,8 @@
-/* Color themes */
-
-
 /* Column Layout */
+
+.container {
+    margin-top: 30px;
+}
 
 .primary {
     height: 825px;
