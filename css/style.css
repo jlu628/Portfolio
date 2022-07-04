@@ -44,6 +44,8 @@ a.disabled:hover {
     --platinum: #dce3e6;
     --blue: #97a5b2;
     --blue-light: #59aae2;
+    --navy: #001128;
+    --brown: #cabfb9;
     --wheat: #d9d2c7;
     --shadow: rgba(0, 0, 0, 0.2)
 }
@@ -121,7 +123,7 @@ a.disabled:hover {
     width: 100%;
     position: fixed;
     border-radius: 0;
-    z-index: 100;
+    z-index: 1000;
     background-color: white;
     -webkit-transition: top 0.3s, background-color 0.3s linear;
     -ms-transition: top 0.3s, background-color 0.3s linear;
@@ -165,7 +167,7 @@ a.disabled:hover {
     padding-right: 30px;
 }
 
-.navbar a img {
+#navbar-icon {
     display: block;
     width: 30px;
     height: 30px;
@@ -176,7 +178,7 @@ a.disabled:hover {
     -ms-transition: width 0.3s, height 0.3s, margin-left 0.3s, margin-right 0.3s;
 }
 
-.navbar a img:hover {
+#navbar-icon:hover {
     width: 50px;
     height: 50px;
     margin-left: 15px;
@@ -189,6 +191,7 @@ a.disabled:hover {
     text-shadow: 0px 3px var(--shadow)
 }
 
+.navbar div a,
 .navbar div a:visited,
 .navbar div a:link,
 .navbar div a:active {
@@ -198,6 +201,38 @@ a.disabled:hover {
 
 .navbar-placeholder {
     height: 75px;
+}
+
+#navbar-right-container {
+    float: right;
+    margin-right: 50px;
+    height: 75px;
+}
+
+#navbar-right-container a img {
+    height: 30px;
+    width: 30px;
+}
+
+#navbar-right-container>input {
+    height: 30px;
+    margin: auto 15px auto -10px;
+}
+
+#small-device-navbar-opener {
+    cursor: pointer;
+    display: none;
+}
+
+#small-device-background-cover {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -343,7 +378,7 @@ a.disabled:hover {
 
 /* Image carousel */
 
-#carouselTitle {
+#carousel-title {
     padding-top: 50px;
     margin-bottom: 50px;
 }
@@ -422,8 +457,150 @@ a.disabled:hover {
     .left.carousel-control {
         width: 9.756%;
     }
-    .right,
-    .carousel-control {
+    .right.carousel-control {
         width: 9.756%;
+    }
+    #carousel-title {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 800px) {
+    /* Ajust navigation bar to expand on left when clicked */
+    .contact-tab {
+        display: none;
+    }
+    .navbar>div:nth-child(2) {
+        position: fixed;
+        height: 100vh;
+        width: 200px;
+        margin: 0;
+        top: 0;
+        left: -200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: white;
+        -webkit-transition: left 0.3s;
+        -ms-transition: left 0.3s;
+        transition: left 0.3s;
+    }
+    .navbar>div:nth-child(2)>a {
+        margin-top: 20px;
+    }
+    #small-device-navbar-opener {
+        display: flex;
+    }
+    .navbar a:hover {
+        text-decoration: none;
+        color: black;
+        text-shadow: none;
+    }
+    .navbar div a:active {
+        text-decoration: underline;
+        color: black;
+    }
+    .header-container {
+        background-image: url(../assets/background-md.png);
+    }
+}
+
+@media (max-width: 767px) {
+    .carousel-indicators {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 650px) {
+    /* Shrink font size */
+    .hugefont {
+        font-size: 32px;
+        font-weight: 650;
+    }
+    .largefont {
+        font-size: 24px;
+    }
+    .bigfont {
+        font-size: 18px;
+    }
+    .midfont {
+        font-size: 15px;
+    }
+    .smallfont {
+        font-size: 11px;
+    }
+    .tinyfont {
+        font-size: 9px;
+    }
+    #carousel-title {
+        padding-top: 15px;
+        margin-bottom: 15px;
+    }
+    .carousel {
+        margin-top: 15px;
+    }
+    #homeCarousel {
+        margin-bottom: 35px;
+    }
+}
+
+@media (max-width: 550px) {
+    .intro-container {
+        margin-bottom: 20px;
+    }
+    .hugefont {
+        font-size: 26px;
+        font-weight: 650;
+    }
+    .largefont {
+        font-size: 20px;
+    }
+    .bigfont {
+        font-size: 15px;
+    }
+    .midfont {
+        font-size: 12px;
+    }
+    .smallfont {
+        font-size: 9px;
+    }
+    .tinyfont {
+        font-size: 7px;
+    }
+    #homeCarousel {
+        margin-bottom: 20px;
+    }
+    .header-container {
+        background-image: url(../assets/background-sd.png);
+    }
+    .navbar>div:nth-child(2) {
+        width: 150px;
+        left: -200px;
+    }
+}
+
+@media (max-width: 450px) {
+    .hugefont {
+        font-size: 22px;
+        font-weight: 650;
+    }
+    .largefont {
+        font-size: 16px;
+    }
+    .bigfont {
+        font-size: 12.5px;
+    }
+    .midfont {
+        font-size: 10px;
+    }
+    .smallfont {
+        font-size: 8px;
+    }
+    .tinyfont {
+        font-size: 6px;
+    }
+    #homeCarousel {
+        margin-bottom: 0px;
     }
 }

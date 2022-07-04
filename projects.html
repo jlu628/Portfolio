@@ -13,12 +13,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="javascript/navbarScroll.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/blogs.css">
-    <link rel="stylesheet" href="css/projects.css">
 </head>
 
 <body>
@@ -29,16 +27,21 @@
     <!-- Navigation bar -->
     <div class="navbar-container">
         <div class="navbar blackfont midfont plainfont centertext">
+            <div id="small-device-navbar-opener" class="largefont"><a>&equiv;</a></div>
             <div>
-                <a href="index.html"><img src="assets/logo.png"></a>
+                <a href="index.html"><img id="navbar-icon" src="assets/logo.png"></a>
                 <a href="portfolio.html">Portfolio</a>
-                <a href="#" style="text-decoration: underline;">Projects</a>
-                <a href="#">Travel</a>
-                <a href="#">Moments</a>
-                <a href="#">Social</a>
+                <a href="?page=1" style="text-decoration: underline;">Projects</a>
+                <a href="blogs.html?page=1">Blogs</a>
+                <a href="social.html">Social</a>
+            </div>
+            <div id="navbar-right-container">
+                <a href="" onClick="return getSearchContent();" id="searchIcon"><img src="assets/search.png"></a>
+                <input type="text" id="search" name="search" placeholder="search post" class="midfont">
             </div>
         </div>
     </div>
+    <div id="small-device-background-cover"></div>
     <div class="navbar-placeholder"></div>
 
     <!-- Contact links section -->
@@ -88,14 +91,13 @@
         Copyright &#169; 2022 Jiayu (Jerry) Lu
     </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js "></script>
+    <script src="javascript/navbar.js"></script>
+    <script src="javascript/utils.js"></script>
+    <script src="javascript/loadPosts.js"></script>
     <script>
-        AOS.init({
-            offset: 250,
-            duration: 1000
-        });
+        loadPage('projects');
+        bindSearch();
     </script>
-    <script src="javascript/loadProjects.js"></script>
 </body>
 
 </html>

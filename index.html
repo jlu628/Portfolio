@@ -10,11 +10,11 @@
     <link rel="icon" href="assets/logo.ico" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js" integrity="sha512-szJ5FSo9hEmXXe7b5AUVtn/WnL8a5VofnFeYC2i2z03uS2LhAch7ewNLbl5flsEmTTimMN0enBZg/3sQ+YOSzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <script src="javascript/navbarScroll.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -26,16 +26,21 @@
     <!-- Navigation bar -->
     <div class="navbar-container transparent">
         <div class="navbar blackfont midfont plainfont centertext">
+            <div id="small-device-navbar-opener" class="largefont"><a>&equiv;</a></div>
             <div>
-                <a href="#"><img src="assets/logo.png"></a>
+                <a href="#"><img id="navbar-icon" src="assets/logo.png"></a>
                 <a href="portfolio.html">Portfolio</a>
-                <a href="projects.html">Projects</a>
-                <a href="#">Travel</a>
-                <a href="#">Moments</a>
-                <a href="#">Social</a>
+                <a href="projects.html?page=1">Projects</a>
+                <a href="blogs.html?page=1">Blogs</a>
+                <a href="social.html">Social</a>
+            </div>
+            <div id="navbar-right-container">
+                <a href="" onClick="return getSearchContent();" id="searchIcon"><img src="assets/search.png"></a>
+                <input type="text" id="search" name="search" placeholder="search post" class="midfont">
             </div>
         </div>
     </div>
+    <div id="small-device-background-cover"></div>
     <!-- <div style="height: 75px;"></div> -->
 
     <!-- header section -->
@@ -120,7 +125,7 @@
 
 
     <!-- Home page image carousel -->
-    <div id="carouselTitle" class="titlefont largefont blackfont centertext">
+    <div id="carousel-title" class="titlefont largefont blackfont centertext">
         Recent blogs
     </div>
     <div id="homeCarousel" class="carousel slide" data-ride="carousel">
@@ -136,42 +141,17 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <!-- <a href="#">
-                    <img src="blogs/images/intramural20211130.png">
-                </a>
-                <div class="carousel-descriptor smallfont grayfont centertext">
-                    End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!
-                </div> -->
             </div>
 
             <div class="item">
-                <!-- <a href="#">
-                    <img src="blogs/images/lakehouse20211009.png">
-                </a>
-                <div class="carousel-descriptor smallfont grayfont centertext">
-                    Fall break at Lake Hartwell
-                </div> -->
             </div>
 
             <div class="item">
-                <!-- <a href="#">
-                    <img src="blogs/images/california20210807.png">
-                </a>
-                <div class="carousel-descriptor smallfont grayfont centertext">
-                    End of summer trip in California with friends
-                </div> -->
             </div>
 
             <div class="item">
-                <!-- <a href="#">
-                    <img src="blogs/images/gatlinburg20211227.png">
-                </a>
-                <div class="carousel-descriptor smallfont grayfont centertext">
-                    Christmas at the Great Smoky Mountains
-                </div> -->
             </div>
         </div>
-        <script src="javascript/loadBlogHome.js"></script>
 
         <!-- Left and right controls -->
         <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
@@ -189,8 +169,13 @@
         Copyright &#169; 2022 Jiayu (Jerry) Lu
     </div>
 
+    <script src="javascript/navbar.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="javascript/utils.js"></script>
+    <script src="javascript/loadBlogHome.js"></script>
     <script>
+        bindSearch();
+        loadBlogHome();
         AOS.init({
             offset: 250,
             duration: 1000

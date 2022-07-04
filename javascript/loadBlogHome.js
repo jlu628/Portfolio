@@ -1,21 +1,23 @@
 const items = document.querySelectorAll("#homeCarousel > .carousel-inner > .item");
 
-fetch("../blogs/meta.json")
-    .then(response => response.json())
-    .then(blogsMeta => {
-        const blogDates = Object.keys(blogsMeta).map(k => parseInt(k));
-        blogDates.sort((a, b) => b - a);
-        for (let i = 0; i < 4; i++) {
-            const item = items[i];
-            const date = blogDates[i];
-            const blog = blogsMeta[date];
-            item.innerHTML = `                
-            <a href="#">
-                <img src="${blog.thumbnail}">
+const loadBlogHome = () => {
+    fetch("../blogs/meta.json")
+        .then(response => response.json())
+        .then(blogsMeta => {
+
+            blogsMeta.blogs.sort((a, b) => parseInt(b.date) - parseInt(a.date));
+            for (let i = 0; i < 4; i++) {
+                const blog = blogsMeta.blogs[i];
+                const item = items[i];
+                const blogID = hash(blog.name + blog.date)
+                item.innerHTML = `                
+            <a href="content.html?blogID=${blogID}">
+                <img src="blogs/images/${blogID}/thumbnail.png">
             </a>
             <div class="carousel-descriptor smallfont grayfont centertext">
                 ${blog.summary}
             </div>
         `
-        }
-    });
+            }
+        });
+}

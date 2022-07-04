@@ -1,8 +1,8 @@
 from PIL import Image
 import numpy as np
 
-fn = 'document.png'
-color = [255, 255, 255]
+fn = 'search.png'
+color = [0, 0, 0]
 with Image.open(fn) as im:
     im = np.array(im)
     for i in range(im.shape[0]):

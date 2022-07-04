@@ -1,5 +1,5 @@
-const canvasWidth = 750;
-const canvasHeight = 250;
+const canvasWidth = window.innerWidth > 750 ? 750 : window.innerWidth;
+const canvasHeight = canvasWidth / 3;
 const speed = 20;
 const penColor = '#425362';
 
@@ -13,8 +13,10 @@ let startWritting = 10;
 let strokeRatio, penRadius, strokes;
 
 window.addEventListener('resize', () => {
-    // signatureCanvas.width = window.innerWidth;
-    // signatureCanvas.height = window.innerHeight;
+    let ratio = window.innerWidth / canvasWidth;
+    if (Math.ceil(canvasWidth * ratio) <= Math.min(window.innerWidth, 750)) {
+        signatureCanvas.style.transform = `scale(${ratio}, ${ratio})`;
+    }
 });
 
 function animateSignature() {
