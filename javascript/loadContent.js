@@ -27,10 +27,26 @@ const createContent = (blogContent, imgFolder) => {
 const loadContent = () => {
     const blogID = parseQueryString().blogID;
     const imgFolder = `blogs/images/${blogID}/`;
-    fetch("../blogs/content.json")
+
+    var header = new Headers();
+    header.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "blogID": blogID
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: header,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("http://127.0.0.1:3000/getContentPage", requestOptions)
         .then(response => response.json())
-        .then(contents => {
-            const blogContent = contents[blogID];
+        .then(data => {
+            const blogContent = data.content;
             document.querySelector(".blog-container").innerHTML = createContent(blogContent, imgFolder);
-        });
+        })
+        .catch(error => console.log('error', error));
 }

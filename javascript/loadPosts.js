@@ -129,20 +129,26 @@ const loadPosts = (posts, pageType) => {
 
 // Load entire page of activity/project posts and create pagination as needed
 const loadPostPage = (currPage, pageType, tag, filter) => {
-    fetch("../blogs/meta.json")
+    var header = new Headers();
+    header.append("Content-Type", "application/json");
+    var raw = JSON.stringify({
+        "type": pageType,
+        "page": currPage,
+        "tag": tag
+    });
+    var requestOptions = {
+        method: 'POST',
+        headers: header,
+        body: raw,
+        redirect: 'follow'
+    };
+    fetch("http://127.0.0.1:3000/getPostPage", requestOptions)
         .then(response => response.json())
-        .then(metadata => {
-            // Filter useful posts
-            data = metadata[pageType];
-            // Load posts
-            if (tag) {
-                data = data.filter(blog => blog.tags.includes(tag));
-            }
-            // Sanity check
-            let totalPage = Math.ceil(data.length / 5);
-            currPage = currPage < 0 ? 1 : Math.min(currPage, totalPage)
+        .then(data => {
+            currPage = data.page;
+            let totalPage = data.totalPages;
+            let displayedPosts = data.displayedPosts;
 
-            const displayedPosts = data.slice((currPage - 1) * 5, currPage * 5);
             loadPosts(displayedPosts, pageType);
             createPagination(currPage, totalPage);
 
@@ -150,7 +156,8 @@ const loadPostPage = (currPage, pageType, tag, filter) => {
             if (displayedPosts.length % 2 == 0) {
                 document.querySelector('.pagination-container').style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--gray-semi-transparent');;
             }
-        });
+        })
+        .catch(error => console.log('error', error));
 }
 
 // When window first loaded
@@ -171,7 +178,5 @@ window.addEventListener("resize", () => {
         if (pagination) {
             pagination.classList.remove("pagination-sm");
         }
-        console.log(pagination.classList)
-
     }
 })

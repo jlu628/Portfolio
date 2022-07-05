@@ -543,6 +543,16 @@ a.disabled:hover {
     #homeCarousel {
         margin-bottom: 35px;
     }
+    .intro-container div {
+        border-radius: 25px;
+    }
+    .intro-container div:nth-child(1) {
+        width: 200px;
+        height: 200px;
+    }
+    .intro-container img {
+        height: 175px;
+    }
 }
 
 @media (max-width: 550px) {
@@ -578,6 +588,19 @@ a.disabled:hover {
         width: 150px;
         left: -200px;
     }
+    .intro-container div {
+        border-radius: 15px;
+    }
+    .intro-container div:nth-child(1) {
+        width: 175px;
+        height: 175px;
+    }
+    .intro-container img {
+        height: 150px;
+    }
+    .intro-container div:nth-child(2) {
+        padding: 15px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -602,5 +625,15 @@ a.disabled:hover {
     }
     #homeCarousel {
         margin-bottom: 0px;
+    }
+    .intro-container div {
+        border-radius: 10px;
+    }
+    .intro-container div:nth-child(1) {
+        width: 150px;
+        height: 150px;
+    }
+    .intro-container img {
+        height: 125px;
     }
 }
