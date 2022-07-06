@@ -79,6 +79,7 @@
     </a>
 
     <!-- Projects -->
+    <div class="filter-container keywords midfont"></div>
     <div class="page-container">
     </div>
 
@@ -95,6 +96,8 @@
     <script src="javascript/utils.js"></script>
     <script src="javascript/loadPosts.js"></script>
     <script>
+        // Change displayed filtered key words
+        document.querySelector(".filter-container").innerHTML = `Filter: ${parseQueryString().filter}`;
         loadPage('search');
         bindSearch();
     </script>

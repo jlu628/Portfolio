@@ -3,10 +3,11 @@
             "title": "Intramural End of Season 2021",
             "date": "20211130",
             "datealt": "November 2021",
+            "name": "intramural",
             "summary": "End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!",
             "brief": [
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?",
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?"
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
             ],
             "tags": ["sport"]
         },
@@ -14,10 +15,11 @@
             "title": "Lake House, Yacht and Fireworks!",
             "date": "20211009",
             "datealt": "Fall Break 2021",
+            "name": "lakehouse",
             "summary": "Fall break at Lake Hartwell",
             "brief": [
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?",
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?"
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
             ],
             "tags": ["travel"]
         },
@@ -25,10 +27,11 @@
             "title": "End of Summer at Eastern Coast",
             "date": "20210822",
             "datealt": "End of Summer 2021",
+            "name": "California",
             "summary": "End of summer trip to California",
             "brief": [
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?",
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?"
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
             ],
             "tags": ["travel"]
         },
@@ -36,18 +39,20 @@
             "title": "Snowy Christmas at the Great Smoky Mountains",
             "date": "20201227",
             "datealt": "Christmas 2020",
+            "name": "Gatlinburg",
             "summary": "Snowy Christmas at the Great Smoky Mountains",
             "brief": [
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?",
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid porro voluptatem aut possimus sapiente veniam consectetur exercitationem maiores eum sint! Vero eaque laudantium voluptatum totam quasi aspernatur omnis impedit? Excepturi?"
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
             ],
             "tags": ["travel"]
         }
     ],
     "projects": [{
-        "name": "StudyFind Blockchain Medical Record Saver",
+        "title": "StudyFind Blockchain Medical Record Saver",
         "thumbnail": "blogs/images/projects/blockchain.png",
         "dates": "January 2021 ~ December 2021",
+        "date": "20211211",
         "skills": ["Solidity", "NodeJS", "ReactNative", "Google Firestore"],
         "description": [
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
@@ -55,9 +60,10 @@
         ],
         "link": "https://github.com/TekTroller/StudyFind#readme"
     }, {
-        "name": "GTCSSA Website",
+        "title": "GTCSSA Website",
         "thumbnail": "blogs/images/projects/gtcssa.png",
         "dates": "November 2020 ~ March 2021",
+        "date": "20210311",
         "skills": ["HTML", "CSS", "JavaScript"],
         "description": [
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
@@ -65,9 +71,10 @@
         ],
         "link": "https://gtcssa.org"
     }, {
-        "name": "One Week Couple Website",
+        "title": "One Week Couple Website",
         "thumbnail": "blogs/images/projects/one-week-couple.png",
         "dates": "November 2021 ~ Febuary 2022",
+        "date": "20220220",
         "skills": ["HTML", "CSS", "JavaScript", "AWS", "Google Firestore"],
         "description": [
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
@@ -75,9 +82,10 @@
         ],
         "link": "https://one-week-couple.gtcssa.org/"
     }, {
-        "name": "QiDian Smart Go Board",
+        "title": "QiDian Smart Go Board",
         "thumbnail": "blogs/images/projects/qidian.png",
         "dates": "May 2021 ~ September 2021",
+        "date": "20210927",
         "skills": ["Swift", "Python", "AWS"],
         "description": [
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
@@ -85,9 +93,10 @@
         ],
         "link": "https://qidiantechnology.com/"
     }, {
-        "name": "Anime Face Generator",
+        "title": "Anime Face Generator",
         "thumbnail": "blogs/images/projects/anime-face-generator.png",
         "dates": "June 2022",
+        "date": "20220801",
         "skills": ["Python", "PyTorch", "Jupyter Notebook"],
         "description": [
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
@@ -95,9 +104,10 @@
         ],
         "link": "https://github.com/jlu628/WaifuGenerator"
     }, {
-        "name": "Discord Bots",
+        "title": "Discord Bots",
         "thumbnail": "blogs/images/projects/discordbots.png",
-        "dates": "Febuary 2022 ~ Present",
+        "dates": "March 2021 ~ March 2022",
+        "date": "20220210",
         "skills": ["Python", "AWS"],
         "description": [
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",

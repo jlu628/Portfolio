@@ -1,6 +1,6 @@
 const createContent = (blogContent, imgFolder) => {
     let date = blogContent.date;
-    date = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
+    date = "Posted on " + date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
     let html = `
     <text class="titlefont largefont">${blogContent.title}</text>
     <div class="date-container"><text class="smallfont semiblackfont">${date}</text></div>

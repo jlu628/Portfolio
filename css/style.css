@@ -32,6 +32,11 @@ a.disabled:hover {
     color: currentColor;
 }
 
+mark {
+    background: #ff0;
+    padding: 0;
+}
+
 
 /* Define colors */
 
@@ -553,6 +558,9 @@ a.disabled:hover {
     .intro-container img {
         height: 175px;
     }
+    #navbar-right-container {
+        margin-right: 25px;
+    }
 }
 
 @media (max-width: 550px) {
@@ -601,6 +609,16 @@ a.disabled:hover {
     .intro-container div:nth-child(2) {
         padding: 15px;
     }
+    .navbar,
+    .navbar div,
+    .navbar-placeholder,
+    #navbar-right-container,
+    .footer-container {
+        height: 60px;
+    }
+    p {
+        margin-bottom: 7px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -635,5 +653,8 @@ a.disabled:hover {
     }
     .intro-container img {
         height: 125px;
+    }
+    #navbar-right-container {
+        margin-right: 15px;
     }
 }

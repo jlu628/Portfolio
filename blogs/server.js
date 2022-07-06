@@ -17,6 +17,11 @@ app.use(cors());
 const routes = require("./router");
 app.use("/", routes);
 
+// Redirect outputs
+const fs = require("fs");
+let access = fs.createWriteStream('./server.log');
+process.stdout.write = process.stderr.write = access.write.bind(access);
+
 const port = process.env.PORT || 3000;
 instance = app.listen(port, () => {
     console.log(`server running on PORT: ${port}`);

@@ -5,8 +5,9 @@ const loadBlogHome = () => {
     header.append("Content-Type", "application/json");
 
     var requestOptions = {
-        method: 'GET',
+        method: 'POST',
         headers: header,
+        body: JSON.stringify({}),
         redirect: 'follow'
     };
 
@@ -16,15 +17,15 @@ const loadBlogHome = () => {
             for (let i = 0; i < 4; i++) {
                 const blog = data.recentPosts[i];
                 const item = items[i];
-                const blogID = hash(blog.name + blog.date)
+                const blogID = blog.blogID;
                 item.innerHTML = `                
-                    <a href="content.html?blogID=${blogID}">
-                        <img src="blogs/images/${blogID}/thumbnail.png">
-                    </a>
-                    <div class="carousel-descriptor smallfont grayfont centertext">
-                        ${blog.summary}
-                    </div>
-                `
+                <a href="content.html?blogID=${blogID}">
+                    <img src="blogs/images/${blogID}/thumbnail.png">
+                </a>
+                <div class="carousel-descriptor smallfont grayfont centertext">
+                    ${blog.summary}
+                </div>
+            `
             }
         })
         .catch(error => console.log('error', error));
