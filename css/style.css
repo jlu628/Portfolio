@@ -49,6 +49,7 @@ mark {
     --platinum: #dce3e6;
     --blue: #97a5b2;
     --blue-light: #59aae2;
+    --blue-light-semi-transparent: rgba(89, 170, 226, 0.5);
     --navy: #001128;
     --brown: #cabfb9;
     --wheat: #d9d2c7;
@@ -76,19 +77,35 @@ mark {
     font-weight: 700;
 }
 
-.blackfont {
+.blackfont,
+.blackfont:hover,
+.blackfont:active,
+.blackfont:link,
+.blackfont:visited {
     color: black;
 }
 
-.whitefont {
+.whitefont,
+.whitefont:hover,
+.whitefont:link,
+.whitefont:active,
+.whitefont:visited {
     color: white;
 }
 
-.semiblackfont {
+.semiblackfont,
+.semiblackfont:hover,
+.semiblackfont:link,
+.semiblackfont:active,
+.semiblackfont:visited {
     color: var(--black-semi-transparent);
 }
 
-.grayfont {
+.grayfont,
+.grayfont:hover,
+.grayfont:link,
+.grayfont:active,
+.grayfont:visited {
     color: var(--gray-dark);
 }
 

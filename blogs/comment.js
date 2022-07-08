@@ -131,8 +131,8 @@ const writeComment = async(req, res) => {
     let name = req.body.name;
     let content = req.body.content;
     let link = req.body.link;
-    let time = getTime();
     let reply_to = req.body.reply_to;
+    let time = getTime();
     let msg = {};
 
     if (!name || !content) {
