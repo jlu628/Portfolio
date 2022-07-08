@@ -176,6 +176,23 @@
     z-index: 10;
 }
 
+.no-result-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.no-result-container img {
+    margin-top: 10vh;
+    height: 50vh;
+    width: auto;
+    margin-bottom: 2vh;
+}
+
 
 /* Reflexive layout */
 

@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const { open } = require('sqlite');
 const dbPath = './Comments.db'
 const { hash, getTime, getTimeDisplayed } = require("./utils");
+let new_content = false;
 
 const sqliteExec = async(sql) => {
     const db = await open({
@@ -39,13 +40,14 @@ const sqliteGet = async(sql) => {
 
 const insertBlog = async(blogID) => {
     await sqliteExec(`INSERT INTO blog (blogID) VALUES("${blogID}")`);
+    new_content = true;
 }
 
 const insertIntoComment = async(blogID, commentID, comment) => {
     blogID = blogID ? blogID : "others"
     let name = comment.name.replaceAll(`"`, `''`);
     let content = comment.content.replaceAll(`"`, `''`);
-    let link = comment.link.replaceAll(`"`, `''`);
+    let link = comment.link ? comment.link.replaceAll(`"`, `''`) : "";
     let reply_to = comment.reply_to;
     let sectionIndex;
     if (!reply_to) {
@@ -68,6 +70,7 @@ const insertIntoComment = async(blogID, commentID, comment) => {
             "${blogID}",
             ${sectionIndex})`
     );
+    new_content = true;
 }
 
 const queryBlogIDs = async() => {
@@ -123,7 +126,7 @@ const getAllComments = async(req, res) => {
     res.end();
 }
 
-const writeComments = async(req, res) => {
+const writeComment = async(req, res) => {
     let blogID = req.body.blogID ? req.body.blogID : "others";
     let name = req.body.name;
     let content = req.body.content;
@@ -147,7 +150,7 @@ const writeComments = async(req, res) => {
             msg.success = true;
         } catch (err) {
             msg.success = false;
-            msg.err = err;
+            msg.err = err.toString();
         }
     }
 
@@ -228,13 +231,17 @@ const exportToJson = async() => {
 
 // Data backup daemon
 {
-    let wakeupinterval = 30 * 60 * 1000;
-    setInterval(exportToJson, wakeupinterval);
+    let wakeupinterval = 10 * 60 * 1000;
+    setInterval(() => {
+        if (new_content) {
+            exportToJson();
+        }
+    }, wakeupinterval);
 }
 
 exports.getBlogComments = getBlogComments;
 exports.getAllComments = getAllComments;
-exports.writeComments = writeComments;
+exports.writeComment = writeComment;
 
 // loadFromJSON();
 // exportToJson();

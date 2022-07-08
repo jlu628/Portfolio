@@ -9,6 +9,6 @@ router.post("/getContentPage", blog.getContentPage);
 
 router.post("/getBlogComments", comment.getBlogComments);
 router.post("/getAllComments", comment.getAllComments);
-router.post("/writeComments", comment.writeComments);
+router.post("/writeComment", comment.writeComment);
 
 module.exports = router;

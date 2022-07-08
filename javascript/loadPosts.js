@@ -1,6 +1,6 @@
 // Create the pagination indicator
 const createPagination = (currPage, totalPage) => {
-    if (totalPage == 1) {
+    if (totalPage <= 1) {
         document.querySelector('.pagination-container').style.display = 'none';
         return;
     }
@@ -162,7 +162,7 @@ const createSearchProject = (searchProject, filter) => {
         dates = insertHighlights(dates, filter.length, matches.dates.idx);
     }
 
-    html = `
+    let html = `
     <div class="post-container">
         <img class="two-one-img" src=${projectPost.thumbnail}>
         <text class="titlefont largefont">${title}</text>
@@ -288,12 +288,26 @@ const createSearchResult = (searchResult, filter) => {
     }
 }
 
+const createNoResult = () => {
+    let html = `
+        <div class="no-result-container">
+            <img src="assets/noresult.png">
+            <text class="semiblackfont largefont">Oops, no posts found...</text>
+        </div>
+    `
+    const page = document.querySelector('.page-container');
+    page.innerHTML += html;
+}
+
 // Create an entire page of activity/project posts
 const loadPosts = (posts, pageType, filter) => {
+    if (pageType == "search" && posts.length == 0) {
+        createNoResult();
+        return;
+    }
     const page = document.querySelector('.page-container');
     page.innerHTML = "";
     posts.forEach(post => {
-        let html;
         if (pageType == "projects") {
             html = createProject(post);
         } else if (pageType == "blogs") {
