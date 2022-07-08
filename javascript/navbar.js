@@ -29,7 +29,6 @@ document.getElementById("small-device-navbar-opener").childNodes[0].onclick = ()
 
 document.getElementById("small-device-background-cover").addEventListener("mousedown", () => {
     const navPanel = document.querySelector(".navbar>div:nth-child(2)");
-    console.log(`${navPanel.style}`);
     navPanel.style.left = `-200px`;
     document.getElementById("small-device-background-cover").style.display = "none";
 });

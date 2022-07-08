@@ -183,7 +183,6 @@ const createSearchProject = (searchProject, filter) => {
 }
 
 const createSearchBlog = (searchBlog, filter) => {
-    console.log(searchBlog)
     let matches = searchBlog.matches;
     let blogPost = searchBlog.post;
     let blogContent = searchBlog.content;

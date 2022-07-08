@@ -1,73 +1,11 @@
+const { exec } = require('child_process');
 const fs = require('fs');
-const sha256 = require('sha256');
 const blogs = JSON.parse(fs.readFileSync("./meta.json"));
 const contents = JSON.parse(fs.readFileSync("./content.json"));
+const { hash, getTimeDisplayed} = require("./utils.js");
 let searchCache = {};
 
-const hash = (str) => {
-    str = sha256(str);
-    const DIGITS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    const add = (x, y, base) => {
-        let z = [];
-        const n = Math.max(x.length, y.length);
-        let carry = 0;
-        let i = 0;
-        while (i < n || carry) {
-            const xi = i < x.length ? x[i] : 0;
-            const yi = i < y.length ? y[i] : 0;
-            const zi = carry + xi + yi;
-            z.push(zi % base);
-            carry = Math.floor(zi / base);
-            i++;
-        }
-        return z;
-    }
-
-    const multiplyByNumber = (num, x, base) => {
-        if (num < 0) return null;
-        if (num == 0) return [];
-
-        let result = [];
-        let power = x;
-        while (true) {
-            num & 1 && (result = add(result, power, base));
-            num = num >> 1;
-            if (num === 0) break;
-            power = add(power, power, base);
-        }
-
-        return result;
-    }
-
-    const parseToDigitsArray = (str) => {
-        const digits = str.split('');
-        let arr = [];
-        for (let i = digits.length - 1; i >= 0; i--) {
-            const n = DIGITS.indexOf(digits[i])
-            if (n == -1) return null;
-            arr.push(n);
-        }
-        return arr;
-    }
-
-    const digits = parseToDigitsArray(str);
-    if (digits === null) return null;
-
-    let outArray = [];
-    let power = [1];
-    for (let i = 0; i < digits.length; i++) {
-        digits[i] && (outArray = add(outArray, multiplyByNumber(digits[i], power, 62), 62));
-        power = multiplyByNumber(16, power, 62);
-    }
-
-    let out = '';
-    for (let i = outArray.length - 1; i >= 0; i--)
-        out += DIGITS[outArray[i]];
-
-    return out;
-}
-
+// Access to blog/project post information
 const getRecentPosts = (req, res) => {
     let msg = {}
 
@@ -126,6 +64,7 @@ const getContentPage = (req, res) => {
     res.end();
 }
 
+// Search keywords in posts
 const search = (filter) => {
     filter = filter.toLowerCase();
     const cachedResult = searchCache[filter];
@@ -138,7 +77,20 @@ const search = (filter) => {
     }
 
     const matchAll = (sourceStr, searchStr) => {
-        return [...sourceStr.toLowerCase().matchAll(new RegExp(searchStr.toLowerCase(), 'gi'))].map(a => a.index);
+        sourceStr = sourceStr.toLowerCase();
+        searchStr = searchStr.toLowerCase();
+        let idx = [];
+        let start = 0;
+        while (true) {
+            let nextIdx = sourceStr.indexOf(searchStr);
+            if (nextIdx == -1) {
+                break;
+            }
+            idx.push(nextIdx + start);
+            start = nextIdx + start + 1;
+            sourceStr = sourceStr.substring(nextIdx + 1);
+        }
+        return idx;
     }
     let result = [];
 
@@ -157,11 +109,14 @@ const search = (filter) => {
 
         // Search in skills
         let skills = project.skills.map(s => s.toLowerCase());
-        if (skills.includes(filter)) {
-            isMatch = true;
-            matches.skills = {
-                idx: skills.indexOf(filter)
-            };
+        for (let i = 0; i < skills.length; i++) {
+            if (skills[i] == filter || skills[i].split(" ").includes(filter)) {
+                isMatch = true;
+                matches.skills = {
+                    idx: i
+                };
+                break;
+            }
         }
 
         // Search in description
@@ -292,19 +247,8 @@ const search = (filter) => {
 
 // Cache cleaner daemon
 {
-    const typeSizes = {
-        "undefined": () => 0,
-        "boolean": () => 4,
-        "number": () => 8,
-        "string": item => 2 * item.length,
-        "object": item => !item ? 0 : Object
-            .keys(item)
-            .reduce((total, key) => sizeOf(key) + sizeOf(item[key]) + total, 0)
-    };
-    const sizeOf = value => typeSizes[typeof value](value);
-
     let threshold = 60 * 60 * 1000;
-    let wakeupinterval = 5 * 60 * 1000;
+    let wakeupinterval = 60 * 1000;
     const cleanCache = () => {
         const timeStamp = new Date();
         let removed = 0;
@@ -314,12 +258,15 @@ const search = (filter) => {
                 removed++;
             }
         }
-        return [timeStamp, removed];
+        return removed;
     }
-    setInterval(function() {
-        const [timeStamp, removed] = cleanCache();
-        const cacheSize = sizeOf(searchCache) / 1024 / 1024;
-        console.log(`${timeStamp}: ${removed} entries removed from search result cache, current cache takes ${cacheSize} MB`);
+    setInterval(() => {
+        let removed = cleanCache();
+        fs.writeFileSync("./searchCache.json", JSON.stringify(searchCache));
+        let size = (fs.statSync("./searchCache.json").size / 1024 / 1024).toFixed(3);
+        if (removed > 0) {
+            console.log(`${getTimeDisplayed()}: ${removed} cache entries removed, cache size ${size} MB`);
+        }
     }, wakeupinterval);
 }
 
