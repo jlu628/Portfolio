@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/blogs.css">
+    <link rel="stylesheet" href="css/comment.css">
 </head>
 
 <body>
@@ -33,7 +34,7 @@
                 <a href="portfolio.html">Portfolio</a>
                 <a href="projects.html?page=1">Projects</a>
                 <a href="blogs.html?page=1">Blogs</a>
-                <a href="social.html">Social</a>
+                <a href="social.html?page=1">Social</a>
             </div>
             <div id="navbar-right-container">
                 <a href="" id="searchIcon"><img src="assets/search.png"></a>
@@ -84,57 +85,6 @@
 
     <!-- Comments -->
     <div class="comment-container">
-        <text class="largefont blackfont">Comments</text>
-        <div class="section-comments">
-            <div class="comment">
-                <div class="midfont semiblackfont">
-                    <text>name</text>
-                </div>
-                <text class="midfont blackfont">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores assumenda beatae soluta laborum aliquam, magni hic veritatis similique minus sit.
-                </text>
-                <div class="midfont semiblackfont">
-                    <text>2022-07-08 17:03:01</text>
-                    <a>reply</a>
-                </div>
-            </div>
-            <div class="comment comment-followup">
-                <div class="midfont semiblackfont">
-                    <text>name &nbsp;</text> <a>@reply_to</a>
-                </div>
-                <text class="midfont blackfont">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores assumenda beatae soluta laborum aliquam, magni hic veritatis similique minus sit.
-                </text>
-                <div class="midfont semiblackfont">
-                    <text>2022-07-08 17:03:01</text>
-                    <a>reply</a>
-                </div>
-            </div>
-            <div class="comment comment-followup">
-                <div class="midfont semiblackfont">
-                    <text>name &nbsp;</text> <a>@reply_to</a>
-                </div>
-                <text class="midfont blackfont">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores assumenda beatae soluta laborum aliquam, magni hic veritatis similique minus sit.
-                </text>
-                <div class="midfont semiblackfont">
-                    <text>2022-07-08 17:03:01</text>
-                    <a>reply</a>
-                </div>
-            </div>
-            <div class="comment comment-followup">
-                <div class="midfont semiblackfont">
-                    <text>name &nbsp;</text> <a>@reply_to</a>
-                </div>
-                <text class="midfont blackfont">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores assumenda beatae soluta laborum aliquam, magni hic veritatis similique minus sit.
-                </text>
-                <div class="midfont semiblackfont">
-                    <text>2022-07-08 17:03:01</text>
-                    <a>reply</a>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- footer -->
@@ -145,6 +95,7 @@
     <script src="javascript/navbar.js"></script>
     <script src="javascript/utils.js"></script>
     <script src="javascript/loadContent.js"></script>
+    <script src="javascript/loadComment.js"></script>
     <script>
         bindSearch();
         loadContent();

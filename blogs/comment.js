@@ -4,6 +4,8 @@ const { open } = require('sqlite');
 const dbPath = './Comments.db'
 const { hash, getTime, getTimeDisplayed } = require("./utils");
 let new_content = false;
+const fs = require("fs");
+let blogs = JSON.parse(fs.readFileSync("./content.json"));
 
 const sqliteExec = async(sql) => {
     const db = await open({
@@ -84,21 +86,20 @@ const queryBlogComments = async(blogID) => {
         SELECT commentID, name, content, link, time, reply_to, sectionIndex FROM comment
         WHERE blogID = "${blogID}" ORDER BY sectionIndex, time;
         `);
-    output = [];
+    let blogCommentsFormated = [];
     blogComments.forEach(comment => {
-        if (comment.sectionIndex == output.length) {
-            output.push({});
+        if (comment.sectionIndex == blogCommentsFormated.length) {
+            blogCommentsFormated.push({});
         }
-        output[comment.sectionIndex][comment.commentId] = {
+        blogCommentsFormated[comment.sectionIndex][comment.commentId] = {
             name: comment.name.replaceAll(`''`, `"`),
             content: comment.content.replaceAll(`''`, `"`),
             link: comment.link.replaceAll(`''`, `"`),
             time: comment.time,
             reply_to: comment.reply_to
         }
-    })
-
-    return output;
+    });
+    return blogCommentsFormated;
 }
 
 // APIs
@@ -114,10 +115,15 @@ const getBlogComments = async(req, res) => {
 
 const getAllComments = async(req, res) => {
     let blogIDs = await queryBlogIDs();
-    let comments = {};
+    let comments = [];
     for (let i = 0; i < blogIDs.length; i++) {
-        const blogComments = await queryBlogComments(blogIDs[i]);
-        comments[blogIDs[i]] = blogComments;
+        let blogComments = await queryBlogComments(blogIDs[i]);
+        blogComments = [...blogComments].map(comment => ({
+            title: blogs[blogIDs[i]] ? blogs[blogIDs[i]].title : null,
+            blogID : blogIDs[i],
+            sectionComment: comment
+        }));
+        comments = comments.concat(blogComments)
     }
 
     res.write(JSON.stringify({
@@ -195,11 +201,10 @@ const reset = async() => {
 }
 
 // Load database from existing json files
-const loadFromJSON = async() => {
+const loadFromJSON = async(url) => {
     await reset();
 
-    const fs = require("fs");
-    const commentsJSON = JSON.parse(fs.readFileSync("commentsCopy.json"));
+    const commentsJSON = JSON.parse(fs.readFileSync(url));
 
     for (let blogID in commentsJSON) {
         await insertBlog(blogID);
@@ -215,18 +220,17 @@ const loadFromJSON = async() => {
 }
 
 // Export current database to json file
-const exportToJson = async() => {
+const exportToJson = async(url) => {
     let output = {};
     const blogIDs = await queryBlogIDs();
     for (let i = 0; i < blogIDs.length; i++) {
         let blogID = blogIDs[i];
         let blogComments = await queryBlogComments(blogID);
-        output[blogID] = blogComments
+        output[blogID] = blogComments;
     }
-    const fs = require("fs");
-    fs.writeFileSync("./commentsCopy.json", JSON.stringify(output));
-    let size = (fs.statSync("./commentsCopy.json").size / 1024 / 1024).toFixed(3);
-    console.log(`${getTimeDisplayed()}: comments data (${size} MB) saved to backup file`)
+    fs.writeFileSync(url, JSON.stringify(output));
+    let size = (fs.statSync(url).size / 1024 / 1024).toFixed(3);
+    console.log(`${getTimeDisplayed()}: comments data (${size} MB) saved to backup file`);
 }
 
 // Data backup daemon
@@ -236,6 +240,7 @@ const exportToJson = async() => {
         if (new_content) {
             exportToJson();
         }
+        new_content = false;
     }, wakeupinterval);
 }
 
@@ -243,5 +248,5 @@ exports.getBlogComments = getBlogComments;
 exports.getAllComments = getAllComments;
 exports.writeComment = writeComment;
 
-// loadFromJSON();
-// exportToJson();
+// loadFromJSON("commentsData.json");
+exportToJson("./commentsCopy.json");

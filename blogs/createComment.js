@@ -15,18 +15,13 @@ names = [
 ]
 contents = [
     "Hello World!",
-    "Comment comment comment",
-    "Test test test",
+    "Comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment",
+    "Test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test",
     "Lorem ipsum dolor",
-    "HTML CSS JavaScript",
-    "Python Java C++",
-    "Genshin Impact",
-    "Honkai Impact"
 ]
 links = [
     "https://google.com",
     "https://youtube.com",
-    "https://bilibili.com",
     "https://facebook.com",
     "https://linkedin.com"
 ]

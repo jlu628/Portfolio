@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/blogs.css">
+    <link rel="stylesheet" href="css/comment.css">
 </head>
 
 <body>
@@ -33,10 +34,10 @@
                 <a href="portfolio.html">Portfolio</a>
                 <a href="projects.html?page=1">Projects</a>
                 <a href="blogs.html?page=1">Blogs</a>
-                <a href="social.html?page=1">Social</a>
+                <a href="?page=1" style="text-decoration: underline;">Social</a>
             </div>
             <div id="navbar-right-container">
-                <a href="" id="searchIcon"><img src="assets/search.png"></a>
+                <a href="" onClick="return getSearchContent();" id="searchIcon"><img src="assets/search.png"></a>
                 <input type="text" id="search" name="search" placeholder="search post" class="midfont">
             </div>
         </div>
@@ -78,29 +79,23 @@
         </div>
     </a>
 
-    <!-- Projects -->
-    <div class="filter-container keywords midfont"></div>
     <div class="page-container">
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination-container">
-    </div>
-
-    <!-- footer -->
-    <div class="footer-container centertext whitefont grayfont ">
-        Copyright &#169; 2022 Jiayu (Jerry) Lu
-    </div>
+    <div class="pagination-container"></div>
 
     <script src="javascript/navbar.js"></script>
     <script src="javascript/utils.js"></script>
     <script src="javascript/loadPosts.js"></script>
+    <script src="javascript/loadComment.js"></script>
     <script>
-        // Change displayed filtered key words
-        document.querySelector(".filter-container").innerHTML = `Filter: ${parseQueryString().filter}`;
-        loadPage('search');
         bindSearch();
+        loadCommentPage();
     </script>
+    <!-- footer -->
+    <div class="footer-container centertext whitefont grayfont ">
+        Copyright &#169; 2022 Jiayu (Jerry) Lu
+    </div>
 </body>
 
 </html>
