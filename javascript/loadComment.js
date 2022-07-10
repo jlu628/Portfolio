@@ -79,6 +79,9 @@ const createSectionComment = (sectionComments, blogID, referBlogs, fromPage) => 
     });
 
     html += `</div>`
+    if (fromPage) {
+        html = `<div>${html}</div>`
+    }
     return html;
 }
 
@@ -234,29 +237,37 @@ const loadCommentPage = () => {
     const prefilledSite = window.localStorage.usersite ? window.localStorage.usersite : "";
     let html = `
         <div class="social-header">
-            <text class="largefont blackfont">Comments</text>
+            <text class="largefont blackfont titlefont">Share Your Thoughts</text>
             <div class="social-header-subscript smallfont semiblackfont">
-                Meet & chat with new people.
-                <br/>
                 Be nice, be professional, be cool.
             </div>
             <hr>
         </div>
 
-        <div class="comment-page-container">
-            <div>
-                <div class="comment-form-container midfont" style="border: solid var(--shadow);" id="newcommentform">
-                <div class="comment-form-top">
-                    <input name="name" type="text" placeholder="name*" maxLength="30" value="${prefilledName}">
-                    <input name="link" type="text" placeholder="website (http://)" value="${prefilledSite}">
-                </div>
-                <textarea placeholder="Leave a friendly comment here..."></textarea>
-                <div class="comment-form-bottom">
-                    <a onclick="clearCommentBox('newcommentform');">Cancel</a>
-                    <a onclick="sendComment('newcommentform', '', 'others', true)">Send</a>
-                </div>
-                </div>
+        <div>
+            <div class="comment-form-container midfont" style="border: solid var(--shadow);" id="newcommentform">
+            <div class="comment-form-top">
+                <input name="name" type="text" placeholder="name*" maxLength="30" value="${prefilledName}">
+                <input name="link" type="text" placeholder="website (http://)" value="${prefilledSite}">
             </div>
+            <textarea placeholder="Leave a friendly comment here..."></textarea>
+            <div class="comment-form-bottom">
+                <a onclick="clearCommentBox('newcommentform');">Cancel</a>
+                <a onclick="sendComment('newcommentform', '', 'others', true)">Send</a>
+            </div>
+            </div>
+        </div>
+
+        <div class="social-header">
+            <text class="largefont blackfont titlefont">Comments</text>
+            <div class="social-header-subscript smallfont semiblackfont">
+                Meet, chat & connect with new people.
+            </div>
+            <hr>
+        </div>
+
+        <div class="comment-page-container">
+
     `
 
     var header = new Headers();

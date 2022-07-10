@@ -1,8 +1,8 @@
-const { exec } = require('child_process');
 const fs = require('fs');
-const blogs = JSON.parse(fs.readFileSync("./meta.json"));
-const contents = JSON.parse(fs.readFileSync("./content.json"));
-const { hash, getTimeDisplayed} = require("./utils.js");
+const path = require('path')
+const blogs = JSON.parse(fs.readFileSync(path.join(__dirname, "./meta.json")));
+const contents = JSON.parse(fs.readFileSync(path.join(__dirname, "./content.json")));
+const { hash, getTimeDisplayed} = require(path.join(__dirname, "./utils.js"));
 let searchCache = {};
 
 // Access to blog/project post information
@@ -262,8 +262,8 @@ const search = (filter) => {
     }
     setInterval(() => {
         let removed = cleanCache();
-        fs.writeFileSync("./searchCache.json", JSON.stringify(searchCache));
-        let size = (fs.statSync("./searchCache.json").size / 1024 / 1024).toFixed(3);
+        fs.writeFileSync(path.join(__dirname, "./searchCache.json"), JSON.stringify(searchCache));
+        let size = (fs.statSync(path.join(__dirname, "./searchCache.json")).size / 1024 / 1024).toFixed(3);
         if (removed > 0) {
             console.log(`${getTimeDisplayed()}: ${removed} cache entries removed, cache size ${size} MB`);
         }

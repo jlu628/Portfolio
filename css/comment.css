@@ -184,11 +184,21 @@
 .comment-page-container {
     min-height: 80vh;
 }
+.comment-page-container > div:nth-child(odd) {
+    background-color: var(--gray-semi-transparent);
+}
 
 .comment-page-container .comment-form-container {
     transition: border 0.3s max-height 0.3s;
     -ms-transition: border 0.3s  max-height 0.3s;
     -webkit-transition: border 0.3s  max-height 0.3s;
+}
+
+.comment-page-container > div {
+    margin: 2vh auto;
+    /* width: 1000px;
+    max-width: 95%; */
+    padding: 10px;
 }
 
 /* Reflexive layouts */

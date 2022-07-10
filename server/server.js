@@ -17,6 +17,8 @@ app.use(cors());
 const routes = require("./router");
 app.use("/", routes);
 
+app.use(express.static("../"));
+
 // Redirect outputs
 const fs = require("fs");
 let access = fs.createWriteStream('./server.log');

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const blog = require("./blog")
-const comment = require("./comment")
+const blog = require("../blogs/blog")
+const comment = require("../blogs/comment")
+const path = require("path");
 
 router.post("/getRecentPosts", blog.getRecentPosts);
 router.post("/getPostPage", blog.getPostPage);

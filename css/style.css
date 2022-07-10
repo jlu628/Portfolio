@@ -523,9 +523,9 @@ mark {
         text-decoration: underline;
         color: black;
     }
-    .header-container {
+    /* .header-container {
         background-image: url(../assets/background-md.png);
-    }
+    } */
 }
 
 @media (max-width: 767px) {
@@ -606,9 +606,9 @@ mark {
     #homeCarousel {
         margin-bottom: 20px;
     }
-    .header-container {
+    /* .header-container {
         background-image: url(../assets/background-sd.png);
-    }
+    } */
     .navbar>div:nth-child(2) {
         width: 150px;
         left: -200px;

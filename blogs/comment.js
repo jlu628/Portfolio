@@ -1,15 +1,15 @@
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const { open } = require('sqlite');
-const dbPath = './Comments.db'
-const { hash, getTime, getTimeDisplayed } = require("./utils");
+const dbPath = path.join(__dirname, './Comments.db')
+const { hash, getTime, getTimeDisplayed } = require(path.join(__dirname, "./utils"));
 let new_content = false;
 const fs = require("fs");
-let blogs = JSON.parse(fs.readFileSync("./content.json"));
+let blogs = JSON.parse(fs.readFileSync(path.join(__dirname, "./content.json")));
 
 const sqliteExec = async(sql) => {
     const db = await open({
-        filename: path.join(__dirname, dbPath),
+        filename: dbPath,
         driver: sqlite3.Database
     });
     await db.get("PRAGMA foreign_keys = ON");
@@ -25,7 +25,7 @@ const sqliteExec = async(sql) => {
 
 const sqliteGet = async(sql) => {
     const db = await open({
-        filename: path.join(__dirname, dbPath),
+        filename: dbPath,
         driver: sqlite3.Database
     });
     await db.get("PRAGMA foreign_keys = ON");
@@ -167,7 +167,7 @@ const writeComment = async(req, res) => {
 // Reset database and create schemas
 const reset = async() => {
     const db = await open({
-        filename: path.join(__dirname, dbPath),
+        filename: dbPath,
         driver: sqlite3.Database
     });
     await db.get("PRAGMA foreign_keys = ON");
@@ -238,7 +238,7 @@ const exportToJson = async(url) => {
     let wakeupinterval = 10 * 60 * 1000;
     setInterval(() => {
         if (new_content) {
-            exportToJson();
+            exportToJson(path.join(__dirname, "./commentsCopy.json"));
         }
         new_content = false;
     }, wakeupinterval);
@@ -249,4 +249,4 @@ exports.getAllComments = getAllComments;
 exports.writeComment = writeComment;
 
 // loadFromJSON("commentsData.json");
-exportToJson("./commentsCopy.json");
+// exportToJson("./commentsCopy.json");
