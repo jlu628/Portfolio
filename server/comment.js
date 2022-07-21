@@ -1,188 +1,260 @@
+const { time } = require("console");
 const path = require("path");
-const { hash, getTime, encodeDbString, decodeDbString, getTimeDisplayed, sqliteExec, sqliteGet } = require(path.join(__dirname, "./utils"));
+const { hash, getTime, sqliteExec, sqliteGet, encodeDbString, decodeDbString } = require(path.join(__dirname, "./utils"));
+let newCommentContent = false;
 
-let new_content = false;
-const fs = require("fs");
-let blogs = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/content.json")));
-
-const insertBlog = async(blogID) => {
-    await sqliteExec(`INSERT INTO blog (blogID) VALUES("${blogID}")`);
-    new_content = true;
+// Change comment from the format stored in JSON backup file to the format stored in database
+const encodeComment = (comment) => {
+    comment.name = encodeDbString(comment.name);
+    comment.content = encodeDbString(comment.content);
+    comment.link = encodeDbString(comment.link, `""`);
+    comment.reply_to = encodeDbString(comment.reply_to, "null");
+    comment.blogID = comment.blogID == "others" ? "null" : `"${comment.blogID}"`;
 }
 
-// Write comment object into database
-const insertIntoComment = async(blogID, commentID, comment) => {
-    blogID = blogID ? blogID : "others"
-    let name = encodeDbString(comment.name);
-    let content = encodeDbString(comment.content);
-    let link = comment.link ? encodeDbString(comment.link) : "";
-    let reply_to = comment.reply_to;
-    let sectionIndex;
-    if (!reply_to) {
-        sectionIndex = `(SELECT IFNULL(max(sectionIndex) + 1, 0) as sectionIndex FROM comment WHERE blogID = "${blogID}")`
-        reply_to = null;
-    } else {
-        reply_to = `"${reply_to}"`;
-        sectionIndex = `(SELECT sectionIndex FROM comment WHERE commentID = ${reply_to} AND blogID = "${blogID}")`
-    }
+// Change comment from the format stored in database to the format stored in JSON backup file
+const decodeComment = (comment) => {
+    comment.name = decodeDbString(comment.name);
+    comment.content = decodeDbString(comment.content);
+    comment.link = decodeDbString(comment.link);
+    comment.reply_to = decodeDbString(comment.reply_to);
+    comment.blogID = comment.blogID ? comment.blogID : "others";
+}
 
+// Insert comment into database
+const insertComment = async (comment) => {
+    encodeComment(comment);
+    const { commentID, name, content, link, time, reply_to, blogID } = comment;
+    let sectionIndex;
+    if (reply_to == "null") {
+        if (blogID == "null") {
+            sectionIndex = `(SELECT IFNULL(max(sectionIndex) + 1, 0) as sectionIndex FROM comment WHERE blogID IS NULL)`
+        } else {
+            sectionIndex = `(SELECT IFNULL(max(sectionIndex) + 1, 0) as sectionIndex FROM comment WHERE blogID = ${blogID})`
+        }
+    } else {
+        sectionIndex = `(SELECT sectionIndex FROM comment WHERE commentID = ${reply_to})`
+    }
     await sqliteExec(
         `INSERT INTO comment (commentID, name, content, link, time, reply_to, blogID, sectionIndex) 
         VALUES(
-            "${commentID}", 
-            "${name}",
-            "${content}", 
-            "${link}",
-            ${comment.time},
+            "${commentID}",
+            ${name},
+            ${content},
+            ${link},
+            ${time},
             ${reply_to},
-            "${blogID}",
-            ${sectionIndex})`
+            ${blogID},
+            ${sectionIndex}
+        )`
     );
-    new_content = true;
+    newCommentContent = true;
 }
 
-// Get a list of blog ids from database
-const queryBlogIDs = async() => {
-    let blogIDs = await sqliteGet(`SELECT blogID FROM blog`);
-    blogIDs = blogIDs.map(b => b.blogID);
-    return blogIDs;
+// Get the comment that belong to a specified blog
+const queryBlogComment = async (blogID) => {
+    let comments = await sqliteGet(`SELECT * FROM comment WHERE blogID = "${blogID}" ORDER BY sectionIndex ASC, time ASC`);
+    let output = [];
+    let sectionIndex = -1;
+    for (let comment of comments) {
+        decodeComment(comment);
+        if (comment.sectionIndex > sectionIndex) {
+            output.push([]);
+            sectionIndex++;
+        }
+        output[sectionIndex].push({
+            commentID: comment.commentID,
+            name: comment.name,
+            content: comment.content,
+            link: comment.link,
+            reply_to: comment.reply_to,
+            time: comment.time
+        });
+    }
+    return output;
 }
 
-// Get all comments under a blog
-const queryBlogComments = async(blogID) => {
-    let blogComments = await sqliteGet(`
-        SELECT commentID, name, content, link, time, reply_to, sectionIndex FROM comment
-        WHERE blogID = "${blogID}" ORDER BY sectionIndex, time;
-        `);
-    let blogCommentsFormated = [];
-    blogComments.forEach(comment => {
-        if (comment.sectionIndex == blogCommentsFormated.length) {
-            blogCommentsFormated.push({});
+// Get all comments
+const queryAllComments = async () => {
+    let comments = await sqliteGet(`SELECT * FROM comment ORDER BY BlogID, sectionIndex ASC, time ASC`);
+    let output = {};
+    let blogID = "";
+    let sectionIndex = -1;
+    for (let comment of comments) {
+        decodeComment(comment);
+        if (blogID != comment.blogID) {
+            blogID = comment.blogID;
+            output[blogID] = [];
+            sectionIndex = -1;
         }
-        blogCommentsFormated[comment.sectionIndex][comment.commentId] = {
-            name: decodeDbString(comment.name),
-            content: decodeDbString(comment.content),
-            link: decodeDbString(comment.link),
-            time: comment.time,
-            reply_to: comment.reply_to
+        if (comment.sectionIndex > sectionIndex) {
+            output[blogID].push([]);
+            sectionIndex++;
         }
-    });
-    return blogCommentsFormated;
+        output[blogID][sectionIndex].push({
+            commentID: comment.commentID,
+            name: comment.name,
+            content: comment.content,
+            link: comment.link,
+            reply_to: comment.reply_to,
+            time: comment.time
+        });
+    }
+    return output;
+}
+
+// Edit comments
+const editCommentDB = async (oldCommentID, comment) => {
+    encodeComment(comment);
+    const { name, content, link, reply_to, blogID } = comment;
+    const setName = `name = ${name}`;
+    const setContent = `content = ${content}`;
+    const setLink = `link = ${link}`;
+    const setReply = `relpy_to = ${reply_to}`;
+    const setBlogID = `blogID = ${blogID}`;
+    const setAttributes = [setName, setContent, setLink, setReply, setBlogID].join(", ");
+    await sqliteExec(
+        `UPDATE blog SET 
+        ${setAttributes} 
+        WHERE commentID = "${oldCommentID}"`
+    );
+    newCommentContent = true;
+}
+
+// Delete comment
+const deleteCommentDB = async (commentID) => {
+    await sqliteExec(
+        `DELETE FROM comment WHERE commentID = "${commentID}"`
+    );
+    newCommentContent = true;
 }
 
 // APIs
-const getBlogComments = async(req, res) => {
-    const blogID = req.body.blogID;
-    let blogComments = await queryBlogComments(blogID);
-
-    res.write(JSON.stringify({
-        comments: blogComments
-    }));
-    res.end();
-}
-
-const getAllComments = async(req, res) => {
-    let blogIDs = await queryBlogIDs();
-    let comments = [];
-    for (let i = 0; i < blogIDs.length; i++) {
-        let blogComments = await queryBlogComments(blogIDs[i]);
-        blogComments = [...blogComments].map(comment => ({
-            title: blogs[blogIDs[i]] ? blogs[blogIDs[i]].title : null,
-            blogID : blogIDs[i],
-            sectionComment: comment
-        }));
-        comments = comments.concat(blogComments)
-    }
-
-    res.write(JSON.stringify({
-        comments: comments
-    }));
-    res.end();
-}
-
-const writeComment = async(req, res) => {
-    let blogID = req.body.blogID ? req.body.blogID : "others";
-    let name = req.body.name;
-    let content = req.body.content;
-    let link = req.body.link;
-    let reply_to = req.body.reply_to;
-    let time = getTime();
+const addComment = async (req, res) => {
+    const { comment } = req.body;
+    const { name, content, link, blogID } = comment;
     let msg = {};
-
-    if (!name || !content) {
+    let isString = (value) => typeof value === 'string' || value instanceof String;
+    if (!(name && content && blogID)) {
         msg.success = false;
-        msg.err = "Name and content must not be empty";
+        msg.error = "Form not complete";
+    } else if (!(isString(name) && isString(content) && isString(blogID))) {
+        msg.success = false;
+        msg.error = "Wrong format";
+    } else if (link && !(isString(link) && (link.startsWith("https://") || link.startsWith("http://")))) {
+        msg.success = false;
+        msg.error = "Invalid link";
     } else {
+        comment.time = getTime();
+        comment.commentID = hash(name+content+comment.time);
         try {
-            await insertIntoComment(blogID, hash(name + content + time), {
-                name: name,
-                content: content,
-                link: link,
-                time: time,
-                reply_to: reply_to
-            });
+            await insertComment(comment);
             msg.success = true;
         } catch (err) {
             msg.success = false;
-            msg.err = err.toString();
+            msg.error = "Database error";
         }
     }
-
     res.write(JSON.stringify(msg));
     res.end();
 }
 
-// Export current database to json file
-const exportToJson = async(url) => {
-    let output = {};
-    const blogIDs = await queryBlogIDs();
-    for (let i = 0; i < blogIDs.length; i++) {
-        let blogID = blogIDs[i];
-        let blogComments = await queryBlogComments(blogID);
-        output[blogID] = blogComments;
+const editComment = async (req, res) => {
+    const { comment, password } = req.body;
+    const oldCommentID = req.body.commentID;
+    const { name, content, link, blogID } = comment;
+    let msg = {};
+
+    if (!(name && content && blogID)) {
+        msg.success = false;
+        msg.error = "Form not complete";
+    } else if (!(isString(name) && isString(content) && isString(blogID))) {
+        msg.success = false;
+        msg.error = "Wrong format";
+    } else if (link && !(isString(link) && (link.startsWith("https://") || link.startsWith("http://")))) {
+        msg.success = false;
+        msg.error = "Invalid link";
+    } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+        msg.success = false;
+        msg.error = "Wrong password";
+    } else {
+        try {
+            await editCommentDB(oldCommentID, comment);
+            msg.success = true;
+        } catch (err) {
+            msg.success = false;
+            msg.error = "Database error"
+        }
     }
-    fs.writeFileSync(url, JSON.stringify(output));
-    let size = (fs.statSync(url).size / 1024 / 1024).toFixed(3);
-    console.log(`${getTimeDisplayed()}: comments data (${size} MB) saved to backup file`);
+    res.write(JSON.stringify(msg));
+    res.end();
 }
 
-// Load database from existing json files
-// const loadFromJSON = async(url) => {
-//     await reset();
-
-//     const commentsJSON = JSON.parse(fs.readFileSync(url));
-
-//     for (let blogID in commentsJSON) {
-//         await insertBlog(blogID);
-//         let sectionComments = commentsJSON[blogID];
-//         for (let sectionIndex = 0; sectionIndex < sectionComments.length; sectionIndex++) {
-//             let section = sectionComments[sectionIndex];
-//             for (let commentID in section) {
-//                 let comment = section[commentID];
-//                 await insertIntoComment(blogID, commentID, comment);
-//             }
-//         }
-//     }
-// }
-
-// Data backup daemon
-{
-    let wakeupinterval = 10 * 60 * 1000;
-    setInterval(() => {
-        if (new_content) {
-            exportToJson(path.join(__dirname, "./commentsCopy.json"));
+const deleteComment = async (req, res) => {
+    const { password, commentID } = req.body;
+    if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+        msg.success = false;
+        msg.error = "Wrong password";
+    } else {
+        try {
+            await deleteCommentDB(commentID);
+            msg.success = true;
+        } catch (err) {
+            msg.success = false;
+            msg.error = "Database error"
         }
-        new_content = false;
+    }
+}
+
+const getBlogComments = async (req, res) => {
+    let blogID = req.body.blogID;
+    let msg = {};
+    let comments = await queryBlogComment(blogID);
+    msg.data = comments;
+    res.write(JSON.stringify(msg));
+    res.end();
+}
+
+// Insert initial data to database
+const loadCommentFromJSON = async () => {
+    const backupPath = path.join(__dirname, "./database/backup/comment.json");
+    const fs = require("fs");
+
+    const comments = JSON.parse(fs.readFileSync(backupPath));
+    for (let blogID in comments) {
+        for (let sections of comments[blogID]) {
+            for (let comment of sections) {
+                comment.blogID = blogID;
+                await insertComment(comment);
+            }
+        }
+    }
+}
+
+// Backup database information to JSON
+const exportCommentToJSON = async () => {
+    const backupPath = path.join(__dirname, "./database/backup/comment.json");
+    const fs = require("fs");
+
+    let comments = await queryAllComments();
+    fs.writeFileSync(backupPath, JSON.stringify(comments));
+}
+
+// Backup daemon
+{
+    let wakeupinterval = 1000;
+    setInterval(() => {
+        if (newCommentContent) {
+            exportCommentToJSON();
+        }
+        newCommentContent = false;
     }, wakeupinterval);
 }
 
-// Internal server usage
-exports.insertBlog = insertBlog;
-
-// API usage
+exports.addComment = addComment;
+exports.editComment = editComment;
+exports.deleteComment = deleteComment;
 exports.getBlogComments = getBlogComments;
-exports.getAllComments = getAllComments;
-exports.writeComment = writeComment;
 
-// loadFromJSON("commentsData.json");
-// exportToJson("./commentsCopy.json");
+exports.loadCommentFromJSON =loadCommentFromJSON;
+exports.exportCommentToJSON = exportCommentToJSON;

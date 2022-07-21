@@ -20,7 +20,6 @@ const scrollIntoComment = (commentID, highlight) => {
         const onScrollEnd = () => {
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(function() {
-                console.log("executed")
                 comment.style.backgroundColor = "var(--blue-light-semi-transparent)";
                 setTimeout(() => {
                     comment.style.backgroundColor = "transparent";
@@ -35,10 +34,9 @@ const scrollIntoComment = (commentID, highlight) => {
 
 const createSectionComment = (sectionComments, blogID, referBlogs, fromPage) => {
     let html = `<div class="section-comments">`
-
-    commentIDs = Object.keys(sectionComments).sort((a, b) => parseInt(a.time) - parseInt(b.time));
-    commentIDs.forEach((commentID, idx) => {
-        let comment = sectionComments[commentID];
+    let referToName = {};
+    sectionComments.forEach((comment, idx) => {
+        referToName[comment.commentID] = comment.name;
         let time = comment.time.toString();
         let name = comment.link ? `<a href="${comment.link}" target="_blank" class="semiblackfont">${comment.name}</a>` :
             `<text>${comment.name}</text>`;
@@ -46,13 +44,13 @@ const createSectionComment = (sectionComments, blogID, referBlogs, fromPage) => 
             referBlogs.refer ? `&nbsp;&nbsp; &#8594; &nbsp;&nbsp;
             <a href="content?blogID=${blogID}" target="_blank">${referBlogs.title}</a>` : ""
         ) : "";
-        let reply = comment.reply_to ? `&nbsp;
+        let reply = comment.reply_to ? `&nbsp; &#8594; &nbsp; 
                 <a onClick="scrollIntoComment('${comment.reply_to}', true)">
-                    @${sectionComments[comment.reply_to].name}
+                    @${referToName[comment.reply_to]}
                 </a>` : "";
 
         html += `
-            <div class="comment ${idx == 0 ? "" : "comment-followup"}" id="${commentID}">
+            <div class="comment ${idx == 0 ? "" : "comment-followup"}" id="${comment.commentID}">
                 <div class="midfont semiblackfont">
                     ${name}${refer}${reply}
                 </div>
@@ -71,10 +69,10 @@ const createSectionComment = (sectionComments, blogID, referBlogs, fromPage) => 
                             time.substring(12,14),
                         ].join(":")}
                     </text>
-                    <a class="midfont" onclick="expandCommentBox('reply-${commentID}', ${fromPage})">reply</a>
+                    <a class="midfont" onclick="expandCommentBox('reply-${comment.commentID}', ${fromPage})">reply</a>
                 </div>
             </div>
-            ${createCommentBox(commentID, comment.name, idx == 0, blogID, fromPage)}
+            ${createCommentBox(comment.commentID, comment.name, idx == 0, blogID, fromPage)}
         `
     });
 
@@ -122,13 +120,16 @@ const expandCommentBox = (commentBoxID, fromPage) => {
         document.getElementById(commentBoxID).style.border = "solid var(--shadow)";
     }
     document.getElementById(commentBoxID).classList.add("comment-form-followup-container-active");
+
+    let focus = window.localStorage.username ? (window.localStorage.usersite ? "textarea" : ".comment-form-top>input:nth-child(2)") : "comment-form-top>input:nth-child(1)";
+    document.querySelector(`.comment-form-followup-container-active ${focus}`).focus();
 }
 
 const clearCommentBox = (commentBoxID) => {
     let commentBox = document.getElementById(commentBoxID);
     let inputs = commentBox.getElementsByTagName("input");
-    inputs[0].value = window.localStorage.username ? window.localStorage.username : "";
-    inputs[1].value = window.localStorage.usersite ? window.localStorage.usersite : "";
+    inputs[0].value = window.localStorage.username || "";
+    inputs[1].value = window.localStorage.usersite || "";
     commentBox.getElementsByTagName("textarea")[0].value = "";
 }
 
@@ -153,13 +154,14 @@ const sendComment = (commentBoxID, replyTo, blogID, fromPage) => {
     let header = new Headers();
     header.append("Content-Type", "application/json");
     var raw = JSON.stringify({
-        "blogID": blogID,
-        "name": name,
-        "content": content,
-        "reply_to": replyTo,
-        "link": site
+        comment: {
+            "blogID": blogID,
+            "name": name,
+            "content": content,
+            "reply_to": replyTo,
+            "link": site
+        }
     });
-    console.log(raw)
 
     var requestOptions = {
         method: 'POST',
@@ -168,7 +170,7 @@ const sendComment = (commentBoxID, replyTo, blogID, fromPage) => {
         redirect: 'follow'
     };
 
-    fetch("http://127.0.0.1:3000/writeComment", requestOptions)
+    fetch("http://127.0.0.1:3000/addComment", requestOptions)
         .then(response => response.json())
         .then(msg => {
             console.log(msg)
@@ -179,7 +181,11 @@ const sendComment = (commentBoxID, replyTo, blogID, fromPage) => {
                     loadCommentPage();
                 }
             } else {
-                alert("Failed to send comment. Please try again later...");
+                if (msg.error == "Invalid link") {
+                    alert(`Website link must starts with "http://" or "https://"`);
+                } else {
+                    alert("Failed to send comment. Please try again later...");
+                }
             }
         });
 }
@@ -202,8 +208,8 @@ const loadComments = () => {
     };
     fetch("http://127.0.0.1:3000/getBlogComments", requestOptions)
         .then(response => response.json())
-        .then(commentSections => {
-            commentSections.comments.forEach(section => {
+        .then(comments => {
+            comments.data.forEach(section => {
                 commentContainer.innerHTML += createSectionComment(section, blogID, {refer:false}, false);
             });
 
@@ -222,7 +228,7 @@ const loadComments = () => {
                 </div>
             </div>
             `
-            if (commentSections.comments.length == 0) {
+            if (comments.data.length == 0) {
                 commentContainer.innerHTML += `
                 <div class="midfont" style="margin: 5vh auto;display:flex;flex-direction:column;align-items:center;">
                         No comments yet. Be the first one to leave a mark on this page

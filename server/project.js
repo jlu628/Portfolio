@@ -54,15 +54,15 @@ const insertIntoProject = async(project) => {
 const editProjectDB = async(oldTitle, oldDate, project) => {
     encodeProject(project);
     const { title, date, thumbnail, dates, skills, description, link, importance } = project;
-    const setTitle = title ? `title = ${title}` : "";
-    const setDate = date ? `date = ${date}` : "";
-    const setThumbnail = thumbnail ? `thumbnail = ${thumbnail}` : "";
-    const setDates = dates ? `dates = ${dates}` : "";
-    const setSkills = skills ? `skills = ${skills}` : "";
-    const setDescription = description ? `description = ${description}` : "";
-    const setLink = link ? `link = ${link}` : "";
-    const setImportance = importance ? `importance = ${importance}` : "";
-    const setAttributes = [setTitle, setDate, setThumbnail, setDates, setSkills, setDescription, setLink, setImportance].filter(a=>a).join(", ");
+    const setTitle = `title = ${title}`;
+    const setDate = `date = ${date}`;
+    const setThumbnail = `thumbnail = ${thumbnail}`;
+    const setDates = `dates = ${dates}`;
+    const setSkills = `skills = ${skills}`;
+    const setDescription = `description = ${description}`;
+    const setLink = `link = ${link}`;
+    const setImportance = `importance = ${importance}`;
+    const setAttributes = [setTitle, setDate, setThumbnail, setDates, setSkills, setDescription, setLink, setImportance].join(", ");
     await sqliteExec(
         `UPDATE project SET 
         ${setAttributes} 
@@ -114,17 +114,20 @@ const addProject = async(req, res) => {
 }
 
 const editProject = async(req, res) => {
-    const { title, date, project, password } = req.body;
-    if (!(title && date) || 
-    !(project.title || project.date || project.thumbnail || project.dates || project.link || project.importance
-    (Array.isArray(project.skills) && project.skills.length > 0) || 
-    (Array.isArray(project.description) && project.description.length > 0))) {
+    const { project, password } = req.body;
+    const oldTitle = req.body.title;
+    const oldDate = req.body.date;
+    const { title, date, thumbnail, dates, skills, description, link, importance } = project;
+    msg = {}
+    // Sanity checks
+    if (!(oldTitle && oldDate && title && date && thumbnail && dates && link && 
+        Array.isArray(skills) && skills.length > 0 && Array.isArray(description) && description.length > 0 && password)) {
         msg.success = false;
         msg.error = "Form not complete";
-    } else if (project.date && (!Number.isInteger(project.date) || project.date < 20190610 || project.date > 20500101)) {
+    } else if (!Number.isInteger(date) || date < 20190610 || date > 20500101) {
         msg.success = false;
         msg.error = "Date not valid";
-    } else if (project.importance && !Number.isInteger(importance)) {
+    } else if (!(!importance || Number.isInteger(importance))) {
         msg.success = false;
         msg.error = "Importance level not valid";
     } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {

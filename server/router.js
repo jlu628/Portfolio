@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const oldBlog = require("./oldBlog")
 const blog = require("./blog")
-const comment = require("./comment")
 const project = require("./project")
+const comment = require("./comment")
+
+const oldComment = require("./oldComment")
+const oldBlog = require("./oldBlog")
 
 // Project manager
 router.post("/admin/addProject", project.addProject);
@@ -12,19 +14,17 @@ router.post("/admin/deleteProject", project.deleteProject);
 router.post("/getProjects", project.getProjects);
 
 // Blog manager
-router.post("/getRecentBlogs", blog.getRecentBlogs);
-router.post("/getBlogs", blog.getBlogs);
-router.post("/getBlogContent", blog.getBlogContent);
 router.post("/admin/addBlog", blog.addBlog);
 router.post("/admin/editBlog", blog.editBlog);
 router.post("/admin/deleteBlog", blog.deleteBlog);
+router.post("/getRecentBlogs", blog.getRecentBlogs);
+router.post("/getBlogs", blog.getBlogs);
+router.post("/getBlogContent", blog.getBlogContent);
 
-router.post("/getRecentPosts", oldBlog.getRecentPosts);
-router.post("/getPostPage", oldBlog.getPostPage);
-router.post("/getContentPage", oldBlog.getContentPage);
-
-router.post("/getBlogComments", comment.getBlogComments);
-router.post("/getAllComments", comment.getAllComments);
-router.post("/writeComment", comment.writeComment);
+// Comment manager
+router.post("/admin/editComment", comment.editComment)
+router.post("/admin/deleteComment", comment.deleteComment)
+router.post("/addComment", comment.addComment)
+router.post("/getBlogComments", comment.getBlogComments)
 
 module.exports = router;

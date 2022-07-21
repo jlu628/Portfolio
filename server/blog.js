@@ -1,4 +1,3 @@
-const e = require("express");
 const path = require("path");
 const { hash, sqliteExec, sqliteGet, encodeDbString, decodeDbString } = require(path.join(__dirname, "./utils"));
 let newBlogContent = false;
@@ -89,16 +88,17 @@ const queryBlogCovers = async (requireDecode) => {
 // Read blog content from database by blog ID
 const queryBlogContent = async (blogID) => {
     let contents = await sqliteGet(`SELECT type, source, description FROM blog_content WHERE blogID = "${blogID}" ORDER BY paragraphIdx`);
-    let blogInfo = await sqliteGet(`SELECT title, date FROM blog WHERE blogID = "${blogID}"`);
+    let blogInfo = await sqliteGet(`SELECT * FROM blog WHERE blogID = "${blogID}"`);
     if (blogInfo.length == 0) {
         return null;
     }
     let blogContent = {
-        title: blogInfo[0].title,
-        date: blogInfo[0].date,
+        ...blogInfo[0],
         content: contents
     }
-    decodeBlog(blogContent);
+    if (blogContent) {
+        decodeBlog(blogContent);
+    }
     return blogContent;
 }
 
@@ -117,26 +117,23 @@ const queryAllBlogs = async () => {
 const editBlogDB = async (blogID, blog) => {
     encodeBlog(blog);
     const { title, date, datealt, name, summary, brief, tags, content } = blog;
-    const setTitle = title ? `title = ${title}` : "";
-    const setDate = date ? `date = ${date}` : "";
-    const setDatealt = datealt ? `datealt = ${datealt}` : "";
+    const setTitle = `title = ${title}`;
+    const setDate = `date = ${date}`;
+    const setDatealt = `datealt = ${datealt}`;
     const setName = name ? `name = ${name}` : "";
-    const setSummary = summary ? `summary = ${summary}` : "";
-    const setBrief = brief ? `brief = ${brief}` : "";
-    const setTags = tags ? `tags = ${tags}` : "";
-    const newBlogID = name || date ? hash(name+date) : null;
-    const setBlogId = newBlogID ? `blogID = "${blogID}"` : "";
-    let setAttributes = [setTitle, setDate, setDatealt, setName, setSummary, setBrief, setTags, setBlogId].filter(a=>a);
-    if (setAttributes.length > 0) {
-        setAttributes = setAttributes.join(", ");
-        await sqliteExec(
-            `UPDATE blog SET 
-            ${setAttributes} 
-            WHERE blogID = "${blogID}"`
-        );
-    }
+    const setSummary = `summary = ${summary}`;
+    const setBrief = `brief = ${brief}`;
+    const setTags = `tags = ${tags}`;
+    const newBlogID = hash(name+date);
+    const setBlogId = `blogID = "${newBlogID}"`;
+    let setAttributes = [setTitle, setDate, setDatealt, setName, setSummary, setBrief, setTags, setBlogId].join(", ");
+    await sqliteExec(
+        `UPDATE blog SET 
+        ${setAttributes} 
+        WHERE blogID = "${blogID}"`
+    );
     if (content) {
-        blogID = newBlogID ? newBlogID : blogID;
+        blogID = newBlogID;
         await sqliteExec(
             `DELETE FROM blog_content WHERE blogID = "${blogID}"`
         );
@@ -208,21 +205,21 @@ const editBlog = async (req, res) => {
     const { title, date, datealt, name, summary, brief, tags , content } = blog;
     let msg = {}
     // Sanity check
-    if (!blogID || !(title || date || datealt || name || 
-    (Array.isArray(summary) && summary.length > 0) || (Array.isArray(brief) && brief.length > 0) ||
-    (Array,isArray(tags) && tags.length > 0) || (Array.isArray(content) && content.length > 0))) {
+    if (!(blogID && title && date && datealt && name && summary && brief && tags && content 
+    && Array.isArray(brief) && brief.length > 0 && Array.isArray(tags) && tags.length > 0
+    && Array.isArray(content) && content.length > 0)) {
         msg.succuss = false;
         msg.error = "Form not complete";
-    } else if (date && (!Number.isInteger(date) || date < 20190610 || date > 20500101)) {
-        msg.success = false;
-        msg.error = "Date not valid";
-    } else if (content && content.filter(paragraph => !paragraph.source).length == 0) {
+    } else if (content.filter(paragraph => !paragraph.source).length == 0) {
         msg.succuss = false;
         msg.error = "Content not valid";
+    } else if (!Number.isInteger(date) || date < 20190610 || date > 20500101) {
+        msg.success = false;
+        msg.error = "Date not valid";
     } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
         msg.success = false;
         msg.error = "Wrong password";
-    } else {
+    }  else {
         try {
             await editBlogDB(blogID, blog);
             msg.success = true;
@@ -290,7 +287,11 @@ const getBlogContent = async (req, res) => {
     let blogID = req.body.blogID;
     let msg = {};
     let content = await queryBlogContent(blogID);
-    msg.content = content;
+    msg.data = {
+        content: content.content,
+        title: content.title,
+        date: content.date
+    };
     res.write(JSON.stringify(msg));
     res.end();
 }
@@ -315,7 +316,7 @@ const loadBlogFromJSON = async () => {
 
 // Backup database information to JSON
 const exportBlogToJSON = async () => {
-    const backupPath = path.join(__dirname, "./database/backup/blog_copy.json");
+    const backupPath = path.join(__dirname, "./database/backup/blog.json");
     const fs = require("fs");
 
     let blogs = await queryAllBlogs();

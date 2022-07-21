@@ -1,22 +1,22 @@
 const fs = require("fs");
-const { hash, getTimeAsync } = require("./utils");
+const { hash, getTimeAsync } = require("../utils");
 
 let commentsDb = {};
 blogIDs = [
-    "CqB4bLSpMyK1LLPmywDcCOuMPfJu3ttoaG6sCWzLP8J",
-    "MBM6umuNgVwlBK0MBZsSdv6ytQ6Sw1kj7RGqCrMVt1N",
-    "tGTJpzT1Dcm2y3exhnGBu0RGWfJPnp8r1GwIgdnBWX0",
-    "pNqOQjO77PENEQXbrBuoFLV7eqg1UH2rAnjznbpAgjV",
+    "N9y1apsF6w1jVyZo32PR84MUjYXYgmFxP1hPqxsxS14",
+    "jiD9ckTskDswPscmItB9IBY05DR4EBVCkP3pn1COaV6",
+    "KFdnwbQAlDyOBUXetVCl2TsO3IJlL5nDrAXknMVrg6G",
+    "GS3UHI6KatJcPpUbcu313ucQTBl1cSVbaIabpO7Shb5",
     "others"
 ]
 blogIDs.forEach(blogID => { commentsDb[blogID] = [] });
 names = [
-    "Jerry", "Ivan", "Cody", "Hanson"
+    "Jerry Lu", "Ivan", "Cody", "Hanson Zhang"
 ]
 contents = [
     "Hello World!",
-    "Comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment comment",
-    "Test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test",
+    "Test comment test comment test comment, test comment. Test comment.",
+    "Kekw lol xd",
     "Lorem ipsum dolor",
 ]
 links = [
@@ -29,38 +29,48 @@ links = [
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-const createBlockComments = async() => {
-    const iters = rand(3, 10);
-    let commentIDs = [];
-    let blockComments = {};
-    for (let i = 0; i < iters; i++) {
-        let section = {
-            name: pick(names),
-            content: pick(contents),
-            link: rand(0, 10) <= 3 ? pick(links) : "",
-            time: await getTimeAsync(),
-            reply_to: null
-        }
-        let commentID = hash(section.name + section.content + section.time);
-        if (commentIDs.length > 0) {
-            section.reply_to = pick(commentIDs);
-        }
-        blockComments[commentID] = section;
-        commentIDs.push(commentID);
+const createComment = async(name, content, link, reply_to) => {
+    const time = await getTimeAsync();
+    let comment = {
+        commentID: hash(name+content+time),
+        name: name,
+        content: content, 
+        link: link,
+        time: time,
+        reply_to: reply_to,
     }
-    return blockComments;
+    return comment;
+}
+
+const createSequentialComments = async () => {
+    const sequentialLength = rand(3,7);
+    const sequentialComments = [];
+    const commentIDs = [];
+    for (let i = 0; i < sequentialLength; i++) {
+        if (i == 0) {
+            const comment = await createComment(pick(names), pick(contents), pick(links), null);
+            commentIDs.push(comment.commentID);
+            sequentialComments.push(comment);
+        } else {
+            const comment = await createComment(pick(names), pick(contents), pick(links), pick(commentIDs));
+            commentIDs.push(comment.commentID);
+            sequentialComments.push(comment);
+        }
+    }
+    return sequentialComments;
 }
 
 const createComments = async() => {
-    for (let i = 0; i < blogIDs.length; i++) {
-        let id = blogIDs[i];
-        const iters = rand(1, 5);
-        let comments = commentsDb[id];
-        for (let i = 0; i < iters; i++) {
-            comments.push(await createBlockComments());
+    let comments = {};
+    for (let blogID of blogIDs) {
+        let blogComments = [];
+        const numSequentials = rand(1,5);
+        for (let i = 0; i < numSequentials; i++) {
+            blogComments.push(await createSequentialComments());
         }
+        comments[blogID] = blogComments;
     }
-    fs.writeFileSync("./commentsData.json", JSON.stringify(commentsDb));
+    fs.writeFileSync("./backup/comment.json", JSON.stringify(comments));
 }
 
 createComments();

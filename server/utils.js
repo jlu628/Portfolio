@@ -104,11 +104,11 @@ const getTimeDisplayed = () => {
 };
 
 const encodeDbString = (str, defaultValue) => {
-    return str && str.trim() ? `"${str.replaceAll(`"`,`''`)}"` : (defaultValue ? `"${defaultValue}"` : `""`);
+    return str && str.trim() ? `"${str.replaceAll(`"`,`''`)}"` : (typeof defaultValue === 'undefined' ? `""` : defaultValue);
 }
 
 const decodeDbString = (str, defaultValue) => {
-    return str && str.trim() ? str.replaceAll(`''`,`"`) : (defaultValue ? `"${defaultValue}"` : "");
+    return str && str.trim() ? str.replaceAll(`''`,`"`) : (typeof defaultValue === 'undefined' ? null : defaultValue);
 }
 
 const sqlite3 = require('sqlite3').verbose();
@@ -127,6 +127,8 @@ const sqliteExec = async(sql) => {
     } catch (err) {
         console.log(sql)
         console.log(err);
+        await db.close();
+        throw err;
     }
     await db.close();
 }
@@ -143,6 +145,8 @@ const sqliteGet = async(sql) => {
         res = await db.all(sql);
     } catch (err) {
         console.log(err);
+        await db.close();
+        throw err;
     }
     await db.close();
     return res;
@@ -189,16 +193,16 @@ const reset = async() => {
     await db.exec(blogContentSchema);
 
     const commentSchema = `CREATE TABLE IF NOT EXISTS comment (
-        commentId VARCHAR(43) NOT NULL PRIMARY KEY,
+        commentID VARCHAR(43) NOT NULL PRIMARY KEY,
         name TEXT NOT NULL,
         content TEXT NOT NULL,
         link TEXT,
         time INTEGER NOT NULL,
         reply_to VARCHAR(43),
-        blogID VARCHAR(43) NOT NULL,
+        blogID VARCHAR(43),
         sectionIndex INTEGER NOT NULL,
 
-        CONSTRAINT comment_fk_reply_to FOREIGN KEY(reply_to) REFERENCES comment(commentId) ON DELETE SET NULL,
+        CONSTRAINT comment_fk_reply_to FOREIGN KEY(reply_to) REFERENCES comment(commentId) ON DELETE SET NULL ON UPDATE CASCADE,
         CONSTRAINT comment_fk_blog_id FOREIGN KEY(blogID) REFERENCES blog(blogID) ON DELETE CASCADE ON UPDATE CASCADE
     )`;
     await db.exec(commentSchema);

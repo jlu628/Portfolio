@@ -16,7 +16,7 @@ const createContent = (blogContent, imgFolder) => {
             html += `
             ${media}
             <div class="img-descriptor semiblackfont smallfont">
-                ${paragraph.description}
+                ${paragraph.description || ""}
             </div>
             `
         }
@@ -48,7 +48,7 @@ const loadContent = () => {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            const blogContent = data.content;
+            const blogContent = data.data;
             document.querySelector(".blog-container").innerHTML = createContent(blogContent, imgFolder);
         })
         .catch(error => console.log('error', error));

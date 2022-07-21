@@ -3,7 +3,7 @@ const path = require('path')
 let blogs = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/meta.json")));
 let contents = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/content.json")));
 const { hash, getTimeDisplayed, sqliteExec, sqliteGet} = require(path.join(__dirname, "./utils.js"));
-const { insertBlog } = require(path.join(__dirname, "./comment.js"));
+const { insertBlog } = require(path.join(__dirname, "./oldComment.js"));
 let searchCache = {};
 
 fs.watchFile(path.join(__dirname, "./database/meta.json"), (curr, prev) => {
