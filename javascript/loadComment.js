@@ -44,7 +44,7 @@ const createSectionComment = (sectionComments, blogID, referBlogs, fromPage) => 
             `<text>${comment.name}</text>`;
         let refer = idx == 0 ? (
             referBlogs.refer ? `&nbsp;&nbsp; &#8594; &nbsp;&nbsp;
-            <a href="content.html?blogID=${blogID}" target="_blank">${referBlogs.title}</a>` : ""
+            <a href="content?blogID=${blogID}" target="_blank">${referBlogs.title}</a>` : ""
         ) : "";
         let reply = comment.reply_to ? `&nbsp;
                 <a onClick="scrollIntoComment('${comment.reply_to}', true)">
@@ -224,7 +224,10 @@ const loadComments = () => {
             `
             if (commentSections.comments.length == 0) {
                 commentContainer.innerHTML += `
-                    <div class="midfont" style="margin: 5vh auto;">No comments yet. Be the first one to leave a mark on this page</div>
+                <div class="midfont" style="margin: 5vh auto;display:flex;flex-direction:column;align-items:center;">
+                        No comments yet. Be the first one to leave a mark on this page
+                        <img style="height: 30vh;" src="assets/nocomment.png">
+                    </div>
                 `
             }
         });
@@ -310,6 +313,7 @@ const loadCommentPage = () => {
                 html += `
                 <div class="midfont" style="margin: 5vh auto;display:flex;flex-direction:column;align-items:center;">
                     No comments yet. Be the first one to leave a mark on this page
+                    <img style="height: 50vh;" src="assets/nocomment.png">
                 </div>
             `;
             }

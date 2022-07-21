@@ -28,7 +28,7 @@ const bindSearch = () => {
     let searchIcon = document.getElementById("searchIcon");
     searchIcon.onclick = () => {
         let searchInput = document.getElementById('search');
-        let href = `search.html?filter=${searchInput.value.trim()}&page=1`
+        let href = `search?filter=${searchInput.value.trim()}&page=1`
         document.getElementById("searchIcon").href = encodeURI(href);
         return !(searchInput.value === null || searchInput.value.match(/^ *$/) !== null);
     };

@@ -1,0 +1,208 @@
+{
+    "blogs": [
+        {
+            "title": "Intramural End of Season 2021",
+            "date": "20211130",
+            "datealt": "November 2021",
+            "name": "intramural",
+            "summary": "End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!",
+            "brief": [
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
+            ],
+            "tags": [
+                "sport"
+            ],
+            "content": [
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": "End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!"
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "desc": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, non!"
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": ""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                }
+            ]
+        },
+        {
+            "title": "Lake House, Yacht and Fireworks!",
+            "date": "20211009",
+            "datealt": "Fall Break 2021",
+            "name": "lakehouse",
+            "summary": "Fall break at Lake Hartwell",
+            "brief": [
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
+            ],
+            "tags": [
+                "travel"
+            ],
+            "content": [
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": "Fall break at Lake Heartwell!"
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "desc": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, non!"
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": ""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                }
+            ]
+        },
+        {
+            "title": "End of Summer at Eastern Coast",
+            "date": "20210822",
+            "datealt": "End of Summer 2021",
+            "name": "California",
+            "summary": "End of summer trip to California",
+            "brief": [
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
+            ],
+            "tags": [
+                "travel"
+            ],
+            "content": [
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": "End of summer trip at California"
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "desc": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, non!"
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": ""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                }
+            ]
+        },
+        {
+            "title": "Snowy Christmas at the Great Smoky Mountains",
+            "date": "20201227",
+            "datealt": "Christmas 2020",
+            "name": "Gatlinburg",
+            "summary": "Snowy Christmas at the Great Smoky Mountains",
+            "brief": [
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio.",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, a neque nisi reprehenderit corrupti eligendi quia suscipit, similique alias quaerat, dolorum commodi! Deleniti nesciunt assumenda doloremque veniam dolor illo libero inventore ab quam, corporis repudiandae unde eum. Voluptate, mollitia accusantium dignissimos atque cum fuga incidunt debitis ab. Sint, deserunt distinctio."
+            ],
+            "tags": [
+                "travel"
+            ],
+            "content": [
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": "Snowy Christmas at the Great Smoky Mountain"
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "desc": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, non!"
+                },
+                {
+                    "type": "image",
+                    "source": "thumbnail.png",
+                    "description": ""
+                },
+                {
+                    "type": "text",
+                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "description":""
+                }
+            ]
+        }
+    ]
+}

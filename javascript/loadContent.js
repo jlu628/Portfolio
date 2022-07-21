@@ -1,6 +1,6 @@
 // Load blog contents
 const createContent = (blogContent, imgFolder) => {
-    let date = blogContent.date;
+    let date = blogContent.date.toString();
     date = "Posted on " + date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
     let html = `
     <text class="titlefont largefont">${blogContent.title}</text>
@@ -8,14 +8,15 @@ const createContent = (blogContent, imgFolder) => {
     <hr>
     <div class="blog-content-container midfont">
     `
-    blogContent.content.forEach(c => {
-        if (typeof c === 'string' || c instanceof String) {
-            html += `<p>${c}</p>`
+    blogContent.content.forEach(paragraph => {
+        if (paragraph.type == "text") {
+            html += `<p>${paragraph.source}</p>`
         } else {
+            let media = paragraph.type == "image" ? `<img src="${imgFolder+paragraph.source}">` : paragraph.source
             html += `
-            <img src="${c.type == "image" ? imgFolder+c.src : c.src}">
+            ${media}
             <div class="img-descriptor semiblackfont smallfont">
-                ${c.desc}
+                ${paragraph.description}
             </div>
             `
         }
@@ -27,7 +28,7 @@ const createContent = (blogContent, imgFolder) => {
 
 const loadContent = () => {
     const blogID = parseQueryString().blogID;
-    const imgFolder = `blogs/images/${blogID}/`;
+    const imgFolder = `/images/${blogID}/`;
 
     var header = new Headers();
     header.append("Content-Type", "application/json");
@@ -43,9 +44,10 @@ const loadContent = () => {
         redirect: 'follow'
     };
 
-    fetch("http://127.0.0.1:3000/getContentPage", requestOptions)
+    fetch("http://127.0.0.1:3000/getBlogContent", requestOptions)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             const blogContent = data.content;
             document.querySelector(".blog-container").innerHTML = createContent(blogContent, imgFolder);
         })

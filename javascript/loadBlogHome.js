@@ -11,16 +11,17 @@ const loadBlogHome = () => {
         redirect: 'follow'
     };
 
-    fetch("http://127.0.0.1:3000/getRecentPosts", requestOptions)
+    fetch("http://127.0.0.1:3000/getRecentBlogs", requestOptions)
         .then(response => response.json())
         .then(data => {
             for (let i = 0; i < 4; i++) {
-                const blog = data.recentPosts[i];
+                const blog = data.data[i];
                 const item = items[i];
                 const blogID = blog.blogID;
+
                 item.innerHTML = `                
-                <a href="content.html?blogID=${blogID}">
-                    <img src="blogs/images/${blogID}/thumbnail.png">
+                <a href="content?blogID=${blogID}">
+                    <img src="/images/${blogID}/thumbnail.png">
                 </a>
                 <div class="carousel-descriptor smallfont grayfont centertext">
                     ${blog.summary}

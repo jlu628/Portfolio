@@ -96,14 +96,14 @@ const createBlog = (blogPost) => {
 
     let html = `
     <div class="post-container">
-        <img class="eight-five-img" src="blogs/images/${blogPost.blogID}/thumbnail.png">
+        <img class="eight-five-img" src="/images/${blogPost.blogID}/thumbnail.png">
         <text class="titlefont largefont">${blogPost.title}</text>
         <text class="semiblackfont smallfont">${blogPost.datealt}</text>
         <hr>
         <div class="semiblackfont midfont">
             ${brief}            
         </div>
-        <a href="content.html?blogID=${blogPost.blogID}">
+        <a href="content?blogID=${blogPost.blogID}">
             <button class="blog-details-btn midfont whitefont">Read More &#x2192;</button>
         </a>
     </div>
@@ -265,14 +265,14 @@ const createSearchBlog = (searchBlog, filter) => {
 
     let html = `
     <div class="post-container">
-        <img class="eight-five-img" src="blogs/images/${blogPost.blogID}/thumbnail.png">
+        <img class="eight-five-img" src="/images/${blogPost.blogID}/thumbnail.png">
         <text class="titlefont largefont">${title}</text>
         <text class="semiblackfont smallfont">${datealt}</text>
         <hr>
         <div class="semiblackfont midfont">
             ${brief}
         </div>
-        <a href="content.html?blogID=${blogPost.blogID}">
+        <a href="content?blogID=${blogPost.blogID}">
             <button class="blog-details-btn midfont whitefont">Read More &#x2192;</button>
         </a>
     </div>
@@ -334,12 +334,25 @@ const loadPostPage = (currPage, pageType, filter) => {
         body: raw,
         redirect: 'follow'
     };
-    fetch("http://127.0.0.1:3000/getPostPage", requestOptions)
+
+    var postUrl;
+    var postKey;
+    if (pageType == "projects") {
+        postUrl = "http://127.0.0.1:3000/getProjects";
+        postKey = "projects";
+    } else if (pageType == "blogs") {
+        postUrl = "http://127.0.0.1:3000/getBlogs";
+        postKey = "blogs";
+    } else {
+        postUrl = "http://127.0.0.1:3000/getPostPage";
+        postKey = "displayedPosts"
+    }
+    fetch(postUrl, requestOptions)
         .then(response => response.json())
         .then(data => {
             currPage = data.page;
             let totalPage = data.totalPages;
-            let displayedPosts = data.displayedPosts;
+            let displayedPosts = data[postKey];
             loadPosts(displayedPosts, pageType, filter);
             createPagination(currPage, totalPage);
 

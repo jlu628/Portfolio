@@ -29,12 +29,12 @@ class Particle {
         this.connected = new Set();
 
         this.draw = () => {
-            particleCtx.beginPath();
-            particleCtx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
-            particleCtx.strokeStyle = `rgb(${this.color}, ${this.color}, ${this.color})`;
-            particleCtx.stroke();
-            particleCtx.fillStyle = `rgb(${this.color}, ${this.color}, ${this.color})`;
-            particleCtx.fill();
+            sparkCtx.beginPath();
+            sparkCtx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+            sparkCtx.strokeStyle = `rgb(${this.color}, ${this.color}, ${this.color})`;
+            sparkCtx.stroke();
+            sparkCtx.fillStyle = `rgb(${this.color}, ${this.color}, ${this.color})`;
+            sparkCtx.fill();
         };
 
         this.update = () => {
@@ -52,11 +52,11 @@ class Particle {
 }
 
 const drawLine = (x1, y1, x2, y2, color) => {
-    particleCtx.beginPath();
-    particleCtx.moveTo(x1, y1);
-    particleCtx.lineTo(x2, y2);
-    particleCtx.strokeStyle = color;
-    particleCtx.stroke();
+    sparkCtx.beginPath();
+    sparkCtx.moveTo(x1, y1);
+    sparkCtx.lineTo(x2, y2);
+    sparkCtx.strokeStyle = color;
+    sparkCtx.stroke();
 }
 
 // Create circles
@@ -92,7 +92,7 @@ window.addEventListener('mouseover', () => {
 // Main animation loop
 function animateParticles() {
     requestAnimationFrame(animateParticles);
-    particleCtx.clearRect(0, 0, innerWidth, innerHeight);
+    sparkCtx.clearRect(0, 0, innerWidth, innerHeight);
     // Draw particles and remove particles that had been disconnected for a while
     for (let key in particles) {
         particles[key].update();

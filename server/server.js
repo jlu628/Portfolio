@@ -17,7 +17,7 @@ app.use(cors());
 const routes = require("./router");
 app.use("/", routes);
 
-app.use(express.static("../"));
+app.use(express.static("../", {extensions:['html']}));
 
 // Redirect outputs
 const fs = require("fs");

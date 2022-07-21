@@ -5,7 +5,7 @@ body {
     font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
 }
 
-#particle-canvas {
+#spark-canvas {
     display: block;
     background-color: transparent;
     position: fixed;
@@ -53,7 +53,10 @@ mark {
     --navy: #001128;
     --brown: #cabfb9;
     --wheat: #d9d2c7;
-    --shadow: rgba(0, 0, 0, 0.2)
+    --shadow: rgba(0, 0, 0, 0.2);
+    --sky-blue: #3b5e9a;
+    --sky-blue-light: #85a3d1;
+    --sky-blue-fade: #b8d2f4;
 }
 
 
@@ -357,8 +360,8 @@ mark {
 /* Intro section */
 
 .intro-container {
-    margin: 50px auto;
-    height: 250px;
+    margin: auto;
+    height: 200px;
     width: 1000px;
     display: grid;
 }
@@ -369,12 +372,17 @@ mark {
     justify-content: center;
     align-items: center;
     border-radius: 50px;
-    background-color: var(--gray-semi-transparent);
+    /* background-color: var(--gray-semi-transparent); */
     z-index: 10;
+}
+
+.intro-container div span a{
+    color: inherit
 }
 
 .intro-container img {
     height: 200px;
+    border-radius: 10%;
 }
 
 .intro-text-container {
@@ -382,19 +390,27 @@ mark {
 }
 
 .intro-container:nth-child(odd) {
-    grid-template-columns: 250px 750px;
+    grid-template-columns: 200px 750px;
 }
 
 .intro-container:nth-child(even) {
-    grid-template-columns: 750px 250px;
+    grid-template-columns: 750px 200px;
 }
 
 .intro-container div:nth-child(2) {
-    padding: 30px;
+    padding: 20px 30px;
 }
 
 .intro-container:nth-child(even) div:nth-child(1) {
     order: 2;
+}
+
+#intro-locator {
+    margin: 35px auto 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -427,8 +443,8 @@ mark {
 }
 
 .carousel-indicators {
-    width: 15%;
-    margin-left: -7.5%;
+    width: 20%;
+    margin-left: -10%;
     z-index: 100;
 }
 
@@ -465,8 +481,8 @@ mark {
         align-items: center;
     }
     .intro-container div:nth-child(1) {
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
     }
     .intro-container:nth-child(even) div:nth-child(2) {
         order: 2;

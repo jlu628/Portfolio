@@ -48,7 +48,7 @@ function animateSignature() {
             headerDescriptorIdx++;
             let headerDescriptorIntervalID = setInterval(() => {
                 headerDescriptors[headerDescriptorIdx].style.opacity = 1;
-                if (++headerDescriptorIdx === 4) {
+                if (++headerDescriptorIdx === headerDescriptors.length) {
                     window.clearInterval(headerDescriptorIntervalID);
                 }
             }, 800);

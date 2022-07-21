@@ -42,8 +42,6 @@
     align-items: center;
     position: relative;
     z-index: 10;
-    /* color: var(--wheat);
-    background-color: var(--blue); */
 }
 
 #resume-download img {

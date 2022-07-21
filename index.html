@@ -19,8 +19,8 @@
 
 <body>
     <!-- Canvas animated background -->
-    <canvas id="particle-canvas"></canvas>
-    <script src="javascript/particle.js"></script>
+    <canvas id="spark-canvas"></canvas>
+    <script src="javascript/sparks.js"></script>
 
     <!-- Navigation bar -->
     <div class="navbar-container transparent">
@@ -28,10 +28,10 @@
             <div id="small-device-navbar-opener" class="largefont"><a>&equiv;</a></div>
             <div>
                 <a href="#"><img id="navbar-icon" src="assets/logo.png"></a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="projects.html?page=1">Projects</a>
-                <a href="blogs.html?page=1">Blogs</a>
-                <a href="social.html?page=1">Social</a>
+                <a href="portfolio">Portfolio</a>
+                <a href="projects?page=1">Projects</a>
+                <a href="blogs?page=1">Blogs</a>
+                <a href="social?page=1">Social</a>
             </div>
             <div id="navbar-right-container">
                 <a href="" onClick="return getSearchContent();" id="searchIcon"><img src="assets/search.png"></a>
@@ -46,10 +46,9 @@
     <div class="header-container">
         <canvas id="signature-canvas"></canvas>
         <text id="header-descriptor" class="largefont semiblackfont">
-            <span>To learn, </span>
-            <span>to apply, </span>
-            <span> to solve, </span>
-            <span>to create...</span>
+            <span>Software Engineer, </span>
+            <span>Data Analyst, </span>
+            <span>Web Developer</span>
         </text>
         <a><button class="whitefont bigfont" onclick="document.getElementById('intro-locator').scrollIntoView()">↓</button></a>
         <script src="javascript/signature.js"></script>
@@ -90,33 +89,48 @@
     </a>
 
     <!-- Intro section -->
-    <div id="intro-locator"></div>
-    <div class="intro-container" data-aos="fade-up">
-        <div><img src="assets/placeholder.png"></div>
-        <div class="midfont blackfont">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
-            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
-        </div>
+    <div id="intro-locator">
+        <text class="titlefont largefont">Quick Introduction</text>
     </div>
-    <div class="intro-container" data-aos="fade-up">
-        <div><img src="assets/placeholder.png"></div>
-        <div class="midfont blackfont">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
-            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
+    <div>
+        <div class="intro-container">
+            <div data-aos="fade-right"><img src="assets/profile.png"></div>
+            <div data-aos="fade-left" class="midfont blackfont">
+                <span>
+                Hi there! This is Jiayu Lu. Yep, that handsome dude with a shinny smile in the picture, that's me. I usually go by Jerry, and I'm a fourth year Georgia Tech student majoring in Computer Science and Math. 
+                <br>
+                This website includes both a portfolio for professional purposes and blogs to share with friends. If you have just landed at this page, let me take you for a quick tour around this website.
+            </span>
+            </div>
         </div>
-    </div>
-    <div class="intro-container" data-aos="fade-up">
-        <div><img src="assets/placeholder.png"></div>
-        <div class="midfont blackfont">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
-            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
+        <div class="intro-container">
+            <div data-aos="fade-left"><img src="assets/profile2.png"></div>
+            <div data-aos="fade-right" class="midfont blackfont">
+                <span>
+                    For recruiters interested in what I can bring for your company/team, please take a look under the <a href="portfolio">portfolio</a> section where I introduce the set of skills I offer.
+                    In the <a href="projects?page=1">projects</a> section, I have also provided demos of past projects I have worked on to show case these skills.
+                </span>
+            </div>
         </div>
-    </div>
-    <div class="intro-container" data-aos="fade-up">
-        <div><img src="assets/placeholder.png"></div>
-        <div class="midfont blackfont">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem eligendi eaque nulla commodi omnis minus dolores nobis neque, quia, fugiat veritatis corrupti cupiditate dicta minima quam, nemo distinctio id porro ducimus cum illum dignissimos. Cumque
-            saepe quam, illo molestias aliquid facere nam, vero magnam magni possimus laboriosam dolorem excepturi!
+        <div class="intro-container">
+            <div data-aos="fade-right"><img src="assets/profile3.png"></div>
+            <div data-aos="fade-left" class="midfont blackfont">
+                <span>
+                    I'll also be sharing memorable moments of my life in my <a href="blogs?page=1">blogs</a>. Typically I post about travels and club activites, but I'll also share things I do for my hobby.
+                    <br>
+                    I play soccer with friends every week will write about intramural or friendly matches from time to time. I am also an amateur fingerstyle guitar player, I've just recently started my YouTube/Bilibili channel, go check those out!
+                </span>
+            </div>
+        </div>
+        <div class="intro-container">
+            <div data-aos="fade-left"><img src="assets/profile4.png"></div>
+            <div data-aos="fade-right" class="midfont blackfont">
+                <span>
+                    Finally, there are comment sections under each blog, where you can share your thoughts or suggestions with me. All comments are publicly visible so be nice and friendly. (no profanity, not ads... seriously)
+                    <br>
+                    That's about it, hope you like this website and I look forward to hearing from you all!
+                </span>
+            </div>
         </div>
     </div>
 
@@ -132,7 +146,6 @@
             <li data-target="#homeCarousel" data-slide-to="1"></li>
             <li data-target="#homeCarousel" data-slide-to="2"></li>
             <li data-target="#homeCarousel" data-slide-to="3"></li>
-
         </ol>
 
         <!-- Wrapper for slides -->
@@ -174,9 +187,36 @@
         bindSearch();
         loadBlogHome();
         AOS.init({
-            offset: 250,
+            offset: 225,
             duration: 1000
         });
+
+        const smallScreenFadeUp = () => {
+            const introInner = document.querySelectorAll(".intro-container>div");
+            introInner.forEach(container => {
+                container.setAttribute("data-aos", "fade-up");
+            })
+        }
+        const largeScreenFadeFromSides = () => {
+            const order = ["right", "left", "left", "right"]
+            const introInner = document.querySelectorAll(".intro-container>div");
+            for (let i = 0; i < introInner.length; i++) {
+                introInner[i].setAttribute("data-aos", `fade-${order[i%4]}`)
+            }
+        }
+        let windowWidth = window.innerWidth;
+        if (windowWidth <= 1025) {
+            smallScreenFadeUp();
+        }
+        window.addEventListener("resize", () => {
+            if (window.innerWidth <= 1025 && windowWidth > 1025) {
+                smallScreenFadeUp();
+                windowWidth = window.innerWidth;
+            } else if (window.innerWidth > 1025 && windowWidth <= 1025) {
+                largeScreenFadeFromSides();
+                windowWidth = window.innerWidth;
+            }
+        })
     </script>
 </body>
 
