@@ -103,6 +103,11 @@ const getTimeDisplayed = () => {
     ].join(":");
 };
 
+const removeHTMLTags = (str) => {
+    let regex = /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g;
+    return str.replace(regex, '');
+}
+
 const encodeDbString = (str, defaultValue) => {
     return str && str.trim() ? `"${str.replaceAll(`"`,`''`)}"` : (typeof defaultValue === 'undefined' ? `""` : defaultValue);
 }
@@ -232,6 +237,8 @@ exports.hash = hash;
 exports.getTime = getTime;
 exports.getTimeAsync = getTimeAsync
 exports.getTimeDisplayed = getTimeDisplayed;
+
+exports.removeHTMLTags = removeHTMLTags;
 
 exports.encodeDbString = encodeDbString;
 exports.decodeDbString = decodeDbString;

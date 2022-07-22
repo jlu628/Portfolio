@@ -173,7 +173,6 @@ const sendComment = (commentBoxID, replyTo, blogID, fromPage) => {
     fetch("http://127.0.0.1:3000/addComment", requestOptions)
         .then(response => response.json())
         .then(msg => {
-            console.log(msg)
             if (msg.success) {
                 if (!fromPage) {
                     loadComments();

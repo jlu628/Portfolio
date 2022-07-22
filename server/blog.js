@@ -1,5 +1,5 @@
 const path = require("path");
-const { hash, sqliteExec, sqliteGet, encodeDbString, decodeDbString } = require(path.join(__dirname, "./utils"));
+const { hash, getTimeDisplayed, sqliteExec, sqliteGet, encodeDbString, decodeDbString } = require(path.join(__dirname, "./utils"));
 let newBlogContent = false;
 
 // Change blog info from the format stored in JSON backup file to the format stored in database
@@ -41,10 +41,10 @@ const decodeBlog = (blog) => {
 }
 
 // Insert new blog into database
-const insertIntoBlog = async (blog) => {
+const insertIntoBlog = async(blog) => {
     encodeBlog(blog);
     // Insert blog info
-    const { title, date, datealt, name, summary, brief, tags , content } = blog;
+    const { title, date, datealt, name, summary, brief, tags, content } = blog;
     const blogID = hash(name + date);
     await sqliteExec(
         `INSERT INTO blog (title, date, datealt, name, summary, brief, tags, blogID) 
@@ -77,7 +77,7 @@ const insertIntoBlog = async (blog) => {
 }
 
 // Read blog cover info from database
-const queryBlogCovers = async (requireDecode) => {
+const queryBlogCovers = async(requireDecode) => {
     let blogCovers = await sqliteGet(`SELECT * FROM blog ORDER BY date DESC`);
     if (requireDecode) {
         blogCovers.forEach(blog => decodeBlog(blog));
@@ -86,7 +86,7 @@ const queryBlogCovers = async (requireDecode) => {
 }
 
 // Read blog content from database by blog ID
-const queryBlogContent = async (blogID) => {
+const queryBlogContent = async(blogID) => {
     let contents = await sqliteGet(`SELECT type, source, description FROM blog_content WHERE blogID = "${blogID}" ORDER BY paragraphIdx`);
     let blogInfo = await sqliteGet(`SELECT * FROM blog WHERE blogID = "${blogID}"`);
     if (blogInfo.length == 0) {
@@ -103,7 +103,7 @@ const queryBlogContent = async (blogID) => {
 }
 
 // Read all blog contents in the database, used for search and backup functions
-const queryAllBlogs = async () => {
+const queryAllBlogs = async() => {
     let blogs = await queryBlogCovers(false);
     for (let blog of blogs) {
         let contents = await sqliteGet(`SELECT type, source, description FROM blog_content WHERE blogID = "${blog.blogID}" ORDER BY paragraphIdx`);
@@ -114,7 +114,7 @@ const queryAllBlogs = async () => {
 }
 
 // Edit information of blog in database with given blog ID
-const editBlogDB = async (blogID, blog) => {
+const editBlogDB = async(blogID, blog) => {
     encodeBlog(blog);
     const { title, date, datealt, name, summary, brief, tags, content } = blog;
     const setTitle = `title = ${title}`;
@@ -124,7 +124,7 @@ const editBlogDB = async (blogID, blog) => {
     const setSummary = `summary = ${summary}`;
     const setBrief = `brief = ${brief}`;
     const setTags = `tags = ${tags}`;
-    const newBlogID = hash(name+date);
+    const newBlogID = hash(name + date);
     const setBlogId = `blogID = "${newBlogID}"`;
     let setAttributes = [setTitle, setDate, setDatealt, setName, setSummary, setBrief, setTags, setBlogId].join(", ");
     await sqliteExec(
@@ -156,7 +156,7 @@ const editBlogDB = async (blogID, blog) => {
 }
 
 // Delete blog in database
-const deleteBlogDB = async (blogID) => {
+const deleteBlogDB = async(blogID) => {
     await sqliteExec(
         `DELETE FROM blog WHERE blogID = "${blogID}"`
     );
@@ -167,14 +167,14 @@ const deleteBlogDB = async (blogID) => {
 }
 
 // APIs
-const addBlog = async (req, res) => {
+const addBlog = async(req, res) => {
     const { blog, password } = req.body;
-    const { title, date, datealt, name, summary, brief, tags , content } = blog;
+    const { title, date, datealt, name, summary, brief, tags, content } = blog;
     let msg = {};
     // Sanity check
-    if (!(title && date && datealt && name && summary && brief && tags && content 
-    && Array.isArray(brief) && brief.length > 0 && Array.isArray(tags) && tags.length > 0
-    && Array.isArray(content) && content.length > 0)) {
+    if (!(title && date && datealt && name && summary && brief && tags && content &&
+            Array.isArray(brief) && brief.length > 0 && Array.isArray(tags) && tags.length > 0 &&
+            Array.isArray(content) && content.length > 0)) {
         msg.succuss = false;
         msg.error = "Form not complete";
     } else if (content.filter(paragraph => !paragraph.source).length == 0) {
@@ -200,14 +200,14 @@ const addBlog = async (req, res) => {
     res.end();
 }
 
-const editBlog = async (req, res) => {
+const editBlog = async(req, res) => {
     const { blogID, blog, password } = req.body;
-    const { title, date, datealt, name, summary, brief, tags , content } = blog;
+    const { title, date, datealt, name, summary, brief, tags, content } = blog;
     let msg = {}
-    // Sanity check
-    if (!(blogID && title && date && datealt && name && summary && brief && tags && content 
-    && Array.isArray(brief) && brief.length > 0 && Array.isArray(tags) && tags.length > 0
-    && Array.isArray(content) && content.length > 0)) {
+        // Sanity check
+    if (!(blogID && title && date && datealt && name && summary && brief && tags && content &&
+            Array.isArray(brief) && brief.length > 0 && Array.isArray(tags) && tags.length > 0 &&
+            Array.isArray(content) && content.length > 0)) {
         msg.succuss = false;
         msg.error = "Form not complete";
     } else if (content.filter(paragraph => !paragraph.source).length == 0) {
@@ -219,7 +219,7 @@ const editBlog = async (req, res) => {
     } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
         msg.success = false;
         msg.error = "Wrong password";
-    }  else {
+    } else {
         try {
             await editBlogDB(blogID, blog);
             msg.success = true;
@@ -233,7 +233,7 @@ const editBlog = async (req, res) => {
     res.end();
 }
 
-const deleteBlog = async (req, res) => {
+const deleteBlog = async(req, res) => {
     const { blogID, password } = req.body;
     if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
         msg.success = false;
@@ -242,7 +242,7 @@ const deleteBlog = async (req, res) => {
     try {
         await deleteBlogDB(blogID);
         msg.success = true;
-    } catch(error) {
+    } catch (error) {
         console.log(error);
         msg.success = false;
         msg.error = "See stack trace in server.log";
@@ -251,53 +251,72 @@ const deleteBlog = async (req, res) => {
     res.end();
 }
 
-const getRecentBlogs = async (req, res) => {
-    const blogs = await queryBlogCovers(true);
-    const recentBlogs = blogs.slice(0, 4).map(blog => ({
-        blogID: blog.blogID,
-        summary: blog.summary
-    }));
-    msg = {
-        data: recentBlogs
+const getRecentBlogs = async(req, res) => {
+    let msg = { data: null };
+    try {
+        const blogs = await queryBlogCovers(true);
+        const recentBlogs = blogs.slice(0, 4).map(blog => ({
+            blogID: blog.blogID,
+            summary: blog.summary
+        }));
+        msg = {
+            data: recentBlogs
+        }
+    } catch (error) {
+        console.log("\n" + getTimeDisplayed());
+        console.log(error);
+        console.log("\n")
     }
     res.write(JSON.stringify(msg));
     res.end();
 }
 
-const getBlogs = async (req, res) => {
+const getBlogs = async(req, res) => {
     let page = req.body.page;
-    let msg = {};
+    let msg = { page: null, totalPages: null, blogs: null };
 
-    let blogs = await queryBlogCovers(true);
+    try {
+        let blogs = await queryBlogCovers(true);
 
-    let totalPages = Math.ceil(blogs.length/5);
-    page = (Number.isInteger(page) && page >= 1) ? page : 1;
-    page = (page > totalPages) ? totalPages : page;
+        let totalPages = Math.ceil(blogs.length / 5);
+        page = (Number.isInteger(page) && page >= 1) ? page : 1;
+        page = (page > totalPages) ? totalPages : page;
 
-    blogs = blogs.slice((page-1)*5, page*5);
-    msg.page = page;
-    msg.totalPages = totalPages;
-    msg.blogs = blogs;
+        blogs = blogs.slice((page - 1) * 5, page * 5);
+        msg.page = page;
+        msg.totalPages = totalPages;
+        msg.blogs = blogs;
+    } catch (error) {
+        console.log("\n" + getTimeDisplayed());
+        console.log(error);
+        console.log("\n")
+    }
 
     res.write(JSON.stringify(msg));
     res.end();
 }
 
-const getBlogContent = async (req, res) => {
+const getBlogContent = async(req, res) => {
     let blogID = req.body.blogID;
-    let msg = {};
-    let content = await queryBlogContent(blogID);
-    msg.data = {
-        content: content.content,
-        title: content.title,
-        date: content.date
-    };
+    let msg = { data: null };
+    try {
+        let content = await queryBlogContent(blogID);
+        msg.data = {
+            content: content.content,
+            title: content.title,
+            date: content.date
+        };
+    } catch (error) {
+        console.log("\n" + getTimeDisplayed());
+        console.log(error);
+        console.log("\n")
+    }
     res.write(JSON.stringify(msg));
     res.end();
 }
 
 // Insert initial data to database
-const loadBlogFromJSON = async () => {
+const loadBlogFromJSON = async() => {
     const backupPath = path.join(__dirname, "./database/backup/blog.json");
     const fs = require("fs");
 
@@ -315,12 +334,12 @@ const loadBlogFromJSON = async () => {
 
 
 // Backup database information to JSON
-const exportBlogToJSON = async () => {
+const exportBlogToJSON = async() => {
     const backupPath = path.join(__dirname, "./database/backup/blog.json");
     const fs = require("fs");
 
     let blogs = await queryAllBlogs();
-    fs.writeFileSync(backupPath, JSON.stringify({blogs: blogs}));
+    fs.writeFileSync(backupPath, JSON.stringify({ blogs: blogs }));
 }
 
 // Backup daemon
@@ -334,12 +353,17 @@ const exportBlogToJSON = async () => {
     }, wakeupinterval);
 }
 
+// Internal usage
+exports.queryAllBlogs = queryAllBlogs;
+exports.loadBlogFromJSON = loadBlogFromJSON;
+exports.exportBlogToJSON = exportBlogToJSON;
+
+// Admin usage
 exports.addBlog = addBlog;
 exports.editBlog = editBlog;
 exports.deleteBlog = deleteBlog;
+
+// Public APIs
 exports.getRecentBlogs = getRecentBlogs;
 exports.getBlogs = getBlogs;
 exports.getBlogContent = getBlogContent;
-
-exports.loadBlogFromJSON = loadBlogFromJSON;
-exports.exportBlogToJSON = exportBlogToJSON;

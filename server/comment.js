@@ -133,27 +133,33 @@ const deleteCommentDB = async (commentID) => {
 const addComment = async (req, res) => {
     const { comment } = req.body;
     const { name, content, link, blogID } = comment;
-    let msg = {};
-    let isString = (value) => typeof value === 'string' || value instanceof String;
-    if (!(name && content && blogID)) {
-        msg.success = false;
-        msg.error = "Form not complete";
-    } else if (!(isString(name) && isString(content) && isString(blogID))) {
-        msg.success = false;
-        msg.error = "Wrong format";
-    } else if (link && !(isString(link) && (link.startsWith("https://") || link.startsWith("http://")))) {
-        msg.success = false;
-        msg.error = "Invalid link";
-    } else {
-        comment.time = getTime();
-        comment.commentID = hash(name+content+comment.time);
-        try {
-            await insertComment(comment);
-            msg.success = true;
-        } catch (err) {
+    let msg = {success: false, error: null};
+    try {
+        let isString = (value) => typeof value === 'string' || value instanceof String;
+        if (!(name && content && blogID)) {
             msg.success = false;
-            msg.error = "Database error";
+            msg.error = "Form not complete";
+        } else if (!(isString(name) && isString(content) && isString(blogID))) {
+            msg.success = false;
+            msg.error = "Wrong format";
+        } else if (link && !(isString(link) && (link.startsWith("https://") || link.startsWith("http://")))) {
+            msg.success = false;
+            msg.error = "Invalid link";
+        } else {
+            comment.time = getTime();
+            comment.commentID = hash(name+content+comment.time);
+            try {
+                await insertComment(comment);
+                msg.success = true;
+            } catch (err) {
+                msg.success = false;
+                msg.error = "Database error";
+            }
         }
+    } catch (error) {
+        console.log("\n" + getTimeDisplayed());
+        console.log(error);
+        console.log("\n")
     }
     res.write(JSON.stringify(msg));
     res.end();
@@ -208,9 +214,15 @@ const deleteComment = async (req, res) => {
 
 const getBlogComments = async (req, res) => {
     let blogID = req.body.blogID;
-    let msg = {};
-    let comments = await queryBlogComment(blogID);
-    msg.data = comments;
+    let msg = {data: null};
+    try {
+        let comments = await queryBlogComment(blogID);
+        msg.data = comments;
+    } catch (error) {
+        console.log("\n" + getTimeDisplayed());
+        console.log(error);
+        console.log("\n")
+    }
     res.write(JSON.stringify(msg));
     res.end();
 }
@@ -251,10 +263,14 @@ const exportCommentToJSON = async () => {
     }, wakeupinterval);
 }
 
+// Internal usage
+exports.loadCommentFromJSON =loadCommentFromJSON;
+exports.exportCommentToJSON = exportCommentToJSON;
+
+// Admin usage
 exports.addComment = addComment;
 exports.editComment = editComment;
 exports.deleteComment = deleteComment;
-exports.getBlogComments = getBlogComments;
 
-exports.loadCommentFromJSON =loadCommentFromJSON;
-exports.exportCommentToJSON = exportCommentToJSON;
+// Public APIs
+exports.getBlogComments = getBlogComments;

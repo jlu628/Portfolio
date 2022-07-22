@@ -113,53 +113,66 @@ const createBlog = (blogPost) => {
 }
 
 // Create the html template for search result post
-const insertHighlights = (text, length, idx) => {
-    if (!idx || idx.length == 0) {
+const highlightFilter = (text, filter) => {
+    const insertHighlights = (text, filter) => {
+        const filterLength = filter.length;
+        const idx = Array.from(text.toLowerCase().matchAll(filter.toLowerCase())).map(i => i.index);
+        idx.reverse();
+        for (let i of idx) {
+            text = `${text.substring(0, i)}<mark>${text.substring(i, i+filterLength)}</mark>${text.substring(i+filterLength)}`;
+        }
         return text;
     }
-    let textArray = [];
-    for (let i = 0; i < idx.length - 1; i++) {
-        textArray.push(text.substring(idx[i], idx[i + 1]));
-    }
-    textArray.push(text.substring(idx[idx.length - 1], text.length));
-    textArray = textArray.map(t => `<mark>${t.substring(0, length)}</mark>${t.substring(length)}`);
-    return text.substring(0, idx[0]) + textArray.join("");
+    let tags = Array.from(text.matchAll(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g)).map(tag => tag[0]);
+    // Create a map between original html tags and tags after insert highlights
+    tags = tags.map(tag => ({
+        original: tag,
+        highlighted: insertHighlights(tag, filter)
+    }));
+    // Insert highlights
+    text = insertHighlights(text, filter)
+        // Restore original tags
+    tags.forEach(tag => {
+        text = text.replaceAll(tag.highlighted, tag.original);
+    });
+    return text;
 }
 
 const createSearchProject = (searchProject, filter) => {
-    let matches = searchProject.matches;
-    let projectPost = searchProject.post;
+    let matches = searchProject.match;
+    let projectPost = searchProject.data;
 
     let title = projectPost.title;
-    if (matches.title) {
-        title = insertHighlights(title, filter.length, matches.title.idx);
+    if (matches.includes("title")) {
+        title = highlightFilter(title, filter);
     }
 
     let skills = [];
     projectPost.skills.forEach(skill => {
-        skills.push(`<div><img src="assets/${skill}.png" title="${skill}"></div>`);
+        if (skill.split(' ').map(s => s.toLowerCase()).includes(filter.toLowerCase())) {
+            skills.push(`
+            <div style="background-color:yellow;">
+                <img src="assets/${skill}.png" title="${skill}">
+            </div>
+            `)
+        } else {
+            skills.push(`<div><img src="assets/${skill}.png" title="${skill}"></div>`);
+        }
     });
-    if (matches.skills) {
-        skills[matches.skills.idx] = `
-        <div style="background-color:yellow;">
-        <img src="assets/${projectPost.skills[matches.skills.idx]}.png" title="${projectPost.skills[matches.skills.idx]}">
-        </div>
-        `;
-    }
     skills = skills.join("");
 
     let description = projectPost.description;
-    if (matches.description) {
+    if (matches.includes("description")) {
         for (let i = 0; i < description.length; i++) {
-            description[i] = insertHighlights(description[i], filter.length, matches.description.idx[i]);
+            description[i] = highlightFilter(description[i], filter);
         }
     }
     description = description.map(d => `<p>${d}</p>`)
     description = description.join("");
 
     let dates = projectPost.dates;
-    if (matches.dates) {
-        dates = insertHighlights(dates, filter.length, matches.dates.idx);
+    if (matches.includes("dates")) {
+        dates = highlightFilter(dates, filter);
     }
 
     let html = `
@@ -183,83 +196,73 @@ const createSearchProject = (searchProject, filter) => {
 }
 
 const createSearchBlog = (searchBlog, filter) => {
-    let matches = searchBlog.matches;
-    let blogPost = searchBlog.post;
-    let blogContent = searchBlog.content;
+    let matches = searchBlog.match;
+    let blogPost = searchBlog.data;
+    let content = blogPost.content;
+    let date = blogPost.date.toString();
+    date = "Posted on " + date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
 
     let title = blogPost.title;
-    if (matches.title) {
-        title = insertHighlights(title, filter.length, matches.title.idx);
+    if (matches.includes("title")) {
+        title = highlightFilter(title, filter);
     }
 
     let datealt = blogPost.datealt;
-    if (matches.datealt) {
-        datealt = insertHighlights(datealt, filter.length, matches.datealt.idx);
+    if (matches.includes("datealt")) {
+        datealt = highlightFilter(datealt, filter);
     }
 
-    let brief;
-    if (!matches.content) {
-        brief = blogPost.brief;
-        if (matches.brief) {
-            for (let i = 0; i < brief.length; i++) {
-                brief[i] = insertHighlights(brief[i], filter.length, matches.brief.idx[i]);
-            }
+    let brief = [];
+    if (!matches.includes("date") && !matches.includes("content")) {
+        if (matches.includes("brief")) {
+            brief = blogPost.brief.map(paragraph => `<p>${highlightFilter(paragraph, filter)}</p>`);
+        } else {
+            brief = blogPost.brief.map(paragraph => `<p>${paragraph}</p>`)
         }
-        brief = brief.map(b => `<p>${b}</p>`)
         brief = brief.join("");
     } else {
-        contentBrief = blogContent.content;
-        contentBrief = contentBrief.map(b => (typeof b === 'string' || b instanceof String) ? b : b.desc);
-        let date = blogPost.date
-        date = "Posted on " + date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
-        contentBrief.unshift(date);
+        if (matches.includes("content")) {
+            let index = 0;
+            while (index < content.length) {
+                let paragraph = content[index].type == "text" ? content[index].source : "... ...(" + content[index].description + ")";
+                paragraph = highlightFilter(paragraph, filter);
+                if (paragraph.toLowerCase().includes(`<mark>${filter.toLowerCase()}</mark>`)) {
+                    brief.push(paragraph)
+                    break;
+                }
+                index++;
+            }
 
-        let wordCount = 0;
-        let paragraphCount = 0;
-        let highlightedIdx = [];
-        for (let i = 0; i < contentBrief.length; i++) {
-            if (matches.content.idx[i].length > 0) {
-                paragraphCount += 1;
-                wordCount += contentBrief[i].split(" ").length;
-                highlightedIdx.push(i);
+            // Add succeeding paragraphs in the content to make up enough length displayed
+            let preceding = index > 0;
+            let succeeding = index < content.length - 1;
+            if (preceding) {
+                let paragraph = content[index-1].type == "text" ? content[index-1].source : "... ...(" + content[index-1].description + ")";
+                brief.unshift(highlightFilter(paragraph, filter));
+                if (!succeeding && index - 2 >= 0) {
+                    paragraph = content[index-2].type == "text" ? content[index-1].source : "... ...(" + content[index-2].description + ")";
+                    brief.unshift(highlightFilter(paragraph, filter));
+                }
             }
-            if (paragraphCount >= 3 || wordCount >= 150) {
-                break;
+            // Add preceding paragraphs in the content to make up enough length displayed
+            if (succeeding) {
+                let paragraph = content[index+1].type == "text" ? content[index+1].source : "... ...(" + content[index+1].description + ")";
+                brief.push(highlightFilter(paragraph, filter));
+                if (!preceding && index + 2 < content.length) {
+                    paragraph = content[index+2].type == "text" ? content[index+2].source : "... ...(" + content[index+2].description + ")";
+                    brief.push(highlightFilter(paragraph, filter));
+                }
             }
+        } else {
+            date = highlightFilter(date, filter);
+            brief.push(date);
+            // Add succeeding paragraphs in the content to make up enough length displayed
+            for (let index = 0; index < Math.min(2, content.length); index++) {
+                let paragraph = content[index].type == "text" ? content[index].source : "... ...(" + content[index].description + ")";
+                brief.push(highlightFilter(paragraph, filter));
+            } 
         }
-        let addWordParagraphs = highlightedIdx[0];
-        while (addWordParagraphs < contentBrief.length && wordCount < 100 && paragraphCount < 3) {
-            if (!highlightedIdx.includes(addWordParagraphs)) {
-                paragraphCount += 1;
-                wordCount += contentBrief[addWordParagraphs].split(" ").length;
-                highlightedIdx.push(addWordParagraphs);
-            }
-            addWordParagraphs++;
-        }
-
-        addWordParagraphs = 0;
-        while (addWordParagraphs < highlightedIdx[0] && wordCount < 100 && paragraphCount < 3) {
-            if (!highlightedIdx.includes(addWordParagraphs)) {
-                paragraphCount += 1;
-                wordCount += contentBrief[iaddWordParagraphs].split(" ").length;
-                highlightedIdx.push(addWordParagraphs);
-            }
-            addWordParagraphs++;
-        }
-
-        displayedContent = [];
-        highlightedIdx.sort();
-        for (let i = 0; i < highlightedIdx.length; i++) {
-            let currIdx = highlightedIdx[i];
-            displayedContent.push(insertHighlights(contentBrief[currIdx], filter.length, matches.content.idx[currIdx]));
-            if ((i < highlightedIdx.length - 1 && highlightedIdx[i + 1] - currIdx > 1) ||
-                (i == highlightedIdx.length - 1 && currIdx < contentBrief.length - 1)) {
-                displayedContent.push(" ... ");
-            }
-        }
-
-        brief = displayedContent.map(b => `<p>${b}</p>`)
-        brief = brief.join("");
+        brief = brief.map(paragraph => `<p>${paragraph}</p>`).join("");
     }
 
 
@@ -281,9 +284,9 @@ const createSearchBlog = (searchBlog, filter) => {
 }
 
 const createSearchResult = (searchResult, filter) => {
-    if (searchResult.type == "projects") {
+    if (searchResult.type == "project") {
         return createSearchProject(searchResult, filter);
-    } else if (searchResult.type == "blogs") {
+    } else if (searchResult.type == "blog") {
         return createSearchBlog(searchResult, filter);
     }
 }
@@ -324,7 +327,6 @@ const loadPostPage = (currPage, pageType, filter) => {
     var header = new Headers();
     header.append("Content-Type", "application/json");
     var raw = JSON.stringify({
-        "type": pageType,
         "page": currPage,
         "filter": filter
     });
@@ -343,9 +345,11 @@ const loadPostPage = (currPage, pageType, filter) => {
     } else if (pageType == "blogs") {
         postUrl = "http://127.0.0.1:3000/getBlogs";
         postKey = "blogs";
+    } else if (pageType == "search") {
+        postUrl = "http://127.0.0.1:3000/search";
+        postKey = "matches"
     } else {
-        postUrl = "http://127.0.0.1:3000/getPostPage";
-        postKey = "displayedPosts"
+        return;
     }
     fetch(postUrl, requestOptions)
         .then(response => response.json())

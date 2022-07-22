@@ -167,18 +167,24 @@ const deleteProject = async(req, res) => {
 
 const getProjects = async(req, res) => {
     let page = req.body.page;
-    let msg = {};
+    let msg = {page: null, totalPages: null, projects: null};
 
-    let projects = await queryAllProject();
+    try {
+        let projects = await queryAllProject();
 
-    let totalPages = Math.ceil(projects.length/5);
-    page = (Number.isInteger(page) && page >= 1) ? page : 1;
-    page = (page > totalPages) ? totalPages : page;
-
-    projects = projects.slice((page-1)*5, page*5);
-    msg.page = page;
-    msg.totalPages = totalPages;
-    msg.projects = projects;
+        let totalPages = Math.ceil(projects.length/5);
+        page = (Number.isInteger(page) && page >= 1) ? page : 1;
+        page = (page > totalPages) ? totalPages : page;
+    
+        projects = projects.slice((page-1)*5, page*5);
+        msg.page = page;
+        msg.totalPages = totalPages;
+        msg.projects = projects;
+    } catch (error) {
+        console.log("\n" + getTimeDisplayed());
+        console.log(error);
+        console.log("\n")
+    }
 
     res.write(JSON.stringify(msg));
     res.end();
@@ -221,16 +227,15 @@ const exportProjectToJSON = async () => {
     }, wakeupinterval);
 }
 
-exports.addProject = addProject;
-exports.editProject = editProject;
-exports.deleteProject = deleteProject;
-exports.getProjects = getProjects;
-
+// Internal usage
+exports.queryAllProject = queryAllProject;
 exports.loadProjectFromJSON = loadProjectFromJSON;
 exports.exportProjectToJSON = exportProjectToJSON;
 
-// For testing purposes
-exports.queryAllProject = queryAllProject;
-exports.insertIntoProject = insertIntoProject;
-exports.editProjectDB = editProjectDB;
-exports.deleteProjectDB = deleteProjectDB;
+// Admin usage
+exports.addProject = addProject;
+exports.editProject = editProject;
+exports.deleteProject = deleteProject;
+
+// Public APIs
+exports.getProjects = getProjects;

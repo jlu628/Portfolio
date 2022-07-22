@@ -47,7 +47,6 @@ const loadContent = () => {
     fetch("http://127.0.0.1:3000/getBlogContent", requestOptions)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             const blogContent = data.data;
             document.querySelector(".blog-container").innerHTML = createContent(blogContent, imgFolder);
         })

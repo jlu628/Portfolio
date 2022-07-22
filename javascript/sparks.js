@@ -1,12 +1,12 @@
 let config = {
     color: [200, 240],
     opacity: [0.4, 0.6],
-    size: [10, 40],
+    size: window.innerWidth >= 600 ? [10, 40] : [10*window.innerWidth/600, 40*window.innerWidth/600],
     initVelocityVertical: [-2, 0],
     initVelocityRatio: [-0.5, 0.5],
     acceleration: [-0.005, -0.025],
     lifeTime: [100, 200],
-    numSparks: Math.ceil(window.innerWidth / 30)
+    numSparks: window.innerWidth >= 1000 ? 50 : Math.ceil(window.innerWidth/20)
 }
 const getRand = (arr) => Math.random() * (arr[1] - arr[0]) + arr[0];
 const getColor = (ratio) => (config.color[1] - config.color[0]) * ratio + config.color[0]
@@ -79,13 +79,13 @@ for (let i = 0; i < config.numSparks; i++) {
 window.addEventListener('resize', () => {
     sparkCanvas.width = window.innerWidth;
     sparkCanvas.height = window.innerHeight;
-    config.numSparks = Math.ceil(window.innerWidth / 30);
+    config.numSparks = window.innerWidth >= 1000 ? 50 : Math.ceil(window.innerWidth/20)
+    config.size = window.innerWidth >= 600 ? [10, 40] : [10*window.innerWidth/600, 40*window.innerWidth/600]
 });
 
 function animateSparks() {
     requestAnimationFrame(animateSparks);
     sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
-    let destroyedList = [];
     for (let i = 0; i < sparks.length; i++) {
         sparks[i].update();
     }

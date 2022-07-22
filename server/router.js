@@ -3,9 +3,7 @@ const router = express.Router();
 const blog = require("./blog")
 const project = require("./project")
 const comment = require("./comment")
-
-const oldComment = require("./oldComment")
-const oldBlog = require("./oldBlog")
+const search = require("./search")
 
 // Project manager
 router.post("/admin/addProject", project.addProject);
@@ -22,9 +20,12 @@ router.post("/getBlogs", blog.getBlogs);
 router.post("/getBlogContent", blog.getBlogContent);
 
 // Comment manager
-router.post("/admin/editComment", comment.editComment)
-router.post("/admin/deleteComment", comment.deleteComment)
-router.post("/addComment", comment.addComment)
-router.post("/getBlogComments", comment.getBlogComments)
+router.post("/admin/editComment", comment.editComment);
+router.post("/admin/deleteComment", comment.deleteComment);
+router.post("/addComment", comment.addComment);
+router.post("/getBlogComments", comment.getBlogComments);
+
+// Search manager
+router.post("/search", search.search);
 
 module.exports = router;
