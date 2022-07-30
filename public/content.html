@@ -34,10 +34,10 @@
                 <a href="portfolio">Portfolio</a>
                 <a href="projects?page=1">Projects</a>
                 <a href="blogs?page=1">Blogs</a>
-                <a href="?page=1" style="text-decoration: underline;">Social</a>
+                <!-- <a href="social?page=1">Social</a> -->
             </div>
             <div id="navbar-right-container">
-                <a href="" onClick="return getSearchContent();" id="searchIcon"><img src="assets/search.png"></a>
+                <a href="" id="searchIcon"><img src="assets/search.png"></a>
                 <input type="text" id="search" name="search" placeholder="search post" class="midfont">
             </div>
         </div>
@@ -79,23 +79,28 @@
         </div>
     </a>
 
-    <div class="page-container">
+    <!-- Blog contents -->
+    <div class="blog-container">
     </div>
 
-    <div class="pagination-container"></div>
+    <!-- Comments -->
+    <div class="comment-container">
+    </div>
 
-    <script src="javascript/navbar.js"></script>
-    <script src="javascript/utils.js"></script>
-    <script src="javascript/loadPosts.js"></script>
-    <script src="javascript/loadComment.js"></script>
-    <script>
-        bindSearch();
-        loadCommentPage();
-    </script>
     <!-- footer -->
     <div class="footer-container centertext whitefont grayfont ">
         Copyright &#169; 2022 Jiayu (Jerry) Lu
     </div>
+
+    <script src="javascript/utils.js"></script>
+    <script src="javascript/navbar.js"></script>
+    <script src="javascript/loadContent.js"></script>
+    <script src="javascript/loadComment.js"></script>
+    <script>
+        bindSearch();
+        loadContent();
+        loadComments();
+    </script>
 </body>
 
 </html>

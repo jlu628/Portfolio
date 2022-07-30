@@ -1,3 +1,6 @@
+// Define Webserver url
+const serverURL = "127.0.0.1:3000"
+
 // Parse the query string into json
 const parseQueryString = () => {
     let queryString = decodeURI(window.location.search.substring(1));

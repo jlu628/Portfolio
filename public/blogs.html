@@ -7,17 +7,16 @@
     <meta name="description" content="Jerry (Jiayu) Lu's Portfolio Website">
     <meta name="keywords" content="Jerry Jiayu Lu Portfolio Georgia Tech Computer Science Undergraduate Student Personal Website">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="icon" href="assets/logo.ico" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/blogs.css">
-    <link rel="stylesheet" href="css/comment.css">
 </head>
 
 <body>
@@ -33,8 +32,8 @@
                 <a href="index"><img id="navbar-icon" src="assets/logo.png"></a>
                 <a href="portfolio">Portfolio</a>
                 <a href="projects?page=1">Projects</a>
-                <a href="blogs?page=1">Blogs</a>
-                <a href="social?page=1">Social</a>
+                <a href="?page=1" style="text-decoration: underline;">Blogs</a>
+                <!-- <a href="social?page=1">Social</a> -->
             </div>
             <div id="navbar-right-container">
                 <a href="" id="searchIcon"><img src="assets/search.png"></a>
@@ -79,27 +78,25 @@
         </div>
     </a>
 
-    <!-- Blog contents -->
-    <div class="blog-container">
+    <!-- Projects -->
+    <div class="page-container">
     </div>
 
-    <!-- Comments -->
-    <div class="comment-container">
+    <!-- Pagination -->
+    <div class="pagination-container">
     </div>
 
     <!-- footer -->
     <div class="footer-container centertext whitefont grayfont ">
         Copyright &#169; 2022 Jiayu (Jerry) Lu
     </div>
-
-    <script src="javascript/navbar.js"></script>
+    
     <script src="javascript/utils.js"></script>
-    <script src="javascript/loadContent.js"></script>
-    <script src="javascript/loadComment.js"></script>
+    <script src="javascript/navbar.js"></script>
+    <script src="javascript/loadPosts.js"></script>
     <script>
+        loadPage('blogs');
         bindSearch();
-        loadContent();
-        loadComments();
     </script>
 </body>
 

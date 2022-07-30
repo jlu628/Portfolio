@@ -11,7 +11,7 @@ const loadBlogHome = () => {
         redirect: 'follow'
     };
 
-    fetch("http://127.0.0.1:3000/getRecentBlogs", requestOptions)
+    fetch(`http://${serverURL}/getRecentBlogs`, requestOptions)
         .then(response => response.json())
         .then(data => {
             for (let i = 0; i < 4; i++) {

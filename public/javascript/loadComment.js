@@ -170,7 +170,7 @@ const sendComment = (commentBoxID, replyTo, blogID, fromPage) => {
         redirect: 'follow'
     };
 
-    fetch("http://127.0.0.1:3000/addComment", requestOptions)
+    fetch(`http://${serverURL}/addComment`, requestOptions)
         .then(response => response.json())
         .then(msg => {
             if (msg.success) {
@@ -205,7 +205,7 @@ const loadComments = () => {
         body: raw,
         redirect: 'follow'
     };
-    fetch("http://127.0.0.1:3000/getBlogComments", requestOptions)
+    fetch(`http://${serverURL}/getBlogComments`, requestOptions)
         .then(response => response.json())
         .then(comments => {
             comments.data.forEach(section => {
@@ -286,7 +286,7 @@ const loadCommentPage = () => {
         body: JSON.stringify({}),
         redirect: 'follow'
     };
-    fetch("http://127.0.0.1:3000/getAllComments", requestOptions)
+    fetch(`http://${serverURL}/getAllComments`, requestOptions)
         .then(response => response.json())
         .then(data => {
             let comments = data.comments;

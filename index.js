@@ -14,15 +14,15 @@ app.use(bodyParser.json({ limit: "100kb" }));
 const cors = require("cors");
 app.use(cors());
 
-const routes = require("./router");
+const routes = require("./server/router");
 app.use("/", routes);
 
-app.use(express.static("../", {extensions:['html']}));
+app.use(express.static("./public", {extensions:['html']}));
 
 // Redirect outputs
 const fs = require("fs");
-let access = fs.createWriteStream('./server.log');
-process.stdout.write = process.stderr.write = access.write.bind(access);
+let fh = fs.createWriteStream('./server/server.log');
+process.stdout.write = process.stderr.write = fh.write.bind(fh);
 
 const port = process.env.PORT || 3000;
 instance = app.listen(port, () => {

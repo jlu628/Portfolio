@@ -1,0 +1,7 @@
+runtime: nodejs16
+env: standard
+instance_class: F1
+
+handlers:
+- url: /*
+  static_dir: /public
