@@ -340,13 +340,13 @@ const loadPostPage = (currPage, pageType, filter) => {
     var postUrl;
     var postKey;
     if (pageType == "projects") {
-        postUrl = `http://${serverURL}/getProjects`;
+        postUrl = `${serverURL}/getProjects`;
         postKey = "projects";
     } else if (pageType == "blogs") {
-        postUrl = `http://${serverURL}/getBlogs`;
+        postUrl = `${serverURL}/getBlogs`;
         postKey = "blogs";
     } else if (pageType == "search") {
-        postUrl = `http://${serverURL}/search`;
+        postUrl = `${serverURL}/search`;
         postKey = "matches"
     } else {
         return;

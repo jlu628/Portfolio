@@ -1,5 +1,5 @@
 // Define Webserver url
-const serverURL = "Portfolioblog-env-1.eba-samr2igc.us-west-1.elasticbeanstalk.com"
+const serverURL = "https://jiayu-lu.com/"
 
 // Parse the query string into json
 const parseQueryString = () => {

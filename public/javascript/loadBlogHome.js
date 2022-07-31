@@ -11,7 +11,7 @@ const loadBlogHome = () => {
         redirect: 'follow'
     };
 
-    fetch(`http://${serverURL}/getRecentBlogs`, requestOptions)
+    fetch(`${serverURL}/getRecentBlogs`, requestOptions)
         .then(response => response.json())
         .then(data => {
             for (let i = 0; i < 4; i++) {

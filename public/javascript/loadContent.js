@@ -44,7 +44,7 @@ const loadContent = () => {
         redirect: 'follow'
     };
 
-    fetch(`http://${serverURL}/getBlogContent`, requestOptions)
+    fetch(`${serverURL}/getBlogContent`, requestOptions)
         .then(response => response.json())
         .then(data => {
             const blogContent = data.data;
