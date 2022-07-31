@@ -292,6 +292,10 @@ mark {
     border-radius: 100%;
     border: none;
     background-color: var(--gray-dark);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-container button:hover {
