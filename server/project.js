@@ -95,7 +95,7 @@ const addProject = async(req, res) => {
     } else if (!(!importance || Number.isInteger(importance))) {
         msg.success = false;
         msg.error = "Importance level not valid";
-    } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    } else if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     } else {
@@ -130,7 +130,7 @@ const editProject = async(req, res) => {
     } else if (!(!importance || Number.isInteger(importance))) {
         msg.success = false;
         msg.error = "Importance level not valid";
-    } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    } else if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     } else {
@@ -149,7 +149,7 @@ const editProject = async(req, res) => {
 
 const deleteProject = async(req, res) => {
     const { title, date, password } = req.body;
-    if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     }
@@ -214,6 +214,7 @@ const exportProjectToJSON = async () => {
 
     let projects = await queryAllProject();
     fs.writeFileSync(backupPath, JSON.stringify({projects: projects}));
+    return projects;
 }
 
 // Backup daemon

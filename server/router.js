@@ -4,6 +4,7 @@ const blog = require("./blog")
 const project = require("./project")
 const comment = require("./comment")
 const search = require("./search")
+const admin = require("./admin")
 
 // Project manager
 router.post("/admin/addProject", project.addProject);
@@ -27,5 +28,9 @@ router.post("/getBlogComments", comment.getBlogComments);
 
 // Search manager
 router.post("/search", search.search);
+
+// Admin functions
+router.post("/admin/login", admin.login);
+router.post("/admin/verify", admin.verify);
 
 module.exports = router;

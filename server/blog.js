@@ -183,7 +183,7 @@ const addBlog = async(req, res) => {
     } else if (!Number.isInteger(date) || date < 20190610 || date > 20500101) {
         msg.success = false;
         msg.error = "Date not valid";
-    } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    } else if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     } else {
@@ -216,7 +216,7 @@ const editBlog = async(req, res) => {
     } else if (!Number.isInteger(date) || date < 20190610 || date > 20500101) {
         msg.success = false;
         msg.error = "Date not valid";
-    } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    } else if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     } else {
@@ -235,7 +235,7 @@ const editBlog = async(req, res) => {
 
 const deleteBlog = async(req, res) => {
     const { blogID, password } = req.body;
-    if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     }
@@ -340,6 +340,7 @@ const exportBlogToJSON = async() => {
 
     let blogs = await queryAllBlogs();
     fs.writeFileSync(backupPath, JSON.stringify({ blogs: blogs }));
+    return blogs;
 }
 
 // Backup daemon

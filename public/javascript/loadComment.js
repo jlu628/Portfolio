@@ -48,7 +48,6 @@ const createSectionComment = (sectionComments, blogID, referBlogs, fromPage) => 
                 <a onClick="scrollIntoComment('${comment.reply_to}', true)">
                     @${referToName[comment.reply_to]}
                 </a>` : "";
-
         html += `
             <div class="comment ${idx == 0 ? "" : "comment-followup"}" id="${comment.commentID}">
                 <div class="midfont semiblackfont">
@@ -140,7 +139,7 @@ const sendComment = (commentBoxID, replyTo, blogID, fromPage) => {
     let name = inputs[0].value.trim().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     let site = inputs[1].value.trim().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     let content = commentBox.getElementsByTagName("textarea")[0].value.trim().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-
+    
     window.localStorage.username = name;
     window.localStorage.usersite = site;
     if (!name) {

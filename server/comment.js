@@ -1,6 +1,5 @@
-const { time } = require("console");
 const path = require("path");
-const { hash, getTime, sqliteExec, sqliteGet, encodeDbString, decodeDbString } = require(path.join(__dirname, "./utils"));
+const { hash, getTime, sqliteExec, sqliteGet, encodeDbString, decodeDbString, decodeDbStringBR } = require(path.join(__dirname, "./utils"));
 let newCommentContent = false;
 
 // Change comment from the format stored in JSON backup file to the format stored in database
@@ -15,7 +14,7 @@ const encodeComment = (comment) => {
 // Change comment from the format stored in database to the format stored in JSON backup file
 const decodeComment = (comment) => {
     comment.name = decodeDbString(comment.name);
-    comment.content = decodeDbString(comment.content);
+    comment.content = decodeDbStringBR(comment.content);
     comment.link = decodeDbString(comment.link);
     comment.reply_to = decodeDbString(comment.reply_to);
     comment.blogID = comment.blogID ? comment.blogID : "others";
@@ -180,7 +179,7 @@ const editComment = async (req, res) => {
     } else if (link && !(isString(link) && (link.startsWith("https://") || link.startsWith("http://")))) {
         msg.success = false;
         msg.error = "Invalid link";
-    } else if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    } else if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     } else {
@@ -198,7 +197,7 @@ const editComment = async (req, res) => {
 
 const deleteComment = async (req, res) => {
     const { password, commentID } = req.body;
-    if (hash(password) != "oKaVXnQ0YZ61k3EOJakytljtnkVg49mBjeVqhwRItsf") {
+    if (hash(password) != (await sqliteGet(`SELECT password FROM password WHERE role = "admin"`))[0].password) {
         msg.success = false;
         msg.error = "Wrong password";
     } else {
@@ -250,6 +249,7 @@ const exportCommentToJSON = async () => {
 
     let comments = await queryAllComments();
     fs.writeFileSync(backupPath, JSON.stringify(comments));
+    return comments;
 }
 
 // Backup daemon

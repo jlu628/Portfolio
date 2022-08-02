@@ -109,17 +109,21 @@ const removeHTMLTags = (str) => {
 }
 
 const encodeDbString = (str, defaultValue) => {
-    return str && str.trim() ? `"${str.replaceAll(`"`,`''`)}"` : (typeof defaultValue === 'undefined' ? `""` : defaultValue);
+    return str && str.trim() ? `"${str.replaceAll(`"`,`''`).replaceAll("\n","<br>")}"` : (typeof defaultValue === 'undefined' ? `""` : defaultValue);
 }
 
 const decodeDbString = (str, defaultValue) => {
+    return str && str.trim() ? str.replaceAll(`''`,`"`).replaceAll("<br>", "\n") : (typeof defaultValue === 'undefined' ? null : defaultValue);
+}
+
+const decodeDbStringBR = (str, defaultValue) => {
     return str && str.trim() ? str.replaceAll(`''`,`"`) : (typeof defaultValue === 'undefined' ? null : defaultValue);
 }
 
 const sqlite3 = require('sqlite3').verbose();
 const { open } = require('sqlite');
 const path = require('path');
-const dbPath = path.join(__dirname, './database/test_posts.db')
+const dbPath = path.join(__dirname, './database/database.db')
 const sqliteExec = async(sql) => {
     const db = await open({
         filename: dbPath,
@@ -170,6 +174,7 @@ const reset = async() => {
     await db.exec(`DROP TABLE IF EXISTS blog_content`);
     await db.exec(`DROP TABLE IF EXISTS blog`);
     await db.exec(`DROP TABLE IF EXISTS project`);
+    await db.exec(`DROP TABLE IF EXISTS password`);
 
     const blogSchema = `CREATE TABLE IF NOT EXISTS blog (
         blogID VARCHAR(43) NOT NULL PRIMARY KEY,
@@ -226,11 +231,26 @@ const reset = async() => {
     )`;
     await db.exec(projectSchema);
 
+    const passwordSchema = `CREATE TABLE IF NOT EXISTS password (
+        role VARCHAR(10) NOT NULL,
+        password VARCHAR(43) NOT NULL
+    )`
+    await db.exec(passwordSchema);
+
     await db.close(err => console.log(err));
 }
 
 const setup = async() => {
+    const { loadProjectFromJSON } = require(path.join(__dirname, "./project.js"));
+    const { loadCommentFromJSON } = require(path.join(__dirname, "./comment.js"));
+    const { loadBlogFromJSON } = require(path.join(__dirname, "./blog.js"));
+    const { loadPasswordFromJSON } = require(path.join(__dirname, "./admin.js"))
+
     await reset();
+    await loadBlogFromJSON();
+    await loadCommentFromJSON();
+    await loadProjectFromJSON();
+    await loadPasswordFromJSON();
 }
 
 exports.hash = hash;
@@ -242,6 +262,7 @@ exports.removeHTMLTags = removeHTMLTags;
 
 exports.encodeDbString = encodeDbString;
 exports.decodeDbString = decodeDbString;
+exports.decodeDbStringBR = decodeDbStringBR;
 exports.sqliteExec = sqliteExec;
 exports.sqliteGet = sqliteGet;
 
