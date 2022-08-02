@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+}
+
+#pagetitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 6vh;
+}
+
+.sectiontitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 450;
+    font-size: 4.5vh;
+}
+
+.subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 350;
+    font-size: 3vh;
+}
+
+hr {
+    height: 0.5px;
+    width: 400px;
+    max-width: 50%;
+    background-color: rgba(0,0,0,0.8);
+    margin: 5px auto;
+}
+
+#sync {
+    width: 150px;
+    height: 35px;
+    border-radius: 5%;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#sync > img {
+    display: inline-block;
+    height: 35px;
+}
+
+#login {
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+    max-width: 75%;
+}
+
+#login > text {
+    font-size: 3vh;
+}
+
+#password {
+    font-size: 3vh;
+}
+
+#submit {
+    font-size: 3vh;
+}
+
+#managed {
+    width: 1500px;
+    max-width: 90%;
+    display: none;
+}
+
+#managed button {
+    width: 75%;
+    cursor: pointer;
+}
+
+#managed > div {
+    margin-top: 4vh;
+}
+
+#projects > div,
+#blogs > div {
+    margin-top: 2vh;
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+#comments > div {
+    margin-top: 4vh;
+}
+
+.sectionComment {
+    margin-top: 4vh;
+}
+
+.followupcomment {
+    margin-top: 2vh;
+    margin-top: 2vh;
+    display: grid;
+    grid-template-columns: 10% 17.5% 17.5% 55%;
+}
+
+.firstcomment {
+    margin-top: 2vh;
+    margin-top: 2vh;
+    display: grid;
+    grid-template-columns: 5% 22.5% 17.5% 60%;
+}
+
+#footer {
+    height: 5vh;
+}

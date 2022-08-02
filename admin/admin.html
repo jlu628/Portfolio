@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin (Jerry Lu)</title>
+
+    <link rel="stylesheet" href="./stylesheet/admin.css">
+    <script src="./javascript/admin.js"></script>
+</head>
+<body>
+    <text id="pagetitle">Admin Page</text>
+    <hr>
+    <div id="login">
+        <text>Password:</text>
+        <input type="password" id="password" name="password">
+        <button id="submit" onclick="submitPassword()">Submit</button>
+    </div>
+    <button id="sync" onclick="syncLocal()">Sync Local &nbsp;<img src="./sync.png"></button>
+    <div id="managed">
+        <div id="projects">
+        </div>
+        <div id="blogs">
+        </div>
+        <div id="comments">
+        </div>
+    </div>
+    <div id="edit">
+    </div>
+    <div id="footer"></div>
+</body>
+</html>
