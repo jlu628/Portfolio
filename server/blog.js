@@ -18,6 +18,7 @@ const encodeBlog = (blog) => {
         paragraph.source = encodeDbString(paragraph.source);
         paragraph.description = encodeDbString(paragraph.description);
         paragraph.type = encodeDbString(paragraph.type, "text");
+        paragraph.styles = encodeDbString(paragraph.styles);
     });
 }
 
@@ -37,6 +38,7 @@ const decodeBlog = (blog) => {
         delete paragraph.paragraphIdx;
         paragraph.source = decodeDbString(paragraph.source);
         paragraph.description = decodeDbString(paragraph.description);
+        paragraph.styles = decodeDbString(paragraph.styles);
     });
 }
 
@@ -61,14 +63,15 @@ const insertIntoBlog = async(blog) => {
     );
     // Insert blog content
     for (let paragraphIdx = 0; paragraphIdx < content.length; paragraphIdx++) {
-        const { type, source, description } = content[paragraphIdx];
+        const { type, source, description, styles } = content[paragraphIdx];
         await sqliteExec(
-            `INSERT INTO blog_content (paragraphIdx, type, source, description, blogID) 
+            `INSERT INTO blog_content (paragraphIdx, type, source, description, styles, blogID) 
             VALUES(
                 ${paragraphIdx},
                 ${type},
                 ${source},
                 ${description},
+                ${styles},
                 "${blogID}"
             )`
         );
@@ -87,7 +90,7 @@ const queryBlogCovers = async(requireDecode) => {
 
 // Read blog content from database by blog ID
 const queryBlogContent = async(blogID) => {
-    let contents = await sqliteGet(`SELECT type, source, description FROM blog_content WHERE blogID = "${blogID}" ORDER BY paragraphIdx`);
+    let contents = await sqliteGet(`SELECT type, source, description, styles FROM blog_content WHERE blogID = "${blogID}" ORDER BY paragraphIdx`);
     let blogInfo = await sqliteGet(`SELECT * FROM blog WHERE blogID = "${blogID}"`);
     if (blogInfo.length == 0) {
         return null;
@@ -106,7 +109,7 @@ const queryBlogContent = async(blogID) => {
 const queryAllBlogs = async() => {
     let blogs = await queryBlogCovers(false);
     for (let blog of blogs) {
-        let contents = await sqliteGet(`SELECT type, source, description FROM blog_content WHERE blogID = "${blog.blogID}" ORDER BY paragraphIdx`);
+        let contents = await sqliteGet(`SELECT type, source, description, styles FROM blog_content WHERE blogID = "${blog.blogID}" ORDER BY paragraphIdx`);
         blog.content = contents;
         decodeBlog(blog);
     }
@@ -139,14 +142,15 @@ const editBlogDB = async(blogID, blog) => {
         );
         for (let paragraph of content) {
             await sqliteExec(`DELETE FROM blog_content WHERE blogID = "${blogID}"`);
-            const { paragraphIdx, type, source, description } = paragraph;
+            const { paragraphIdx, type, source, styles } = paragraph;
             await sqliteExec(
-                `INSERT INTO blog (paragraphIdx, type, source, description, blogID) 
+                `INSERT INTO blog (paragraphIdx, type, source, description, styles, blogID) 
                 VALUES(
                     ${paragraphIdx},
                     ${type},
                     ${source},
                     ${description},
+                    ${styles},
                     "${blogID}"
                 )`
             );

@@ -113,7 +113,7 @@ const encodeDbString = (str, defaultValue) => {
 }
 
 const decodeDbString = (str, defaultValue) => {
-    return str && str.trim() ? str.replaceAll(`''`,`"`).replaceAll("<br>", "\n") : (typeof defaultValue === 'undefined' ? null : defaultValue);
+    return str && str.trim() ? str.replaceAll(`''`,`"`) : (typeof defaultValue === 'undefined' ? null : defaultValue);
 }
 
 const decodeDbStringBR = (str, defaultValue) => {
@@ -195,6 +195,7 @@ const reset = async() => {
         type TEXT NOT NULL,
         description TEXT,
         source TEXT NOT NULL,
+        styles TEXT,
 
         PRIMARY KEY (blogID, paragraphIdx),
         CONSTRAINT blog_content_fk_blog_id FOREIGN KEY(blogID) REFERENCES blog(blogID) ON DELETE CASCADE ON UPDATE CASCADE

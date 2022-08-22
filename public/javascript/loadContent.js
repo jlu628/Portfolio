@@ -12,7 +12,8 @@ const createContent = (blogContent, imgFolder) => {
         if (paragraph.type == "text") {
             html += `<p>${paragraph.source}</p>`
         } else {
-            let media = paragraph.type == "image" ? `<img src="${imgFolder+paragraph.source}">` : paragraph.source
+            let styles = paragraph.styles ? `class='${paragraph.styles}'` : "class='himg'";
+            let media = paragraph.type == "image" ? `<img ${styles} src="${imgFolder+paragraph.source}">` : paragraph.source
             html += `
             ${media}
             <div class="img-descriptor semiblackfont smallfont">

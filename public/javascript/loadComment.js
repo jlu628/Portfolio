@@ -210,7 +210,14 @@ const loadComments = () => {
             comments.data.forEach(section => {
                 commentContainer.innerHTML += createSectionComment(section, blogID, {refer:false}, false);
             });
-
+            if (comments.data.length == 0) {
+                commentContainer.innerHTML += `
+                <div class="midfont" style="margin: 5vh auto;display:flex;flex-direction:column;align-items:center;">
+                    No comments yet. Be the first one to leave a mark on this page
+                    <img style="width: 600px; max-width: 60%;" src="assets/nocomment.png">
+                </div>
+                `
+            }
             const prefilledName = window.localStorage.username ? window.localStorage.username : "";
             const prefilledSite = window.localStorage.usersite ? window.localStorage.usersite : "";
             commentContainer.innerHTML += `
@@ -226,14 +233,6 @@ const loadComments = () => {
                 </div>
             </div>
             `
-            if (comments.data.length == 0) {
-                commentContainer.innerHTML += `
-                <div class="midfont" style="margin: 5vh auto;display:flex;flex-direction:column;align-items:center;">
-                        No comments yet. Be the first one to leave a mark on this page
-                        <img style="height: 30vh;" src="assets/nocomment.png">
-                    </div>
-                `
-            }
         });
 }
 

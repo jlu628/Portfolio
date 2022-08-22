@@ -1,6 +1,119 @@
 {
     "blogs": [
         {
+            "blogID": "PVoe6nsGbXirnsNcz6PSV6V4grMvwQ3Vw01eCVn3f8S",
+            "title": "Jerry's Bizzare Adventure:<br>A Month-Long Trip Home",
+            "date": 20220606,
+            "datealt": "Early Summer 2022",
+            "name": "triphome",
+            "summary": "My special trip home: a month-long quaranteen diary...",
+            "brief": [
+                "After 3 consecutive years without returning my home in China due to the pandemic policies, there are finally family and personal reasons that made me have to go back China. For the first time in a while, I could reunite with my family and enjoy this summer with them.",
+                "It is though not the most ideal time to go back. At the time another wave of covid outbreak (Omicron varient) have just hit, and major cities like Shanghai had been locked down for weeks. Amidst of all these chaos, my month-long trip back home began..."
+            ],
+            "tags": [
+                "travel"
+            ],
+            "content": [
+                {
+                    "type": "text",
+                    "source": "<span class='largefont center_p'>Planning</span>",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "It wasn't until mid April since I made the decision to fly back home this summer. Long story in short, the U.S. Consulate informed my family to schedule an in-person interview for immigration this summer. Although not the most ideal time, we had already requested to postpone this interview the previous year, so this time we decided it's better to get this thing out of our agenda.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "Thanks to China's circuit breaker arrangement for international flights, tickets are extremely hard to find. We ended up resorting to a group ticket scalper who managed to get me a ticket on May 13<sup>th</sup>. The ticket was around $10,000 (about the same price as purchasing directly from airline companies), which is absolutely insane comparing to summer 2019 (before Covid-19) when I flew round-trip for under $2,000.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "<span class='largefont center_p'>Pre-Departure</span>",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "The policy for international travelers in China require us to \"self-quaranteen\" the week prior to flying in the departure city. So here we are, after finishing my last final in the noon, I hurried to farwell my roommate (who is graduating this semester) and hopped on a flight to San Francisco, the first stop of this advanture.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "departure.jpg",
+                    "description": "Me at Hartsfield airport, Atlanta. Shot by my roommate.",
+                    "styles": "vimg"
+                },
+                {
+                    "type": "text",
+                    "source": "My friend in San Francisco picked me up and we headed straight to a Korean BBQ for dinner. Since he had a final the next day, we didn't hang out late. I settled done in a Hilton next to the airport and began my one week self-quaranteen.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "China also require international travelers to get tested for Covid while self-quaranteening, and they only approve the test result from two specified institutions. I ended up booking 3 tests following to the guideline with Apostle Diagnotics, which costs around $650. (without a better choice) One antigen test was required 7 days before flying, then a blood test 5 days later following another antigen and antibody test 24 hours prior to boarding.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "The next few days I was basically chilling in the hotel room to reduce the risk of being infected. Other than going to the Covid test place, I was watching YouTube and animes or playing video games most of the time. Luckily my friends completed their finals, so they had the time to drive me to lunch and dinner together, saving me from the embarrassment of ordering take out everyday. Since the San Francisco Bay Area resides a large Asian population, there are lots of great Izakaya and other Japanese, Korean and Chinese restuarants.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "california_meal2.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "california_meal3.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "We also visited Japantown the day before departure and spent the afternoon in a book store. I bought several mangas and light novels to kill time on the airplane and during the quaranteen after landing.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "japantown1.jpg",
+                    "description": "The book store in Japantown",
+                    "styles": "vimg"
+                },
+                {
+                    "type": "text",
+                    "source": "<span class='largefont center_p'>Departure</span>",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "I didn't get a good night of rest that day cause I was too excited but also worried. Early in the morning that day I took the shuttle bus to the SFO airport",
+                    "description": null,
+                    "styles": null
+                }
+            ]
+        },
+        {
             "blogID": "N9y1apsF6w1jVyZo32PR84MUjYXYgmFxP1hPqxsxS14",
             "title": "Intramural End of Season 2021",
             "date": 20211130,
@@ -18,37 +131,44 @@
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": "End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!"
+                    "description": "End of season: we placed in the final 8 in this year's Georgia Tech intramural soccer tournament!",
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "departure1.jpg",
+                    "description": null,
+                    "styles": "vimg"
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": null
-                },
-                {
-                    "type": "image",
-                    "source": "thumbnail.png",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 }
             ]
         },
@@ -70,37 +190,44 @@
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": "Fall break at Lake Heartwell!"
+                    "description": "Fall break at Lake Heartwell!",
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 }
             ]
         },
@@ -122,37 +249,44 @@
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": "End of summer trip at California"
+                    "description": "End of summer trip at California",
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 }
             ]
         },
@@ -174,37 +308,44 @@
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": "Snowy Christmas at the Great Smoky Mountain"
+                    "description": "Snowy Christmas at the Great Smoky Mountain",
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "image",
                     "source": "thumbnail.png",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 },
                 {
                     "type": "text",
                     "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null
+                    "description": null,
+                    "styles": null
                 }
             ]
         }
