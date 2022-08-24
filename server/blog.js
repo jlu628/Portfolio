@@ -28,8 +28,8 @@ const decodeBlog = (blog) => {
     blog.datealt = decodeDbString(blog.datealt);
     blog.name = decodeDbString(blog.name);
     blog.summary = decodeDbString(blog.summary);
-    blog.brief = decodeDbString(blog.brief).split("\n");
-    blog.tags = decodeDbString(blog.tags).split("\n");
+    blog.brief = decodeDbString(blog.brief).split("<br>");
+    blog.tags = decodeDbString(blog.tags).split("<br>");
     if (!blog.content || !Array.isArray(blog.content)) {
         blog.content = [];
         return;

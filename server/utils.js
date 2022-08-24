@@ -184,7 +184,8 @@ const reset = async() => {
         name TEXT NOT NULL,
         summary TEXT NOT NULL,
         brief TEXT NOT NULL,
-        tags TEXT NOT NULL
+        tags TEXT NOT NULL,
+        views INT
     )
     `
     await db.exec(blogSchema);

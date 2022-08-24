@@ -107,7 +107,7 @@ const search = async(req, res) => {
     let msg = {
         matches: []
     }
-    if (!filter.trim()) {
+    if (!filter || !filter.trim()) {
         res.write(JSON.stringify(msg));
         res.end();
         return;
