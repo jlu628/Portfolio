@@ -1,6 +1,6 @@
 const { hash } = require("./utils");
 
-const blogName = "versionhistory"
-const blogDate = 20210125
+const blogName = "catimages"
+const blogDate = 20220315
 
 console.log(hash(`"${blogName}"` + blogDate));

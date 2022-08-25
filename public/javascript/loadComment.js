@@ -90,7 +90,7 @@ const createCommentBox = (replyTo, replyName, isFirst, blogID, fromPage) => {
     <div class="comment-form-container midfont ${replyName ? "comment-form-followup-container" : ""} ${isFirst ? "comment-form-first-followup-container" : ""}" id="reply-${replyTo}">
         <div class="comment-form-top">
             <input name="name" type="text" placeholder="name*" maxLength="30" value="${prefilledName}">
-            <input name="link" type="text" placeholder="website (http://)" value="${prefilledSite}">
+            <input name="link" type="text" placeholder="your personal website (http://)" value="${prefilledSite}">
         </div>
         <textarea placeholder="Leave a friendly comment here..."></textarea>
         <div class="comment-form-bottom">
@@ -224,7 +224,7 @@ const loadComments = () => {
             <div class="comment-form-container midfont" id="newcommentform">
                 <div class="comment-form-top">
                     <input name="name" type="text" placeholder="name*" maxLength="30" value="${prefilledName}">
-                    <input name="link" type="text" placeholder="website (http://)" value="${prefilledSite}">
+                    <input name="link" type="text" placeholder="your personal website (http://)" value="${prefilledSite}">
                 </div>
                 <textarea placeholder="Leave a friendly comment here..."></textarea>
                 <div class="comment-form-bottom">
@@ -254,7 +254,7 @@ const loadCommentPage = () => {
             <div class="comment-form-container midfont" style="border: solid var(--shadow);" id="newcommentform">
             <div class="comment-form-top">
                 <input name="name" type="text" placeholder="name*" maxLength="30" value="${prefilledName}">
-                <input name="link" type="text" placeholder="website (http://)" value="${prefilledSite}">
+                <input name="link" type="text" placeholder="your personal website (http://)" value="${prefilledSite}">
             </div>
             <textarea placeholder="Leave a friendly comment here..."></textarea>
             <div class="comment-form-bottom">
