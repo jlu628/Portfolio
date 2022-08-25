@@ -18,8 +18,8 @@ const decodeProject = (project) => {
     project.title = decodeDbString(project.title);
     project.dates = decodeDbString(project.dates);
     project.thumbnail = decodeDbString(project.thumbnail);
-    project.skills = decodeDbString(project.skills).split("\n");
-    project.description = decodeDbString(project.description).split("\n");
+    project.skills = decodeDbString(project.skills).split("<br>");
+    project.description = decodeDbString(project.description).split("<br>");
     project.link = decodeDbString(project.link);
 }
 

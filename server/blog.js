@@ -46,10 +46,11 @@ const decodeBlog = (blog) => {
 const insertIntoBlog = async(blog) => {
     encodeBlog(blog);
     // Insert blog info
-    const { title, date, datealt, name, summary, brief, tags, content } = blog;
+    const { title, date, datealt, name, summary, brief, tags, views, content } = blog;
+
     const blogID = hash(name + date);
     await sqliteExec(
-        `INSERT INTO blog (title, date, datealt, name, summary, brief, tags, blogID) 
+        `INSERT INTO blog (title, date, datealt, name, summary, brief, tags, views, blogID) 
         VALUES(
             ${title},
             ${date},
@@ -58,6 +59,7 @@ const insertIntoBlog = async(blog) => {
             ${summary},
             ${brief},
             ${tags},
+            ${views && Number.isInteger(views) && views >= 0 ? views : 0},
             "${blogID}"
         )`
     );
@@ -275,6 +277,10 @@ const getRecentBlogs = async(req, res) => {
     res.end();
 }
 
+const incrementView = async (blogID) => {
+    await sqliteExec(`UPDATE blog SET views = views + 1 WHERE blogID = "${blogID}"`);
+}
+
 const getBlogs = async(req, res) => {
     let page = req.body.page;
     let msg = { page: null, totalPages: null, blogs: null };
@@ -315,6 +321,8 @@ const getBlogContent = async(req, res) => {
         console.log(error);
         console.log("\n")
     }
+
+    await incrementView(blogID);
     res.write(JSON.stringify(msg));
     res.end();
 }

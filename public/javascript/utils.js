@@ -1,6 +1,6 @@
 // Define Webserver url
-const serverURL = "https://jiayu-lu.com/"
-// const serverURL = "http://127.0.0.1:3000"
+// const serverURL = "https://jiayu-lu.com/"
+const serverURL = "http://127.0.0.1:3000"
 
 // Parse the query string into json
 const parseQueryString = () => {
