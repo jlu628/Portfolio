@@ -12,7 +12,8 @@
                 "It is definitely not an ideal time to go back. Another wave of COVID outbreak (the Omicron varient) have just hit, and major cities like Shanghai had been locked down for weeks. Amidst of all these chaos, my month-long trip back home began..."
             ],
             "tags": [
-                "travel", "life"
+                "travel",
+                "life"
             ],
             "views": 56,
             "content": [
@@ -410,16 +411,17 @@
             "name": "catimages",
             "summary": "Cat Images: Mochi The British Shorhair",
             "brief": [
-                "Celebrating the 2<sup>nd</sup> birthday of our British shorthair, Mochi, or you can call him by his Chinese name 点点 (Diǎn diǎn). I just want to take this chance to dump some cat images. Guaranteed to cure all depression and stresses, enjoy!"
+                "Celebrating the 2<sup>nd</sup> birthday of our British shorthair, Mochi, or you can call him by his Chinese name 点点 (Diǎn diǎn). Just want to take this chance to dump some images of our furry friend over the past year. It <del>theoretically</del> cures all types of depression and stress, so don't miss it. Enjoy!"
             ],
             "tags": [
-                "life", "animals"
+                "life",
+                "animals"
             ],
             "views": 0,
             "content": [
                 {
                     "type": "text",
-                    "source": "Mochi, or by his Chinese name 点点 (Diǎn diǎn), is turning 2 years old today. It's more than 1 and a half years since he joined our family.",
+                    "source": "Mochi, or by his Chinese name 点点 (Diǎn diǎn), is turning 2 years old today. It has been more than 1 and a half years since he joined our family.",
                     "description": null,
                     "styles": null
                 },
@@ -563,7 +565,13 @@
                 },
                 {
                     "type": "text",
-                    "source": "Mochi's owner is going to graduate this semester and return back to China, but since the COVID related policies there is not so pet-friendly, Mochi get to stay with us a bit longer...",
+                    "source": "Mochi's owner (one of my roommates) is going to graduate this semester and return back to China, but since the COVID related policies there is not so pet-friendly, Mochi get to stay with us a bit longer...",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "Credits to: Jonathan Zhang, Ivan Hou, Penny Jiang and Me",
                     "description": null,
                     "styles": null
                 }
@@ -577,7 +585,8 @@
             "name": "lakehouse",
             "summary": "Fall break at Lake Hartwell",
             "brief": [
-                "This fall break"
+                "It is fall break, and that means we are half-way done for another stressful semester!",
+                "This time, my friend and I are heading north for a lakeside vacation. We spent the weekend in a lakehouse and also rented a yacht to relax on the lake. Lots of new experiences and lots of fun..."
             ],
             "tags": [
                 "travel"
@@ -586,43 +595,199 @@
             "content": [
                 {
                     "type": "text",
-                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
-                    "description": null,
-                    "styles": null
-                },
-                {
-                    "type": "image",
-                    "source": "thumbnail.png",
-                    "description": "Fall break at Lake Heartwell!",
-                    "styles": null
-                },
-                {
-                    "type": "text",
-                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "source": "My friends had long been wishing for a lakehouse holiday, and it is happening this time, fall break 2021.",
                     "description": null,
                     "styles": null
                 },
                 {
                     "type": "text",
-                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "source": "We set off the Saturday afternoon and it was almost dusk when we got to Lake Heartwell in northern Georgia. We had booked a yacht ahead of time and actually found a water route from the yacht rental place to our lakeside Airbnb, so we headed straigh to the dock. As we return along the waterway, we also had the fortune to enjoy sunset on the lake.",
                     "description": null,
                     "styles": null
                 },
                 {
                     "type": "image",
-                    "source": "thumbnail.png",
+                    "source": "sunset1.jpg",
+                    "description": null,
+                    "styles": "vimg"
+                },
+                {
+                    "type": "image",
+                    "source": "sunset2.jpg",
+                    "description": null,
+                    "styles": "vimg"
+                },
+                {
+                    "type": "image",
+                    "source": "sunset3.jpg",
+                    "description": "Sunset from the middle of the lake.",
+                    "styles": "vimg"
+                },
+                {
+                    "type": "text",
+                    "source": "The next morning, we continued to sail on the lake for some sunshine.",
                     "description": null,
                     "styles": null
                 },
                 {
                     "type": "image",
-                    "source": "thumbnail.png",
+                    "source": "sail1.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "sail2.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "sail3.jpg",
+                    "description": null,
+                    "styles": "vimg"
+                },
+                {
+                    "type": "image",
+                    "source": "sail4.jpg",
+                    "description": "We continued a day on yacht to enjoy some sunshine and had pizza for lunch on the lake.",
+                    "styles": "vimg"
+                },
+                {
+                    "type": "text",
+                    "source": "Since the boater's license in our state only requires a driver's license and a boater's education, we all had a chance to operate the yacht. I also had my \"yatch captain\" experience: Are you ready, kid?",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "sail5.jpg",
+                    "description": "My first time as a yacht captain",
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "We enjoyed the rest of the day on the lake and it was almost dark again when we returned home.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "sunset4.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "sunset5.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "sunset6.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "sunset7.jpg",
+                    "description": "Sky gradually turning dark as we return along the waterway",
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "After returning from the lake, we had a hotpot party for dinner.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "hotpot.jpg",
                     "description": null,
                     "styles": null
                 },
                 {
                     "type": "text",
-                    "source": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus sed soluta vel impedit, nobis asperiores praesentium sapiente unde dolor ducimus possimus voluptatibus. Dolores quo molestiae aspernatur ut eligendi. Laborum, iure.",
+                    "source": "We had bought some fireworks on the way the previous day, so after dinner we took a walk along the river to find a large open space to set those fireworks.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "hanabi1.jpg",
+                    "description": null,
+                    "styles": "vimg"
+                },
+                {
+                    "type": "image",
+                    "source": "hanabi2.jpg",
+                    "description": null,
+                    "styles": "vimg"
+                },
+                {
+                    "type": "image",
+                    "source": "hanabi3.jpg",
+                    "description": null,
+                    "styles": "vimg"
+                },
+                {
+                    "type": "image",
+                    "source": "hanabi4.jpg",
+                    "description": null,
+                    "styles": "vimg"
+                },
+                {
+                    "type": "text",
+                    "source": "We also bought this thing called the Kongming lantern (Sky lantern), which is an old Chinese tradition to write ones' wishes on the lantern and send it airborne.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "hanabi4.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "hanabi5.jpg",
+                    "description": "Us setting the lantern up and watch it rising to the sky.",
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "The starry sky is crystal clear, we could even see the milky way with naked eyes.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "nightsky1.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "nightsky2.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "The only thing that upset us was that nobody had a digital camera, so we only had our phones' default camera to take pictures of these beautiful stars, but at least the milky way is visible from the picture.",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "nightsky3.jpg",
+                    "description": "The milky way in the night sky",
+                    "styles": null
+                },
+                {
+                    "type": "text",
+                    "source": "Anyways, what a trip! Tried lots of new things and had lots of fun with friends. Must be a fall break to be remembered.",
                     "description": null,
                     "styles": null
                 }
