@@ -6,7 +6,7 @@
             "date": 20220606,
             "datealt": "Early Summer 2022",
             "name": "triphome",
-            "summary": "My special trip home: a month-long travel and quarantine diary...",
+            "summary": "Jerry's Bizzare Adventure: A Month-Long Trip Home...",
             "brief": [
                 "After 3 consecutive years without returning home in China due to the pandemic, this summer I have to go back due to some family and personal reasons. For the first time in a while, I could reunite with my family and enjoy this summer with them.",
                 "It is definitely not an ideal time to go back. Another wave of COVID outbreak (the Omicron varient) have just hit, and major cities like Shanghai had been locked down for weeks. Amidst of all these chaos, my month-long trip back home began..."
@@ -541,6 +541,18 @@
                 },
                 {
                     "type": "image",
+                    "source": "24.jpg",
+                    "description": null,
+                    "styles": null
+                },
+                {
+                    "type": "image",
+                    "source": "25.jpg",
+                    "description": "Yes, we are models. Not this model, the other model.",
+                    "styles": null
+                },
+                {
+                    "type": "image",
                     "source": "20.jpg",
                     "description": null,
                     "styles": null
@@ -583,7 +595,7 @@
             "date": 20211009,
             "datealt": "Fall Break 2021",
             "name": "lakehouse",
-            "summary": "Fall break at Lake Hartwell",
+            "summary": "Fall Break & Lake House",
             "brief": [
                 "It is fall break, and that means we are half-way done for another stressful semester!",
                 "This time, my friend and I are heading north for a lakeside vacation. We spent the weekend in a lakehouse and also rented a yacht to relax on the lake. Lots of new experiences and lots of fun..."
