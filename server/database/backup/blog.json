@@ -541,18 +541,6 @@
                 },
                 {
                     "type": "image",
-                    "source": "24.jpg",
-                    "description": null,
-                    "styles": null
-                },
-                {
-                    "type": "image",
-                    "source": "25.jpg",
-                    "description": "Yes, we are models. Not this model, the other model.",
-                    "styles": null
-                },
-                {
-                    "type": "image",
                     "source": "20.jpg",
                     "description": null,
                     "styles": null
