@@ -78,14 +78,6 @@ const searchBlog = (filter, blog) => {
         return output;
     }
 
-    // Search in date
-    let dateStr = date.toString();
-    dateStr = "Posted on " + dateStr.substring(0, 4) + "-" + dateStr.substring(4, 6) + "-" + dateStr.substring(6, 8);
-    if (dateStr.toLowerCase().includes(filter)) {
-        output.match = true;
-        output.in.push("date");
-    }
-
     // Search in content
     for (let paragraph of content) {
         if (paragraph.type == "text" && removeHTMLTags(paragraph.source).toLowerCase().includes(filter)) {

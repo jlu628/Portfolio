@@ -5,6 +5,7 @@
             "title": "Jerry's Bizzare Adventure:<br>A Month-Long Trip Home",
             "date": 20220606,
             "datealt": "Early Summer 2022",
+            "editDate": -1,
             "name": "triphome",
             "summary": "Jerry's Bizzare Adventure: A Month-Long Trip Home...",
             "brief": [
@@ -408,6 +409,7 @@
             "title": "Mochi The British Shorthair",
             "date": 20220315,
             "datealt": "March 2022",
+            "editDate": -1,
             "name": "catimages",
             "summary": "Cat Images: Mochi The British Shorhair",
             "brief": [
@@ -576,6 +578,7 @@
             "title": "Fall Break & Lake House",
             "date": 20211009,
             "datealt": "Fall Break 2021",
+            "editDate": -1,
             "name": "lakehouse",
             "summary": "Fall Break & Lake House",
             "brief": [
@@ -792,11 +795,12 @@
             "title": "Hello World",
             "date": 20210125,
             "datealt": "Update at Any Time",
+            "editDate": 20220816,
             "name": "versionhistory",
             "summary": "Version History of This Website",
             "brief": [
-                "A version history of this website, includes descriptions of major updates to this websites.",
-                "This log will be updated when new features are added."
+                "A version history of my personal website, in the form of a log for major updates made in the past. Includes information like date of updates, description of major changes and snap shoots of old versions of website.",
+                "This log will be updated in the future when new features are added."
             ],
             "tags": [
                 "programming"

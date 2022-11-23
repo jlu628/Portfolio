@@ -46,15 +46,16 @@ const decodeBlog = (blog) => {
 const insertIntoBlog = async(blog) => {
     encodeBlog(blog);
     // Insert blog info
-    const { title, date, datealt, name, summary, brief, tags, views, content } = blog;
+    const { title, date, datealt, editDate, name, summary, brief, tags, views, content } = blog;
 
     const blogID = hash(name + date);
     await sqliteExec(
-        `INSERT INTO blog (title, date, datealt, name, summary, brief, tags, views, blogID) 
+        `INSERT INTO blog (title, date, datealt, editDate, name, summary, brief, tags, views, blogID) 
         VALUES(
             ${title},
             ${date},
             ${datealt},
+            ${editDate},
             ${name},
             ${summary},
             ${brief},
@@ -121,17 +122,18 @@ const queryAllBlogs = async() => {
 // Edit information of blog in database with given blog ID
 const editBlogDB = async(blogID, blog) => {
     encodeBlog(blog);
-    const { title, date, datealt, name, summary, brief, tags, content } = blog;
+    const { title, date, datealt, editDate, name, summary, brief, tags, content } = blog;
     const setTitle = `title = ${title}`;
     const setDate = `date = ${date}`;
     const setDatealt = `datealt = ${datealt}`;
+    const setEditDate = `editDate = ${editDate}`;
     const setName = name ? `name = ${name}` : "";
     const setSummary = `summary = ${summary}`;
     const setBrief = `brief = ${brief}`;
     const setTags = `tags = ${tags}`;
     const newBlogID = hash(name + date);
     const setBlogId = `blogID = "${newBlogID}"`;
-    let setAttributes = [setTitle, setDate, setDatealt, setName, setSummary, setBrief, setTags, setBlogId].join(", ");
+    let setAttributes = [setTitle, setDate, setDatealt, setEditDate, setName, setSummary, setBrief, setTags, setBlogId].join(", ");
     await sqliteExec(
         `UPDATE blog SET 
         ${setAttributes} 
@@ -175,10 +177,10 @@ const deleteBlogDB = async(blogID) => {
 // APIs
 const addBlog = async(req, res) => {
     const { blog, password } = req.body;
-    const { title, date, datealt, name, summary, brief, tags, content } = blog;
+    const { title, date, datealt, editDate, name, summary, brief, tags, content } = blog;
     let msg = {};
     // Sanity check
-    if (!(title && date && datealt && name && summary && brief && tags && content &&
+    if (!(title && date && datealt && editDate && name && summary && brief && tags && content &&
             Array.isArray(brief) && brief.length > 0 && Array.isArray(tags) && tags.length > 0 &&
             Array.isArray(content) && content.length > 0)) {
         msg.succuss = false;
@@ -208,10 +210,10 @@ const addBlog = async(req, res) => {
 
 const editBlog = async(req, res) => {
     const { blogID, blog, password } = req.body;
-    const { title, date, datealt, name, summary, brief, tags, content } = blog;
+    const { title, date, datealt, editDate, name, summary, brief, tags, content } = blog;
     let msg = {}
         // Sanity check
-    if (!(blogID && title && date && datealt && name && summary && brief && tags && content &&
+    if (!(blogID && title && date && datealt && editDate && name && summary && brief && tags && content &&
             Array.isArray(brief) && brief.length > 0 && Array.isArray(tags) && tags.length > 0 &&
             Array.isArray(content) && content.length > 0)) {
         msg.succuss = false;
@@ -314,7 +316,8 @@ const getBlogContent = async(req, res) => {
         msg.data = {
             content: content.content,
             title: content.title,
-            date: content.date
+            date: content.date,
+            edit: content.editDate,
         };
     } catch (error) {
         console.log("\n" + getTimeDisplayed());

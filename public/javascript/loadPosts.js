@@ -199,8 +199,6 @@ const createSearchBlog = (searchBlog, filter) => {
     let matches = searchBlog.match;
     let blogPost = searchBlog.data;
     let content = blogPost.content;
-    let date = blogPost.date.toString();
-    date = "Posted on " + date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
 
     let title = blogPost.title;
     if (matches.includes("title")) {
@@ -253,15 +251,8 @@ const createSearchBlog = (searchBlog, filter) => {
                     brief.push(highlightFilter(paragraph, filter));
                 }
             }
-        } else {
-            date = highlightFilter(date, filter);
-            brief.push(date);
-            // Add succeeding paragraphs in the content to make up enough length displayed
-            for (let index = 0; index < Math.min(2, content.length); index++) {
-                let paragraph = content[index].type == "text" ? content[index].source : "... ...(" + content[index].description + ")";
-                brief.push(highlightFilter(paragraph, filter));
-            } 
         }
+
         brief = brief.map(paragraph => `<p>${paragraph}</p>`).join("");
     }
 

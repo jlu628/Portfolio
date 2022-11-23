@@ -181,6 +181,7 @@ const reset = async() => {
         title TEXT NOT NULL,
         date INTEGER NOT NULL,
         datealt TEXT NOT NULL,
+        editDate INTEGER NOT NULL,
         name TEXT NOT NULL,
         summary TEXT NOT NULL,
         brief TEXT NOT NULL,
