@@ -26,18 +26,20 @@ window.addEventListener('mouseup', () => {
     writting = false;
 });
 
-signatureCanvas.addEventListener('touchmove', (event) => {
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
+
+// Apple pencil
+window.addEventListener('touchstart', (e) => {
     writting = true;
-    for(var i = 0; i < event.touches.length; i++){
-        if(event.touches[i].touchType === "stylus"){
-            mouse.x = event.touches[i].clientX;
-            mouse.y =  event.touches[i].clientY;
-        }
-    }
+});
+window.addEventListener('touchend', () => {
     writting = false;
 });
 
-window.addEventListener('mousemove', (event) => {
+window.addEventListener('touchmove', (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
 });
