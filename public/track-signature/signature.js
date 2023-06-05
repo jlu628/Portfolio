@@ -34,9 +34,11 @@ window.addEventListener('mousemove', (event) => {
 // Apple pencil
 window.addEventListener('touchstart', (e) => {
     writting = true;
+    alert("Touch")
 });
 window.addEventListener('touchend', () => {
     writting = false;
+    alert("Leave")
 });
 
 window.addEventListener('touchmove', (event) => {
