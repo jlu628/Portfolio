@@ -34,22 +34,23 @@ window.addEventListener('mousemove', (event) => {
 // Apple pencil
 window.addEventListener('touchstart', (e) => {
     if (e.touches[0].touchType === 'stylus') {
-        alert("Touch start")
         writting = true;
+        let touch = e.originalEvent.touches[0]
+        mouse.x = touch.pageX;
+        mouse.y = touch.pageY;
     }
 });
 window.addEventListener('touchend', (e) => {
     if (e.touches[0].touchType === 'stylus') {
-        alert("Touch end")
         writting = false;
     }}
 );
 
 window.addEventListener('touchmove', (event) => {
     if (event.touches[0].touchType === 'stylus') {
-        alert("Touch move")
-        mouse.x = event.x;
-        mouse.y = event.y;
+        let touch = e.originalEvent.changedTouches[0];
+        mouse.x = touch.pageX;
+        mouse.y = touch.pageY;
     }
 });
 
