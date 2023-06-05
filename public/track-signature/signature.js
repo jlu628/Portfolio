@@ -26,7 +26,7 @@ window.addEventListener('mouseup', () => {
     writting = false;
 });
 
-document.getElementById('mycanvas').addEventListener('touchmove', function(event){
+window.getElementById('mycanvas').addEventListener('touchmove', (event) => {
     writting = true;
     for(var i = 0; i < event.touches.length; i++){
         if(event.touches[i].touchType === "stylus"){
