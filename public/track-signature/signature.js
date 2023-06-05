@@ -33,17 +33,21 @@ window.addEventListener('mousemove', (event) => {
 
 // Apple pencil
 window.addEventListener('touchstart', (e) => {
-    writting = true;
-    alert("Touch")
+    if (e.touches[0].touchType === 'stylus') {
+        writting = true;
+    }
 });
-window.addEventListener('touchend', () => {
-    writting = false;
-    alert("Leave")
-});
+window.addEventListener('touchend', (e) => {
+    if (e.touches[0].touchType === 'stylus') {
+        writting = false;
+    }}
+);
 
 window.addEventListener('touchmove', (event) => {
-    mouse.x = event.x;
-    mouse.y = event.y;
+    if (e.touches[0].touchType === 'stylus') {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    }
 });
 
 const submit = async() => {
