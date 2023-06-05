@@ -28,9 +28,11 @@ window.addEventListener('mouseup', () => {
 
 document.getElementById('mycanvas').addEventListener('touchmove', function(event){
     writting = true;
-    if(event.touches[i].touchType === "stylus"){
-        mouse.x = event.touches[i].clientX;
-        mouse.y =  event.touches[i].clientY;
+    for(var i = 0; i < event.touches.length; i++){
+        if(event.touches[i].touchType === "stylus"){
+            mouse.x = event.touches[i].clientX;
+            mouse.y =  event.touches[i].clientY;
+        }
     }
     writting = false;
 });
