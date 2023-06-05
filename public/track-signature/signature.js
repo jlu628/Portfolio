@@ -25,6 +25,18 @@ window.addEventListener('mousedown', (e) => {
 window.addEventListener('mouseup', () => {
     writting = false;
 });
+
+signatureCanvas.addEventListener('touchmove', (event) => {
+    writting = true;
+    for(var i = 0; i < event.touches.length; i++){
+        if(event.touches[i].touchType === "stylus"){
+            mouse.x = event.touches[i].clientX;
+            mouse.y =  event.touches[i].clientY;
+        }
+    }
+    writting = false;
+});
+
 window.addEventListener('mousemove', (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
