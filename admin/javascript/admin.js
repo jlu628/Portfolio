@@ -1,6 +1,5 @@
-const serverURL = "https://jiayu-lu.com/"
-// const serverURL = "http://127.0.0.1:3000"
-let managedData;
+// const serverURL = "https://jiayu-lu.com/"
+const serverURL = "http://127.0.0.1:3000"
 
 window.onload = function() {
     var passwordInput = document.getElementById("password");
@@ -50,14 +49,12 @@ const submitPassword = function() {
         body: body,
         redirect: 'follow'
     };
+    console.log("".concat(serverURL, "/admin/login"))
     fetch("".concat(serverURL, "/admin/login"), requestOptions)
-        .then(function(response) { return response.json(); })
-        .then(function(data) {
-            console.log(data);
+        .then((response) =>{ return response.json(); })
+        .then((data) => {
             if (data.success) {
-                window.localStorage.token = data.token;
-                managedData = data.managedData;
-                loadManagedData()
+                console.log(data);
             } else {
                 alert("Wrong password!")
             }

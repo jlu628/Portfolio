@@ -30,7 +30,5 @@ router.post("/getBlogComments", comment.getBlogComments);
 router.post("/search", search.search);
 
 // Admin functions
-router.post("/admin/login", admin.login);
-router.post("/admin/verify", admin.verify);
-
+router.post("/admin/login", admin.verify);
 module.exports = router;

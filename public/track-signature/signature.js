@@ -20,9 +20,6 @@ let mouse = {
     y: NaN
 };
 window.addEventListener('mousedown', (e) => {
-    if (e.which == 3) {
-        finished = true;
-    }
     writting = true;
 });
 window.addEventListener('mouseup', () => {
@@ -32,6 +29,17 @@ window.addEventListener('mousemove', (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
 });
+
+const submit = async() => {
+    finished = true;
+    let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
+        "width": canvasWidth,
+        "height": canvasHeight,
+        "radius": penRadius,
+        "strokes": strokes
+    }));
+    document.querySelector('body').innerHTML += '<a href="data:' + data + '" download="data.json">download Strokes</a>';
+}
 
 function animate() {
     if (writting) {
@@ -47,14 +55,6 @@ function animate() {
 
     if (!finished) {
         requestAnimationFrame(animate);
-    } else {
-        let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
-            "width": canvasWidth,
-            "height": canvasHeight,
-            "radius": penRadius,
-            "strokes": strokes
-        }));
-        document.querySelector('body').innerHTML += '<a href="data:' + data + '" download="data.json">download Strokes</a>';
     }
 }
 animate();

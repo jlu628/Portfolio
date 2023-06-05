@@ -18,11 +18,12 @@ const routes = require("./server/router");
 app.use("/", routes);
 
 app.use(express.static("./public", {extensions:['html']}));
+app.use(express.static("./admin", {extensions:['html']}));
 
 // Redirect outputs
-const fs = require("fs");
-let fh = fs.createWriteStream('./server/server.log');
-process.stdout.write = process.stderr.write = fh.write.bind(fh);
+// const fs = require("fs");
+// let fh = fs.createWriteStream('./server/server.log');
+// process.stdout.write = process.stderr.write = fh.write.bind(fh);
 
 const port = process.env.PORT || 3000;
 instance = app.listen(port, () => {
